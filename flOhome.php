@@ -1,7 +1,7 @@
 <?php session_start();
 
 		if(!isset($mysqlconnect)){
-			$mysqlconnect=mysql_connect('localhost','jose','ohoh');
+			$mysqlconnect=mysql_connect('localhost','danla_web','thisiscool');
 			
 		}
 
@@ -158,16 +158,16 @@
 					<!--		<li><a href="#" title="Sports">Sports</a></li>
 							<li><a href="#" title="Brands">Brands</a></li>
 							<li><a href="#" title="Promos">Promos</a></li>
-							<li><a href="#" title="Clinic">Clinic</a></li>   --> 
-							<li 
+							<li><a href="#" title="Clinic">Clinic</a></li>   
+							<li>
 							
-							 class="sale-item" <form action="first3.php" method="post">
-								<!--<form action="search.php" method="GET">
+							  class="sale-item" <form action="first3.php" method="post">
+								-<form action="search.php" method="GET">
 								<input type="text" name="query" />
 								<input type="submit" value="Search" />
-								</form>-->
+								</form>
 
-							</li>
+							</li>-->
 							></a>.
 						</ul>
 						<div class="cl">&nbsp;</div>
