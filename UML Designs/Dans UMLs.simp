@@ -139,9 +139,7 @@
             </attributes>
             <operations />
             <template-parameters>
-              <source-codes>
-                <source-code language="ActionScript" />
-              </source-codes>
+              <source-codes />
             </template-parameters>
           </item>
           <item id="di751356961438275544" cid="REL001" type="relationship" name="Consits Of" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/18/2013 21:41:27">
@@ -219,9 +217,7 @@
             </attributes>
             <operations />
             <template-parameters>
-              <source-codes>
-                <source-code language="ActionScript" />
-              </source-codes>
+              <source-codes />
             </template-parameters>
           </item>
           <item id="di396359826666979034" cid="REL002" type="relationship" name="Assigned to" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/18/2013 21:44:02">
@@ -272,9 +268,7 @@
             </attributes>
             <operations />
             <template-parameters>
-              <source-codes>
-                <source-code language="ActionScript" />
-              </source-codes>
+              <source-codes />
             </template-parameters>
           </item>
           <item id="di551973368880220794" cid="REL004" type="relationship" name="Consits of" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/18/2013 21:45:59">
@@ -393,7 +387,7 @@
           </authors>
           <description />
           <creation-date>09/18/2013 19:28:31</creation-date>
-          <change-date>09/18/2013 20:22:12</change-date>
+          <change-date>09/19/2013 23:05:30</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -428,11 +422,15 @@
             <owned-items />
             <style class="default" />
             <attributes>
-              <attribute uid="a517cda0acf244603a2dd15b429dff34c564" name="Name" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="true" nullable="false" description="Name of the company" default-value="" auto-increment="true" />
+              <attribute uid="a705f376060c84c1f96e5e018c91d5162446" name="CompanyID" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="true" nullable="false" description="" default-value="" auto-increment="false" />
+              <attribute uid="a517cda0acf244603a2dd15b429dff34c564" name="Name" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="false" description="Name of the company" default-value="" auto-increment="true" />
               <attribute uid="af9afd592f2b7463991cde4cc25ae0875829" name="Address" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
               <attribute uid="aa7941d27d2fc4d269f0adea46b988439383" name="City" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
               <attribute uid="aaa92166ebf0042afa549b5ebabbe1cf7513" name="State" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
               <attribute uid="afaf6c75713de41c4b52b38ac82a80f5c496" name="Zip" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
+              <attribute uid="aa3170d9c14fe41d0a3793b7ae375db8b126" name="Phone" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
+              <attribute uid="a6f10f4f3cdaf4adebaf1055883382f01729" name="Fax" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
+              <attribute uid="ac0a0369682ac4998858053ce74681ee8215" name="Contact" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
             </attributes>
             <indexes />
           </item>
@@ -465,7 +463,7 @@
             <owned-items />
             <style class="default" />
             <attributes>
-              <attribute uid="a2f6c0d9f05744e828433dfd165116793170" name="EpicID" type="Integer" type-id="Uml.Integer" type-size="" foreign-key="false" primary-key="true" nullable="false" description="" default-value="" auto-increment="false" />
+              <attribute uid="a2f6c0d9f05744e828433dfd165116793170" name="ProjectD" type="Integer" type-id="Uml.Integer" type-size="" foreign-key="false" primary-key="true" nullable="false" description="" default-value="" auto-increment="false" />
               <attribute uid="aa2c5fb290df146dc9369efaffdbd5386937" name="Manager" type="Integer" type-id="Uml.Integer" type-size="" foreign-key="true" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
               <attribute uid="ac687adeae1d64428bfac77181d08b50f185" name="Name" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="true" />
               <attribute uid="a999c206ebcaa40429263746ca119cc6d579" name="TargetStartDate" type="DateTime" type-id="Uml.DateTime" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
@@ -537,14 +535,16 @@
             <style class="default" />
             <attributes>
               <attribute uid="aef05d330094e426cbfcb077b91219b75487" name="EmployeeID" type="Integer" type-id="Uml.Integer" type-size="" foreign-key="false" primary-key="true" nullable="false" description="" default-value="" auto-increment="false" />
+              <attribute uid="af7152cde2e764ed584d748f425332665147" name="CompanyID" type="Integer" type-id="Uml.Integer" type-size="" foreign-key="true" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
+              <attribute uid="a04c01fcf791c4475bbf671381c0b3da843" name="Email" type="String" type-id="Uml.String" type-size="" foreign-key="true" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
               <attribute uid="afc50b5bc1b9e41ddaa9463a65efe3f8095" name="Salary" type="Real" type-id="Uml.Real" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
               <attribute uid="a05a01c030cf64d16bff59b907c6a9458578" name="Phone" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
               <attribute uid="ab260b62a6b4d404191a3c07141b8a54f841" name="Address" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
               <attribute uid="a6077bf3c1cee479bb4bdd9657a89d617479" name="City" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
               <attribute uid="a0198f78f7f97435eb548ba72ef7d64e3431" name="State" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
               <attribute uid="ac151ba273f654051b3c9bc55ba3f26e064" name="Zip" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
-              <attribute uid="a04c01fcf791c4475bbf671381c0b3da843" name="Email" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
-              <attribute uid="a3024956e754746b6b8227cfd3ea90a28622" name="UserName" type="String" type-id="Uml.String" type-size="" foreign-key="true" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
+              <attribute uid="a7a7793322fba4de789b71e14fe549e82673" name="FirstName" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
+              <attribute uid="a2f82323f83a44d669fb0f7443e6395fa207" name="LastName" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
             </attributes>
             <indexes />
           </item>
@@ -610,7 +610,7 @@
             <style class="default" />
             <attributes>
               <attribute uid="a8042b7b91ca44a7ca8cf4d3213d285d1594" name="Epic ID" type="Integer" type-id="Uml.Integer" type-size="" foreign-key="false" primary-key="true" nullable="false" description="" default-value="" auto-increment="true" />
-              <attribute uid="ae2e5e56f782342c09424c6c8fc3b02c7143" name="ProjectName" type="String" type-id="Uml.String" type-size="" foreign-key="true" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
+              <attribute uid="ae2e5e56f782342c09424c6c8fc3b02c7143" name="ProjectID" type="Integer" type-id="Uml.Integer" type-size="" foreign-key="true" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
               <attribute uid="a006a3f314de14465a0638799de56c8e9525" name="Name" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
               <attribute uid="aeeb99018113e4b44b5f8c27d68b990af437" name="Description" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
             </attributes>
@@ -704,7 +704,7 @@
               </attribute-pairs>
             </erd-relation>
           </item>
-          <item id="di714748538820070513" cid="ENT007" type="erd-entity" name="User" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/18/2013 20:20:18">
+          <item id="di714748538820070513" cid="ENT007" type="erd-entity" name="Login" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/18/2013 20:20:18">
             <stereotypes />
             <tagged-values />
             <documentation>
@@ -734,13 +734,14 @@
             <style class="default" />
             <attributes>
               <attribute uid="acdb0c6ccfdf242769ad272b0f08659f1612" name="UserName" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="true" nullable="false" description="" default-value="" auto-increment="false" />
+              <attribute uid="a21de96b33cc64b9fb0d3644765ac8c01890" name="EmployeeID" type="Integer" type-id="Uml.Integer" type-size="" foreign-key="true" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
               <attribute uid="a7bb47c714980454ba7b9e31e3fd5e905853" name="Password" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
               <attribute uid="a0927c4c95a744249ad9a54153b0c2cdc89" name="Administrator" type="Boolean" type-id="Uml.Boolean" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
               <attribute uid="a56ed32a51b1443bc926243409781ae76223" name="Locked" type="Boolean" type-id="Uml.Boolean" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
             </attributes>
             <indexes />
           </item>
-          <item id="di780433800459192626" cid="REL009" type="erd-relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/18/2013 20:22:12">
+          <item id="di780433800459192626" cid="REL009" type="erd-relationship" name="Can Login" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/18/2013 20:22:12">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -752,34 +753,46 @@
               </attribute-pairs>
             </erd-relation>
           </item>
+          <item id="di378606826242177412" cid="REL001" type="erd-relationship" name="Employs" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/19/2013 23:05:30">
+            <stereotypes />
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <erd-relation type="Association" multiplicity-from="1" multiplicity-to="0..*">
+              <attribute-pairs>
+                <attribute-pair from-attribute="a6f10f4f3cdaf4adebaf1055883382f01729" to-attribute="" />
+              </attribute-pairs>
+            </erd-relation>
+          </item>
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
           <item id="di531572768399723001" iid="c196ae621d5645699b315e31fdbceb33" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/18/2013 19:28:46" order-index="0" type="entity">
-            <layout ax="45" ay="33" awidth="428" aheight="160" x="45" y="33" width="428" height="160" angle="0" />
+            <layout ax="45" ay="33" awidth="428" aheight="262" x="45" y="33" width="428" height="262" angle="0" />
             <erd-entity show-nullability="true" />
           </item>
           <item id="di708377118373372922" iid="6096194ed6314c47ae27d3814f948fcd" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/18/2013 19:35:29" order-index="1" type="entity">
-            <layout ax="831" ay="126" awidth="435" aheight="216" x="831" y="126" width="435" height="216" angle="0" />
+            <layout ax="831" ay="126" awidth="435" aheight="254" x="831" y="126" width="435" height="254" angle="0" />
             <erd-entity show-nullability="true" />
           </item>
           <item id="di973084645691365085" iid="dd6ab17f2c5d462f8d68fede18061dbb" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/18/2013 19:35:43" order-index="2" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" auto-path="" x1="473" y1="146" x2="831" y2="201" start-border-pos="0.426279306411743" end-border-pos="0.913517174897371">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" auto-path="" x1="473" y1="188" x2="831" y2="229" start-border-pos="0.398033797285939" end-border-pos="0.899092336339275">
               <points>
-                <point x="473" y="146" />
-                <point x="831" y="201" />
+                <point x="473" y="188" />
+                <point x="831" y="229" />
               </points>
             </layout>
             <relation from="di531572768399723001" from-iid="c196ae621d5645699b315e31fdbceb33" to="di708377118373372922" to-iid="6096194ed6314c47ae27d3814f948fcd" />
           </item>
           <item id="di700732660277208894" iid="f40d05512bdb4092b0c88a2894a9812a" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/18/2013 19:41:37" order-index="3" type="entity">
-            <layout ax="45" ay="286" awidth="428" aheight="268" x="45" y="286" width="428" height="268" angle="0" />
+            <layout ax="45" ay="388" awidth="428" aheight="313" x="45" y="388" width="428" height="313" angle="0" />
             <erd-entity show-nullability="true" />
           </item>
           <item id="di681486521880040944" iid="8aec9890504e4b65a11662fe6b1f8e19" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/18/2013 19:49:58" order-index="4" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" auto-path="" x1="473" y1="370" x2="831" y2="285" start-border-pos="0.327939674035827" end-border-pos="0.815791801170067">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" auto-path="" x1="473" y1="465" x2="831" y2="333" start-border-pos="0.311559293216791" end-border-pos="0.796226171057994">
               <points>
-                <point x="473" y="370" />
-                <point x="831" y="285" />
+                <point x="473" y="465" />
+                <point x="831" y="333" />
               </points>
             </layout>
             <relation from="di700732660277208894" from-iid="f40d05512bdb4092b0c88a2894a9812a" to="di708377118373372922" to-iid="6096194ed6314c47ae27d3814f948fcd" />
@@ -789,9 +802,9 @@
             <erd-entity show-nullability="true" />
           </item>
           <item id="di326148834460329071" iid="e611026fb98648afb53d59df50783216" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/18/2013 19:55:13" order-index="6" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" auto-path="" x1="1048" y1="342" x2="1048" y2="446" start-border-pos="0.625287356321839" end-border-pos="0.124712643678161" name-width="187">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" auto-path="" x1="1048" y1="380" x2="1048" y2="446" start-border-pos="0.625287356321839" end-border-pos="0.124712643678161" name-width="187">
               <points>
-                <point x="1048" y="342" />
+                <point x="1048" y="380" />
                 <point x="1048" y="446" />
               </points>
             </layout>
@@ -811,26 +824,35 @@
             <relation from="di677403711409576471" from-iid="7cb8a1a2b7394aeb8e572a0c959f7ec8" to="di585998542275302534" to-iid="5f4f775fdaff4c44a288982d3960cabf" />
           </item>
           <item id="di167196630773798966" iid="f33aff16aa8d42d78eaefb568103bcd0" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/18/2013 20:17:51" order-index="9" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" auto-path="" x1="473" y1="539" x2="831" y2="739" start-border-pos="0.486325505954116" end-border-pos="0.970230341705035" name-width="232">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" auto-path="" x1="473" y1="630" x2="831" y2="773" start-border-pos="0.443057904228235" end-border-pos="0.943503161582827" name-width="232">
               <points>
-                <point x="473" y="539" />
-                <point x="831" y="739" />
+                <point x="473" y="630" />
+                <point x="831" y="773" />
               </points>
             </layout>
             <relation from="di700732660277208894" from-iid="f40d05512bdb4092b0c88a2894a9812a" to="di585998542275302534" to-iid="5f4f775fdaff4c44a288982d3960cabf" />
           </item>
           <item id="di714748538820070513" iid="55e5eefd3630410fbfa0ee7b3ecd3479" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/18/2013 20:20:18" order-index="10" type="entity">
-            <layout ax="45" ay="701" awidth="428" aheight="169" x="45" y="701" width="428" height="169" angle="0" />
+            <layout ax="45" ay="788" awidth="428" aheight="167" x="45" y="788" width="428" height="167" angle="0" />
             <erd-entity show-nullability="true" />
           </item>
           <item id="di780433800459192626" iid="66586bf48a4d4fea8d4ee7c45b0ba0e2" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/18/2013 20:22:12" order-index="11" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" auto-path="" x1="259" y1="701" x2="259" y2="554" start-border-pos="0.125" end-border-pos="0.625">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" auto-path="" x1="259" y1="788" x2="259" y2="701" start-border-pos="0.125" end-border-pos="0.625" name-width="190">
               <points>
+                <point x="259" y="788" />
                 <point x="259" y="701" />
-                <point x="259" y="554" />
               </points>
             </layout>
             <relation from="di714748538820070513" from-iid="55e5eefd3630410fbfa0ee7b3ecd3479" to="di700732660277208894" to-iid="f40d05512bdb4092b0c88a2894a9812a" />
+          </item>
+          <item id="di378606826242177412" iid="0d52670884a34b84a1e31a289c097fd1" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/19/2013 23:05:30" order-index="12" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" auto-path="" x1="259" y1="295" x2="259" y2="388" start-border-pos="0.625" end-border-pos="0.125" name-width="203">
+              <points>
+                <point x="259" y="295" />
+                <point x="259" y="388" />
+              </points>
+            </layout>
+            <relation from="di531572768399723001" from-iid="c196ae621d5645699b315e31fdbceb33" to="di700732660277208894" to-iid="f40d05512bdb4092b0c88a2894a9812a" />
           </item>
         </layer>
       </diagram>
