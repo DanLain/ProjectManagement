@@ -6,8 +6,6 @@
 		}
 
 		mysql_select_db("danlain_live");
-		
-		
 		if(!isset($_SESSION['Login']))
 		{
 			$_SESSION['Login'] = "false";
@@ -18,8 +16,8 @@
 			$_SESSION['Locked']="False";
 		}
 		?>
-		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-		<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+		
+		<html>
 		<head>
 			<title>
 			<?php
@@ -29,8 +27,6 @@
 				echo $row['BusinessName'];
 			}
 			?></title>
-
-
 			<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 			<link rel="shortcut icon" href="css/images/favicon.ico" />
 			<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
@@ -91,9 +87,8 @@
 						  
 
 
-					</span>
-					<!--<span class="shopping">Shopping Cart <a href="cart.php" title="Shopping Cart">$<?php echo $_SESSION['OrderTotal'];?>
-					</a></span>--></p>
+					</span><span class="shopping">Shopping Cart <a href="cart.php" title="Shopping Cart">$<?php echo $_SESSION['OrderTotal'];?>
+					</a></span></p>
 					</div>
 					<!-- End Shell -->
 				</div>
@@ -158,16 +153,16 @@
 					<!--		<li><a href="#" title="Sports">Sports</a></li>
 							<li><a href="#" title="Brands">Brands</a></li>
 							<li><a href="#" title="Promos">Promos</a></li>
-							<li><a href="#" title="Clinic">Clinic</a></li>   
-							<li>
+							<li><a href="#" title="Clinic">Clinic</a></li>   --> 
+							<li 
 							
-							  class="sale-item" <form action="first3.php" method="post">
-								-<form action="search.php" method="GET">
+							 class="sale-item" <form action="first3.php" method="post">
+								<form action="search.php" method="GET">
 								<input type="text" name="query" />
 								<input type="submit" value="Search" />
 								</form>
 
-							</li>-->
+							</li>
 							></a>.
 						</ul>
 						<div class="cl">&nbsp;</div>
@@ -183,69 +178,145 @@
 			<!-- Begin Content -->
 			<div id="content">
 				<div class="post">
-                                <div class="welcome">
-					<?php 
-					if($_SESSION['Login'] != "True")
-					{
-						echo "<h2>Login</h2>";
-						
-					}
-					?>
-					
-					<!--<img src="images/sport1.jpg" alt="Post Image" --> 
-					<?php
-					if($_SESSION['Login'] != "True")
-					{
-						echo "<form  action='login.php' method='test'>
-
-						Emai Address: <input type='text' name='Email'><br />
-						<br />
-						Password: <input type='password' size='20' name='Password'><br />
-						";
-						if ($_SESSION['Locked']=="True"){
-								echo "Account ".$_SESSION['Email']." locked please contact customer service at dan@drlain.com<br /><br />";
-							}
-								
-						elseif ($_SESSION['LoginTry']!=0){
-							Echo "System will lock account after ".(6 - $_SESSION['LoginTry'])." more attempts. <br/> <br/>";
+					<h2>
+					 <?php
+						if($_SESSION['Login']=="True"){
+							echo "Update Customer Information";
+						}
+						else {
+							echo "Registration";
 						}
 						
+					 ?>
+					</h2>
+					<form action="first3.php" method="post">
+<?php
+if($_SESSION['Login']=="True"){
 
-						echo "<input  type='submit' >
-						</form>";
-					}	 
-					else
-					{
-						echo "Welcome ";
-						
-						
-						//echo "<a href='registration.php' title='Profile Link'>";
-						echo $_SESSION['User'];
-						echo "<br />";
-						if ($_SESSION['adminLogin']=="True"){
-							echo "<br /><a href='admin.php' title='Manage Information'>Manage Projects</a></h1>";
-						}
-						echo "<br /><br /><a href='transactionHistory.php' title='Transaction History'>Transaction History</a></h1>";
-						
-					}
-				?>					
-				</div>
+
+	$mysqlquery1="Select * from customer where CustomerID = '$_SESSION[CustomerID]'";
+	$result1=mysql_query($mysqlquery1);
+	while ($row=mysql_fetch_array($result1))
+	{
+			
+			$_SESSION['Phone'] = $row['Phone'];
+			$_SESSION['Fax'] = $row['Fax'];
+			$_SESSION['FirstName'] = $row['FirstName'];
+			$_SESSION['LastName'] = $row['LastName'];
+			$_SESSION['Address']= $row['Address'];
+			$_SESSION['City'] = $row['City'];
+			$_SESSION['State'] = $row['State'];
+			$_SESSION['Zip'] = $row['Zip'];
+			$_SESSION['Email'] = $row['Email'];
+			$_SESSION['Salary'] = $row['Salary'];
+			$_SESSION['CompanyID']=$row('CompanyID');
+		
+	}
+}
+
+
+if (isset($_SESSION['BadEmail']) || isset($_SESSION['BadPassword'])){
+	if ($_SESSION['BadEmail'] == "True"){
+			echo "First Name: <input type='text' name='FirstName' value=".$_SESSION['FirstName']." >";
+			echo "Last Name: <input type='text' name='LastName'value=".$_SESSION['LastName']."><br /><br />";
+			echo "CompanyID: <input type='text' name='CompanyId' value=".$_SESSION['CompanyID']."><br /><br />";
+			echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
+			echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email'].">";
+			if ($_SESSION['EmailInvalid'] =="True"){
+				Echo "Email address is invalid.<br /><br />";
+			}
+			else{
+				Echo "Email address already used please enter a different one <br /><br />";
+			}
+			echo "Password: <input type='password' name='Password'><br /><br />";
+			echo "Confirm Password: <input type='password' name='ConfirmPassword' ><br /><br />";
+			echo "Address: <input type='text' name='Address' value=".$_SESSION['Address']."><br /><br />";
+			echo "City: <input type='text' name='City' value=".$_SESSION['City']."><br /><br />";
+			echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
+			echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
+			echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
+		
+		}
+	else if ($_SESSION['BadPassword'] == "True"){
+		echo "First Name: <input type='text' name='FirstName' value=".$_SESSION['FirstName']." >";
+		echo "Last Name: <input type='text' name='LastName'value=".$_SESSION['LastName']."><br /><br />";
+		echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
+		echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
+		echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email']."><br /><br />";
+		echo "Password: <input type='password' name='Password'>";
+		Echo "Passwords do not match<br /> or the password must be at least 8 characters and must contain at least one lower case letter, one upper case letter and one digi<br /><br />";
+		echo "Confirm Password: <input type='password' name='ConfirmPassword'>";
+		Echo "Passwords do not match<br /> or the password must be at least 8 characters and must contain at least one lower case letter, one upper case letter and one digi<br /><br />";
+		echo "Address: <input type='text' name='Address' value=".$_SESSION['Address']."><br /><br />";
+		echo "City: <input type='text' name='City' value=".$_SESSION['City']."><br /><br />";
+		echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
+		echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
+		echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
+	}
+	else if ($_SESSION['Login']=="True"){
+			echo "First Name: <input type='text' name='FirstName' value=".$_SESSION['FirstName']." >";
+			echo "Last Name: <input type='text' name='LastName'value=".$_SESSION['LastName']."><br /><br />";
+			echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
+			echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
+			echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email'].">";
+			Echo " <br /><br />";
+			echo "Password: <input type='password' name='Password'><br /><br />";
+			echo "Confirm Password: <input type='password' name='ConfirmPassword' ><br /><br />";
+			echo "Address: <input type='text' name='Address' value=".$_SESSION['Address']."><br /><br />";
+			echo "City: <input type='text' name='City' value=".$_SESSION['City']."><br /><br />";
+			echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
+			echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
+			echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
+		}
+	
+	}
+else
+	{
+		if ($_SESSION['Login']=="True"){
+			echo "First Name: <input type='text' name='FirstName' value=".$_SESSION['FirstName']." >";
+			echo "Last Name: <input type='text' name='LastName'value=".$_SESSION['LastName']."><br /><br />";
+			echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
+			echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
+			echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email'].">";
+			Echo " <br /><br />";
+			echo "Password: <input type='password' name='Password'><br /><br />";
+			echo "Confirm Password: <input type='password' name='ConfirmPassword' ><br /><br />";
+			echo "Address: <input type='text' name='Address' value=".$_SESSION['Address']."><br /><br />";
+			echo "City: <input type='text' name='City' value=".$_SESSION['City']."><br /><br />";
+			echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
+			echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
+			echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
+		}
+		else {
+			echo "First Name: <input type='text' name='FirstName'>";
+			echo "Last Name: <input type='text' name='LastName'><br /><br />";
+			echo "CompanyID: <input type='text' name='CompanyID'><br /><br />";
+			echo "Phone Number: <input type='text' name='Phone'><br /><br />";
+			echo "E-Mail: <input type='text' name='Email'><br /><br />";
+			echo "Password: <input type='password' name='Password' ><br /><br />";
+			echo "Confirm Password: <input type='password' name='ConfirmPassword'><br /><br />";
+			echo "Address: <input type='text' name='Address'><br /><br />";
+			echo "City: <input type='text' name='City'><br /><br />";
+			echo "State: <input type='text' name='State'><br /><br />";
+			echo "Zip Code: <input type='text' name='Zip'><br /><br />";
+			echo "Fax: <input type='text' name='Fax'><br /><br /><br />";
+		}
+	}
+	?>
+<input type="submit">
+</form>
+
+					<div class="cl">&nbsp;</div>
 				</div>
 			</div>
 			<!-- End Content -->
-		
 			<div class="cl">&nbsp;</div>
-			<!-- Begin Promotions -->
-			<div id="project-slider">
-				
+		<!-- Begin Promotions -->
+			<div id="product-slider">
+				<h2>Promotions</h2>
+				<ul>
 				<?php
 			
-					if($_SESSION['Login'] == "True")
-					{
-
-						echo "<h2>Projects</h2>
-						<ul>";
-						
 					$mysqlquery="Select * from promotions JOIN merchandise WHERE promotions.MerchID = merchandise.MerchID";
 					$result=mysql_query($mysqlquery);
 										
@@ -294,15 +365,13 @@
 						}											
 											
 					}
-				}
 				?>
 				</ul>
 				<div class="cl">&nbsp;</div>
 			</div>
-			<!-- End Project Slider -->
+			<!-- End Promotions Slider -->
 		</div>
 		<!-- End Main -->
-
 		<!-- Begin Footer -->
 		<div id="footer">
 			<div class="boxes">
@@ -311,7 +380,7 @@
 					<div class="box post-box">
 						<!--<h2>About SGC</h2>-->
 						<div class="box-entry">
-							<h1> Better Business, We make Magic Manageable </h1>
+							<h1> Sporting Goods Company </h1>
 							
 							<div class="cl">&nbsp;</div>
 						</div>
@@ -349,14 +418,14 @@
 				<!-- Begin Shell -->
 				<div class="shell">
 					<div class="carts">
-						<!--<ul>
+						<ul>
 							<li><span>We accept</span></li>
 							
 							<li><a href="#" title="VISA"><img src="images/cart-img2.jpg" alt="VISA" /></a></li>
 							<li><a href="#" title="MasterCard"><img src="images/cart-img3.jpg" alt="MasterCard" /></a></li>
-						</ul>-->
+						</ul>
 					</div>
-					<p>&copy; Sitename.com. Design by Gary Johns,Dan Lain,and Jose Flores <br/>Template from <a href="http://css-free-templates.com/">CSS-FREE-TEMPLATES.COM</a></p>
+					<p>&copy; Sitename.com. Design by Gary Johns,Richard Sherrill,Dan Lain,and Jose Flores <br/>Template from <a href="http://css-free-templates.com/">CSS-FREE-TEMPLATES.COM</a></p>
 					<div class="cl">&nbsp;</div>
 				</div>
 				<!-- End Shell -->
