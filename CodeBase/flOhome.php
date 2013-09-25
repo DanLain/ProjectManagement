@@ -246,7 +246,7 @@
 						echo "<h2>Projects</h2>
 						<ul>";
 						
-					$mysqlquery="Select * from promotions JOIN merchandise WHERE promotions.MerchID = merchandise.MerchID";
+					$mysqlquery="Select * from projects WHERE promotions.MerchID = merchandise.MerchID";
 					$result=mysql_query($mysqlquery);
 										
 					$mysqlqueryitem="Select * from merchandise";
