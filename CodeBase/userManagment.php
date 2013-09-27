@@ -156,7 +156,7 @@
 							<li><a href="#" title="Clinic">Clinic</a></li>   --> 
 							<li 
 							
-							 class="sale-item" <form action="first3.php" method="post">
+							 class="sale-item" <form action="userInsert.php" method="post">
 								<form action="search.php" method="GET">
 								<input type="text" name="query" />
 								<input type="submit" value="Search" />
@@ -189,7 +189,7 @@
 						
 					 ?>
 					</h2>
-					<form action="first3.php" method="post">
+					<form action="userInsert.php" method="post">
 <?php
 if($_SESSION['Login']=="True"){
 
