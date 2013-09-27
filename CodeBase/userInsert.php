@@ -44,15 +44,15 @@ if (!($_SESSION['Login']=="True" && !strlen($_REQUEST['Password'])>0) && preg_ma
 		$_SESSION['Fax'] = $_REQUEST['Fax'];
 		$_SESSION['FirstName'] = $_REQUEST['FirstName'];
 		$_SESSION['LastName'] = $_REQUEST['LastName'];
-		$_SESSION['BillingAddress']= $_REQUEST['BillingAddress'];
-		$_SESSION['BillingCity'] = $_REQUEST['BillingCity'];
-		$_SESSION['BillingState'] = $_REQUEST['BillingState'];
-		$_SESSION['BillingZip'] = $_REQUEST['BillingZip'];
-		$_SESSION['BussinessName'] = $_REQUEST['BussinessName'];
+		$_SESSION['Address']= $_REQUEST['Address'];
+		$_SESSION['City'] = $_REQUEST['City'];
+		$_SESSION['State'] = $_REQUEST['State'];
+		$_SESSION['Zip'] = $_REQUEST['Zip'];
+		$_SESSION['CompanyID'] = $_REQUEST['CompanyID'];
 		$_SESSION['Email'] = $_REQUEST['Email'];
 		$_SESSION['PasswordInvalid']="True";
 		$_SESSION['GoodReg']="False";
-		header("Location: http://drlain.com.50-116-103-71.secure21.win.hostgator.com/registration.php");
+		header("Location: http://localhost/registration.php");
 	}
 	
 if(!filter_var($_REQUEST['Email'], FILTER_VALIDATE_EMAIL)){
@@ -61,16 +61,16 @@ if(!filter_var($_REQUEST['Email'], FILTER_VALIDATE_EMAIL)){
 		$_SESSION['Fax'] = $_REQUEST['Fax'];
 		$_SESSION['FirstName'] = $_REQUEST['FirstName'];
 		$_SESSION['LastName'] = $_REQUEST['LastName'];
-		$_SESSION['BillingAddress']= $_REQUEST['BillingAddress'];
-		$_SESSION['BillingCity'] = $_REQUEST['BillingCity'];
-		$_SESSION['BillingState'] = $_REQUEST['BillingState'];
-		$_SESSION['BillingZip'] = $_REQUEST['BillingZip'];
-		$_SESSION['BussinessName'] = $_REQUEST['BussinessName'];
+		$_SESSION['Address']= $_REQUEST['Address'];
+		$_SESSION['City'] = $_REQUEST['City'];
+		$_SESSION['State'] = $_REQUEST['State'];
+		$_SESSION['Zip'] = $_REQUEST['Zip'];
+		$_SESSION['CompanyID'] = $_REQUEST['CompanyID'];
 		$_SESSION['Email'] = $_REQUEST['Email'];
 		$_SESSION['GoodReg']="False";
 		$_SESSION['BadEmail'] = "True";
 		$_SESSION['EmailInvalid'] = "True";
-		header("Location: http://drlain.com.50-116-103-71.secure21.win.hostgator.com/registration.php");
+		header("Location: http://local/registration.php");
 	}
 
 if($_SESSION['BadEmail'] == "True"){
@@ -79,14 +79,14 @@ if($_SESSION['BadEmail'] == "True"){
 		$_SESSION['Fax'] = $_REQUEST['Fax'];
 		$_SESSION['FirstName'] = $_REQUEST['FirstName'];
 		$_SESSION['LastName'] = $_REQUEST['LastName'];
-		$_SESSION['BillingAddress']= $_REQUEST['BillingAddress'];
-		$_SESSION['BillingCity'] = $_REQUEST['BillingCity'];
-		$_SESSION['BillingState'] = $_REQUEST['BillingState'];
-		$_SESSION['BillingZip'] = $_REQUEST['BillingZip'];
-		$_SESSION['BussinessName'] = $_REQUEST['BussinessName'];
+		$_SESSION['Address']= $_REQUEST['Address'];
+		$_SESSION['City'] = $_REQUEST['City'];
+		$_SESSION['State'] = $_REQUEST['State'];
+		$_SESSION['Zip'] = $_REQUEST['Zip'];
+		$_SESSION['CompanyID'] = $_REQUEST['CompanyID'];
 		$_SESSION['Email'] = $_REQUEST['Email'];
 		$_SESSION['GoodReg']="False";
-		header("Location: http://drlain.com.50-116-103-71.secure21.win.hostgator.com/registration.php");
+		header("Location: http://localhost/registration.php");
 	}
 	
 if($_REQUEST['Password'] != $_REQUEST['ConfirmPassword']){
@@ -96,14 +96,14 @@ if($_REQUEST['Password'] != $_REQUEST['ConfirmPassword']){
 		$_SESSION['Fax'] = $_REQUEST['Fax'];
 		$_SESSION['FirstName'] = $_REQUEST['FirstName'];
 		$_SESSION['LastName'] = $_REQUEST['LastName'];
-		$_SESSION['BillingAddress']= $_REQUEST['BillingAddress'];
-		$_SESSION['BillingCity'] = $_REQUEST['BillingCity'];
-		$_SESSION['BillingState'] = $_REQUEST['BillingState'];
-		$_SESSION['BillingZip'] = $_REQUEST['BillingZip'];
-		$_SESSION['BussinessName'] = $_REQUEST['BussinessName'];
+		$_SESSION['Address']= $_REQUEST['Address'];
+		$_SESSION['City'] = $_REQUEST['City'];
+		$_SESSION['State'] = $_REQUEST['State'];
+		$_SESSION['Zip'] = $_REQUEST['Zip'];
+		$_SESSION['CompanyID'] = $_REQUEST['CompanyID'];
 		$_SESSION['Email'] = $_REQUEST['Email'];
 		$_SESSION['GoodReg']="False";
-		header("Location: http://drlain.com.50-116-103-71.secure21.win.hostgator.com/registration.php");
+		header("Location: http://localhost/registration.php");
 	}
 if ($_SESSION['GoodReg']=="True"){
 		$insert_query="Insert into employee 
@@ -112,11 +112,11 @@ if ($_SESSION['GoodReg']=="True"){
 				   '$_REQUEST[Fax]',
 				   '$_REQUEST[FirstName]',
 				   '$_REQUEST[LastName]',
-				   '$_REQUEST[BillingAddress]',
-				   '$_REQUEST[BillingCity]',
-				   '$_REQUEST[BillingState]',
-				   '$_REQUEST[BillingZip]',
-				   '$_REQUEST[BussinessName]',
+				   '$_REQUEST[Address]',
+				   '$_REQUEST[City]',
+				   '$_REQUEST[State]',
+				   '$_REQUEST[Zip]',
+				   '$_REQUEST[CompanyID]',
 				   '$_REQUEST[Email]')";
 		mysql_query($insert_query);
 		$insert_query="Insert into login 
@@ -133,7 +133,7 @@ if ($_SESSION['GoodReg']=="True"){
 		$_SESSION['employeeID'] = $next_employee_ID;
 		$_SESSION['User'] = $_REQUEST[Email];
 
-		header("Location:http://drlain.com.50-116-103-71.secure21.win.hostgator.com/flOhome.php");
+		header("Location:http://localhost/flOhome.php");
 	}
 else if ($_SESSION['Login']=="True" && ($_SESSION['BadPassword']=="False") && $_SESSION['EmailInvalid']=="False"){
 		$update_query="UPDATE employee  
@@ -141,11 +141,11 @@ else if ($_SESSION['Login']=="True" && ($_SESSION['BadPassword']=="False") && $_
 					employee.Fax='$_REQUEST[Fax]', 
 					employee.FirstName='$_REQUEST[FirstName]', 
 					employee.LastName='$_REQUEST[LastName]', 
-					employee.BillingAddress='$_REQUEST[BillingAddress]',
-					employee.BillingCity='$_REQUEST[BillingCity]',
-					employee.BillingState='$_REQUEST[BillingState]',
-					employee.BillingZip='$_REQUEST[BillingZip]',
-					employee.BussinessName='$_REQUEST[BussinessName]'
+					employee.Address='$_REQUEST[Address]',
+					employee.City='$_REQUEST[City]',
+					employee.State='$_REQUEST[State]',
+					employee.Zip='$_REQUEST[Zip]',
+					employee.CompanyID='$_REQUEST[CompanyID]'
 			WHERE employee.employeeID = '$_SESSION[employeeID]'";
 		$retval = mysql_query($update_query);
 		
@@ -162,6 +162,6 @@ else if ($_SESSION['Login']=="True" && ($_SESSION['BadPassword']=="False") && $_
 				}
 		}
 		
-		header("Location: http://drlain.com.50-116-103-71.secure21.win.hostgator.com/flOhome.php");
+		header("Location: http://localhost/flOhome.php");
 	}
 ?>
