@@ -219,7 +219,6 @@ if (isset($_SESSION['BadEmail']) || isset($_SESSION['BadPassword'])){
 	if ($_SESSION['BadEmail'] == "True"){
 			echo "First Name: <input type='text' name='FirstName' value=".$_SESSION['FirstName']." >";
 			echo "Last Name: <input type='text' name='LastName'value=".$_SESSION['LastName']."><br /><br />";
-			echo "CompanyID: <input type='text' name='CompanyId' value=".$_SESSION['CompanyID']."><br /><br />";
 			echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
 			echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email'].">";
 			if ($_SESSION['EmailInvalid'] =="True"){
@@ -235,12 +234,11 @@ if (isset($_SESSION['BadEmail']) || isset($_SESSION['BadPassword'])){
 			echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
 			echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
 			echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
-		
+			echo "CompanyID: <input type='text' name='CompanyId' value=".$_SESSION['CompanyID']."><br /><br />";
 		}
 	else if ($_SESSION['BadPassword'] == "True"){
 		echo "First Name: <input type='text' name='FirstName' value=".$_SESSION['FirstName']." >";
 		echo "Last Name: <input type='text' name='LastName'value=".$_SESSION['LastName']."><br /><br />";
-		echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
 		echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
 		echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email']."><br /><br />";
 		echo "Password: <input type='password' name='Password'>";
@@ -252,11 +250,11 @@ if (isset($_SESSION['BadEmail']) || isset($_SESSION['BadPassword'])){
 		echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
 		echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
 		echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
+		echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
 	}
 	else if ($_SESSION['Login']=="True"){
 			echo "First Name: <input type='text' name='FirstName' value=".$_SESSION['FirstName']." >";
 			echo "Last Name: <input type='text' name='LastName'value=".$_SESSION['LastName']."><br /><br />";
-			echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
 			echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
 			echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email'].">";
 			Echo " <br /><br />";
@@ -267,6 +265,7 @@ if (isset($_SESSION['BadEmail']) || isset($_SESSION['BadPassword'])){
 			echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
 			echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
 			echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
+			echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
 		}
 	
 	}
@@ -275,7 +274,6 @@ else
 		if ($_SESSION['Login']=="True"){
 			echo "First Name: <input type='text' name='FirstName' value=".$_SESSION['FirstName']." >";
 			echo "Last Name: <input type='text' name='LastName'value=".$_SESSION['LastName']."><br /><br />";
-			echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
 			echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
 			echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email'].">";
 			Echo " <br /><br />";
@@ -286,11 +284,11 @@ else
 			echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
 			echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
 			echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
+			echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
 		}
 		else {
 			echo "First Name: <input type='text' name='FirstName'>";
 			echo "Last Name: <input type='text' name='LastName'><br /><br />";
-			echo "CompanyID: <input type='text' name='CompanyID'><br /><br />";
 			echo "Phone Number: <input type='text' name='Phone'><br /><br />";
 			echo "E-Mail: <input type='text' name='Email'><br /><br />";
 			echo "Password: <input type='password' name='Password' ><br /><br />";
@@ -300,6 +298,7 @@ else
 			echo "State: <input type='text' name='State'><br /><br />";
 			echo "Zip Code: <input type='text' name='Zip'><br /><br />";
 			echo "Fax: <input type='text' name='Fax'><br /><br /><br />";
+			echo "CompanyID: <input type='text' name='CompanyID'><br /><br />";
 		}
 	}
 	?>
