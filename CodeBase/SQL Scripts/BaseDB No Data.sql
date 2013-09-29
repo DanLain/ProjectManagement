@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2013 at 03:08 PM
+-- Generation Time: Sep 29, 2013 at 06:28 PM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -16,6 +16,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+DROP DATABASE `danlain_live`;
 --
 -- Database: `danlain_live`
 --
@@ -48,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `company` (
 --
 
 INSERT INTO `company` (`CompanyID`, `BusinessName`, `Address`, `City`, `State`, `Zip`, `Phone`, `Fax`, `ContactName`) VALUES
-(1, 'Sporting Goods Company', '21 Jump Street', 'Lost', 'TX', '76666', '890-555-3421', '890-555-3421', 'Sally Smith');
+(1, 'Better Software\r\n', '21 Jump Street', 'Lost', 'TX', '76666', '890-555-3421', '890-555-3421', 'Sally Smith');
 
 -- --------------------------------------------------------
 
@@ -80,7 +81,6 @@ CREATE TABLE IF NOT EXISTS `employee` (
 
 INSERT INTO `employee` (`EmployeeID`, `Phone`, `Fax`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `Salary`, `CompanyID`) VALUES
 (1, '817-308-2582', '', 'Dan', 'Lain', '1003 Cooper Square Circle', 'Arlington', 'Te', '76013', 'danlain@live.com', '0.00', 0),
-(2, '817-308-2582', '', '', 'Lain', '1003 Cooper Square Circle', 'Arlington', 'Te', '76013', 'danlain@live.com', '0.00', 0),
 (3, '555-555-5555', '', 'Richard', 'Sherrill', '1313', 'Arlington', 'TX', '76012', 'richardzsherrill@yahoo.com', '0.00', 0),
 (4, '682-555-1111', '', 'john', 'john', '12', 'Here', 'HI', '43433', 'john@live.com', '0.00', 0),
 (5, '1234561234', '682453124', 'Jon', 'Snow', '123', 'The', 'My', '71234', 'WhiteWalker@MiddleEarth.com', '0.00', 0),
@@ -149,6 +149,20 @@ CREATE TABLE IF NOT EXISTS `project` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sprint`
+--
+
+CREATE TABLE IF NOT EXISTS `sprint` (
+  `ProjectID` int(11) NOT NULL,
+  `Name` varchar(100) NOT NULL,
+  `StartDate` date NOT NULL,
+  `EndDate` date NOT NULL,
+  `InitialStoryPoints` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `story`
 --
 
@@ -157,9 +171,11 @@ CREATE TABLE IF NOT EXISTS `story` (
   `EpicID` int(11) NOT NULL,
   `EmployeeID` bigint(20) NOT NULL,
   `Name` varchar(200) NOT NULL,
+  `Description` text NOT NULL,
   `PlannedDays` int(11) NOT NULL,
   `WorkedDays` int(11) NOT NULL,
   `RemainingDays` int(11) NOT NULL,
+  `StoryPoints` int(11) NOT NULL,
   PRIMARY KEY (`StoryID`),
   UNIQUE KEY `StoryID` (`StoryID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
