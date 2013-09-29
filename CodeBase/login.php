@@ -4,9 +4,9 @@ session_start();
 $_SESSION['Locked'] = "False";
 
 if(!$mysqlconnect){
-	$mysqlconnect=mysqli_connect('localhost','test');
+	$mysqlconnect=mysqli_connect('localhost','danla_web','thisiscool');
 }
-mysql_select_db("test");
+mysql_select_db("danlain_live");
 
 $check_password="Select * from login where (`UserName` LIKE '%".$_REQUEST['Email']."%')";
 $check_result=mysql_fetch_array(mysql_query($check_password));
