@@ -26,7 +26,7 @@ if ($check_result['Locked']==0){
 			header("Location: http://localhost/flohome.php");		
 		}	
 		else{
-			$_SESSION['EmployeeLogin'] = ( $check_result['Emp']==0 ? "False":"True");
+			$_SESSION['adminLogin'] = ( $check_result['Admin']==0 ? "False":"True");
 			$_SESSION['Login'] = "True";
 			$_SESSION['User'] = $check_result['UserName']; 
 			$_SESSION['CustomerID']  = $check_result['CustomerID'];
