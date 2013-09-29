@@ -4,7 +4,7 @@ session_start();
 $_SESSION['Locked'] = "False";
 
 if(!$mysqlconnect){
-	$mysqlconnect=mysqli_connect('localhost','danla_web','thisiscool');
+	$mysqlconnect=mysql_connect('localhost','danla_web','thisiscool');
 }
 mysql_select_db("danlain_live");
 
