@@ -163,7 +163,7 @@
 							<li><a href="#" title="Clinic">Clinic</a></li>   --> 
 							<li 
 							
-							 class="sale-item" <form action="first3.php" method="post">
+							 class="sale-item" <form action="userInsert.php" method="post">
 								<form action="search.php" method="GET">
 								<input type="text" name="query" />
 								<input type="submit" value="Search" />
@@ -196,12 +196,12 @@
 						
 					 ?>
 					</h2>
-					<form action="first3.php" method="post">
+					<form action="userInsert.php" method="post">
 <?php
 if($_SESSION['Login']=="True"){
 
 
-	$mysqlquery1="Select * from customer where CustomerID = '$_SESSION[CustomerID]'";
+	$mysqlquery1="Select * from employee where EmployeeID = '$_SESSION[EmployeeID]'";
 	$result1=mysql_query($mysqlquery1);
 	while ($row=mysql_fetch_array($result1))
 	{
@@ -209,11 +209,11 @@ if($_SESSION['Login']=="True"){
 			$_SESSION['Fax'] = $row['Fax'];
 			$_SESSION['FirstName'] = $row['FirstName'];
 			$_SESSION['LastName'] = $row['LastName'];
-			$_SESSION['BillingAddress']= $row['BillingAddress'];
-			$_SESSION['BillingCity'] = $row['BillingCity'];
-			$_SESSION['BillingState'] = $row['BillingState'];
-			$_SESSION['BillingZip'] = $row['BillingZip'];
-			$_SESSION['BussinessName'] = $row['BussinessName'];
+			$_SESSION['Address']= $row['Address'];
+			$_SESSION['City'] = $row['City'];
+			$_SESSION['State'] = $row['State'];
+			$_SESSION['Zip'] = $row['Zip'];
+			$_SESSION['CompanyID'] = $row['CompanyID'];
 			$_SESSION['Email'] = $row['Email'];
 			$_SESSION['UpdateCustomer']="True";
 		
@@ -225,7 +225,7 @@ if (isset($_SESSION['BadEmail']) || isset($_SESSION['BadPassword'])){
 	if ($_SESSION['BadEmail'] == "True"){
 			echo "First Name: <input type='text' name='FirstName' value=".$_SESSION['FirstName']." >";
 			echo "Last Name: <input type='text' name='LastName'value=".$_SESSION['LastName']."><br /><br />";
-			echo "Business Name: <input type='text' name='BussinessName' value=".$_SESSION['BussinessName']."><br /><br />";
+			echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
 			echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
 			echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email'].">";
 			if ($_SESSION['EmailInvalid'] =="True"){
@@ -236,42 +236,42 @@ if (isset($_SESSION['BadEmail']) || isset($_SESSION['BadPassword'])){
 			}
 			echo "Password: <input type='password' name='Password'><br /><br />";
 			echo "Confirm Password: <input type='password' name='ConfirmPassword' ><br /><br />";
-			echo "Address: <input type='text' name='BillingAddress' value=".$_SESSION['BillingAddress']."><br /><br />";
-			echo "City: <input type='text' name='BillingCity' value=".$_SESSION['BillingCity']."><br /><br />";
-			echo "State: <input type='text' name='BillingState' value=".$_SESSION['BillingState']."><br /><br />";
-			echo "Zip Code: <input type='text' name='BillingZip' value=".$_SESSION['BillingZip']."><br /><br />";
+			echo "Address: <input type='text' name='Address' value=".$_SESSION['Address']."><br /><br />";
+			echo "City: <input type='text' name='City' value=".$_SESSION['City']."><br /><br />";
+			echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
+			echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
 			echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
 		
 		}
 	else if ($_SESSION['BadPassword'] == "True"){
 		echo "First Name: <input type='text' name='FirstName' value=".$_SESSION['FirstName']." >";
 		echo "Last Name: <input type='text' name='LastName'value=".$_SESSION['LastName']."><br /><br />";
-		echo "Business Name: <input type='text' name='BussinessName' value=".$_SESSION['BussinessName']."><br /><br />";
+		echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
 		echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
 		echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email']."><br /><br />";
 		echo "Password: <input type='password' name='Password'>";
 		Echo "Passwords do not match<br /> or the password must be at least 8 characters and must contain at least one lower case letter, one upper case letter and one digi<br /><br />";
 		echo "Confirm Password: <input type='password' name='ConfirmPassword'>";
 		Echo "Passwords do not match<br /> or the password must be at least 8 characters and must contain at least one lower case letter, one upper case letter and one digi<br /><br />";
-		echo "Address: <input type='text' name='BillingAddress' value=".$_SESSION['BillingAddress']."><br /><br />";
-		echo "City: <input type='text' name='BillingCity' value=".$_SESSION['BillingCity']."><br /><br />";
-		echo "State: <input type='text' name='BillingState' value=".$_SESSION['BillingState']."><br /><br />";
-		echo "Zip Code: <input type='text' name='BillingZip' value=".$_SESSION['BillingZip']."><br /><br />";
+		echo "Address: <input type='text' name='Address' value=".$_SESSION['Address']."><br /><br />";
+		echo "City: <input type='text' name='City' value=".$_SESSION['City']."><br /><br />";
+		echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
+		echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
 		echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
 	}
 	else if ($_SESSION['Login']=="True"){
 			echo "First Name: <input type='text' name='FirstName' value=".$_SESSION['FirstName']." >";
 			echo "Last Name: <input type='text' name='LastName'value=".$_SESSION['LastName']."><br /><br />";
-			echo "Business Name: <input type='text' name='BussinessName' value=".$_SESSION['BussinessName']."><br /><br />";
+			echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
 			echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
 			echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email'].">";
 			Echo " <br /><br />";
 			echo "Password: <input type='password' name='Password'><br /><br />";
 			echo "Confirm Password: <input type='password' name='ConfirmPassword' ><br /><br />";
-			echo "Address: <input type='text' name='BillingAddress' value=".$_SESSION['BillingAddress']."><br /><br />";
-			echo "City: <input type='text' name='BillingCity' value=".$_SESSION['BillingCity']."><br /><br />";
-			echo "State: <input type='text' name='BillingState' value=".$_SESSION['BillingState']."><br /><br />";
-			echo "Zip Code: <input type='text' name='BillingZip' value=".$_SESSION['BillingZip']."><br /><br />";
+			echo "Address: <input type='text' name='Address' value=".$_SESSION['Address']."><br /><br />";
+			echo "City: <input type='text' name='City' value=".$_SESSION['City']."><br /><br />";
+			echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
+			echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
 			echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
 		}
 	
@@ -281,30 +281,30 @@ else
 		if ($_SESSION['Login']=="True"){
 			echo "First Name: <input type='text' name='FirstName' value=".$_SESSION['FirstName']." >";
 			echo "Last Name: <input type='text' name='LastName'value=".$_SESSION['LastName']."><br /><br />";
-			echo "Business Name: <input type='text' name='BussinessName' value=".$_SESSION['BussinessName']."><br /><br />";
+			echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
 			echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
 			echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email'].">";
 			Echo " <br /><br />";
 			echo "Password: <input type='password' name='Password'><br /><br />";
 			echo "Confirm Password: <input type='password' name='ConfirmPassword' ><br /><br />";
-			echo "Address: <input type='text' name='BillingAddress' value=".$_SESSION['BillingAddress']."><br /><br />";
-			echo "City: <input type='text' name='BillingCity' value=".$_SESSION['BillingCity']."><br /><br />";
-			echo "State: <input type='text' name='BillingState' value=".$_SESSION['BillingState']."><br /><br />";
-			echo "Zip Code: <input type='text' name='BillingZip' value=".$_SESSION['BillingZip']."><br /><br />";
+			echo "Address: <input type='text' name='Address' value=".$_SESSION['Address']."><br /><br />";
+			echo "City: <input type='text' name='City' value=".$_SESSION['City']."><br /><br />";
+			echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
+			echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
 			echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
 		}
 		else {
 			echo "First Name: <input type='text' name='FirstName'>";
 			echo "Last Name: <input type='text' name='LastName'><br /><br />";
-			echo "Business Name: <input type='text' name='BussinessName'><br /><br />";
+			echo "CompanyID: <input type='text' name='CompanyID'><br /><br />";
 			echo "Phone Number: <input type='text' name='Phone'><br /><br />";
 			echo "E-Mail: <input type='text' name='Email'><br /><br />";
 			echo "Password: <input type='password' name='Password' ><br /><br />";
 			echo "Confirm Password: <input type='password' name='ConfirmPassword'><br /><br />";
-			echo "Address: <input type='text' name='BillingAddress'><br /><br />";
-			echo "City: <input type='text' name='BillingCity'><br /><br />";
-			echo "State: <input type='text' name='BillingState'><br /><br />";
-			echo "Zip Code: <input type='text' name='BillingZip'><br /><br />";
+			echo "Address: <input type='text' name='Address'><br /><br />";
+			echo "City: <input type='text' name='City'><br /><br />";
+			echo "State: <input type='text' name='State'><br /><br />";
+			echo "Zip Code: <input type='text' name='Zip'><br /><br />";
 			echo "Fax: <input type='text' name='Fax'><br /><br /><br />";
 		}
 	}

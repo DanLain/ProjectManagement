@@ -181,7 +181,7 @@
 					<h2>
 					 <?php
 						if($_SESSION['Login']=="True"){
-							echo "Update Customer Information";
+							echo "Update Employee Information";
 						}
 						else {
 							echo "Registration";
@@ -194,7 +194,7 @@
 if($_SESSION['Login']=="True"){
 
 
-	$mysqlquery1="Select * from customer where CustomerID = '$_SESSION[CustomerID]'";
+	$mysqlquery1="Select * from Employee where EmployeeID = '$_SESSION[EmployeeID]'";
 	$result1=mysql_query($mysqlquery1);
 	while ($row=mysql_fetch_array($result1))
 	{
