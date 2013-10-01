@@ -10,9 +10,9 @@
 		
 		if(!isset($_SESSION['Login']))
 		{
-			$_SESSION['Login'] = "false";
+			$_SESSION['Login'] = "False";
 			$_SESSION['User'] = "Guest";
-			$_SESSION['EmployeeLogin'] = "False";
+			$_SESSION['EmployeeID'] = 0;
 			$_SESSION['LoginTry']=0;
 			$_SESSION['BadLogin']="";
 			$_SESSION['Locked']="False";
@@ -192,7 +192,7 @@
 					}
 					?>
 					
-					<!--<img src="images/sport1.jpg" alt="Post Image" --> 
+					
 					<?php
 					if($_SESSION['Login'] != "True")
 					{
@@ -219,13 +219,26 @@
 						echo "Welcome ";
 						
 						
-						//echo "<a href='registration.php' title='Profile Link'>";
+						
 						echo $_SESSION['User'];
 						echo "<br />";
-						if ($_SESSION['adminLogin']=="True"){
-							echo "<br /><a href='admin.php' title='Manage Information'>Manage Projects</a></h1>";
+						$getProjectSqlQuery="Select * from project";
+						$projectResult=mysql_query($getProjectSqlQuery);
+						$managerCount = 0;			
+						while($row_project=mysql_fetch_array($projectResult))
+						{
+							if($row_project['Manager'] == $_SESSION['EmployeeID'])
+							{
+								$managerCount = 1;
+							}
 						}
-						echo "<br /><br /><a href='transactionHistory.php' title='Transaction History'>Transaction History</a></h1>";
+						
+						if($managerCount = 1)
+						{
+							echo "<br /><a href='projectManager.php' title='Manage Information'>Manage Projects</a></h1>";
+						}
+						
+						echo "<br /><br /><a href='transactionHistory.php' title='Projects'>Transaction History</a></h1>";
 						
 					}
 				?>					
@@ -245,55 +258,67 @@
 
 						echo "<h2>Projects</h2>
 						<ul>";
-						
-					$mysqlquery="Select * from projects WHERE promotions.MerchID = merchandise.MerchID";
-					$result=mysql_query($mysqlquery);
-										
-					$mysqlqueryitem="Select * from merchandise";
-					//$item_result=mysql_query($mysqlqueryitem);
 
+					//EmployeeID under session
+					$getStorySqlQuery="Select * from story";
+					$storyResult=mysql_query($getStorySqlQuery);
+																
+
+					while ($row=mysql_fetch_array($storyResult))
+					{
+						if($row['EmployeeID'] == $_SESSION['EmployeeID'])
+						{
+							$getEpicSqlQuery="Select * from epic";
+							$epicResult=mysql_query($getEpicSqlQuery);
+
+							while($row_epic=mysql_fetch_array($epicResult))
+							{
+								if($row['EpicID']==$row_epic['EpicID'])
+								{
+									$getProjectSqlQuery="Select * from project";
+									$projectResult=mysql_query($getProjectSqlQuery);
 									
-
-					while ($row=mysql_fetch_array($result)){
-						$item_result=mysql_query($mysqlqueryitem);
-						while ($row_item=mysql_fetch_array($item_result)){
-							if ($row_item['MerchID'] == $row['MerchID']){
-								if(date("Y-m-d")>=$row['StartDate'] & date("Y-m-d")<=$row['EndDate']){
-								echo "<li>";
-								echo "<a href='productDetails.php?varname=".$row['MerchID']."' title=";
-								echo "Product Link";
-								echo "><img src=";
-								echo "images/";
-								echo $row_item['Picture'];
-								echo " alt=";
-								echo"Product Image"; 
-								echo "/></a>";
-								echo "<div class=";
-								echo "info";
-								echo ">";
-								echo "<h4>";
-								echo $row_item['Name'];
-								echo "</h4>";
-								echo "<span class=";
-								echo "number";
-								echo ">";
-								echo $row_item['MerchID'];
-								echo "</span>";
-								echo "<span class=";
-								echo "price";
-								echo "><span>$</span>";
-								echo $row['SalePrice'];
-								echo "</span>";
-								echo "<div class=";
-								echo "cl";
-								echo ">&nbsp;</div>";
-								echo "</div>";
-								echo "</li>";
+									while($row_project=mysql_fetch_array($projectResult))
+									{
+										if($row_project['ProjectID'] == $row_epic['ProjectID'])
+										{
+											//output
+											echo "<li>";
+											echo "<a href='projectDetails.php?varname=".$row_project['ProjectID']."' title=";
+											echo "Project Link";
+											echo "><img src=";
+											echo "images/";
+											echo "baseball1.jpg";//BASEBALL IMAGE TEMPORARY
+											echo " alt=";
+											echo"Product Image/>"; 
+											echo "</a>";
+											echo "<div class=";
+											echo "info";
+											echo ">";
+											echo "<h4>";
+											echo $row_project['ProjectName'];
+											echo "</h4>";
+											echo "<span class=";
+											echo "Start Date";
+											echo ">";
+											echo $row_project['TargetStartDate'];
+											echo "</span>";
+											echo "<span class=";
+											echo "End Date";
+											echo "><span>$</span>";
+											echo $row_project['TargetEndDate'];
+											echo "</span>";
+											echo "<div class=";
+											echo "cl";
+											echo ">&nbsp;</div>";
+											echo "</div>";
+											echo "</li>";
+										}
+									}
 								}
 							}
-						}											
-											
-					}
+						}
+					}	
 				}
 				?>
 				</ul>
