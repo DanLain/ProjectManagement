@@ -5,11 +5,19 @@
 		}
 
 		mysql_select_db("danlain_live");
+		if(!isset($_SESSION['cart'])){
+			$_SESSION['cart'] = array();
+			$_SESSION['cartQuantity'] = array();
+		}
+		if(!isset($_SESSION['OrderTotal']))
+		{
+			$_SESSION['OrderTotal'] = 0.00;
+		}
 		if(!isset($_SESSION['Login']))
 		{
 			$_SESSION['Login'] = "false";
 			$_SESSION['User'] = "Guest";
-			$_SESSION['adminLogin'] = "False";
+			$_SESSION['EmployeeLogin'] = "False";
 			$_SESSION['LoginTry']=0;
 			$_SESSION['BadLogin']="";
 			$_SESSION['Locked']="False";
@@ -172,143 +180,129 @@
 		
 		</div>
 		<!-- End Slider -->
-		<!-- Begin Main gary-->
+		
+		<!-- Begin Main -->
 		<div  id="main" class="shell">
 			<!-- Begin Content -->
 			<div id="content">
 				<div class="post">
-					<h2>Employee Options</h2>
-					<ul>
-					<h3>Merchandise Management</h3> 
-						
-						<li><a href="NewProject.php" title="Vendor"><span>Add / Edit Projects</span></a></li>
-						<li><a href="createCompany.php" title="Company"><span>Add Company</span></a></li>
-						<li><a href="createItem.php" title="Item"><span>Add Item</span></a></li>
-						<li><a href="createCategory.php" title="Category"><span>Add Category</span></a></li>
-						<li><a href="createType.php" title="Category"><span>Add Type</span></a></li>
-						<li><a href="createNewPromo.php" tilte="order">Create Promotions</a></li>
-					<br >
-					<h3>Acount and Report Management</h3> 
-						
-						<li><a href="createOrder.php" tilte="order">Order Product</a></li>
-						<li><a href="accountManagement.php" title="Category"><span>Account Management</span></a></li>
-						<li><a href="cashOnHand.php" tilte="order">View Cash On Hand</a></li>
-						<li><a href="viewOrders.php" tilte="order">Order Processing</a></li>
-						<li><a href="managementReports.php" title="Category"><span>Management Reports</span></a></li>
-					<br>
-						
-						<!--end gary<li><a href="#" title="Contact"><span>Contact</span></a></li>-->
+					
+<!--gary-->
+						<!--<li><a href="#" title="Contact"><span>Contact</span></a></li>-->
 	<!--<li><a href="#" title="Contact"><span>Contact</span></a></li>-->
 						
 					</ul>
-					
+					<h2>Employee Options</h2>
+					<ul>
 					<div class="cl">&nbsp;</div>
 				</div>
 			</div>
 			<!-- End Content -->
 		
 			<div class="cl">&nbsp;</div>
-			<!-- Begin Promotions -->
-			<div id="product-slider">
-				<h2>Promotions</h2>
-				<ul>
-				<?php
+			<div id="content">
+			<div class="post">
 			
-					$mysqlquery="Select * from promotions JOIN merchandise WHERE promotions.MerchID = merchandise.MerchID";
-					$result=mysql_query($mysqlquery);
-										
-					$mysqlqueryitem="Select * from merchandise";
-					//$item_result=mysql_query($mysqlqueryitem);
+				<li><a href="addCompany.php" title="Company"><span>Create New Company</span></a></li>
+<?php
+       $raw_results = mysql_query("SELECT * FROM company") or die(mysql_error());
+             
+       
+        if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
+           									
+			if (mysql_num_rows($raw_results)>0){
+					
+					echo"<table border='1'> ";
+					echo'<tr>';
+					echo'<th>CompanyID</th>';
+					echo'<th>';
+					echo'BusinessName';
+					echo'</th>';
+					echo'<th>';
+					echo'Address';
+					echo'</th>';
+					echo'<th>';
+					echo'City';
+					echo'</th>';
+					echo'<th>';
+					echo'State';
+					echo'</th>';
+					echo'<th>';
+					echo'Zip';
+					echo'</th>';				
+					echo'<th>';
+					echo'Phone';
+					echo'</th>';
+					echo'<th>';
+					echo'Fax';
+					echo'</th>';
+					echo'<th>';
+					echo'ContactName';
+					echo'</th>';
+					echo'</tr>';
+					$count1=0;
+					
 
-									
-
-					while ($row=mysql_fetch_array($result)){
-						$item_result=mysql_query($mysqlqueryitem);
-						while ($row_item=mysql_fetch_array($item_result)){
-							if ($row_item['MerchID'] == $row['MerchID']){
-								if(date("Y-m-d")>=$row['StartDate'] & date("Y-m-d")<=$row['EndDate']){
-								echo "<li>";
-								echo "<a href='productDetails.php?varname=".$row['MerchID']."' title=";
-								echo "Product Link";
-								echo "><img src=";
-								echo "images/";
-								echo $row_item['Picture'];
-								echo " alt=";
-								echo"Product Image"; 
-								echo "/></a>";
-								echo "<div class=";
-								echo "info";
-								echo ">";
-								echo "<h4>";
-								echo $row_item['Name'];
-								echo "</h4>";
-								echo "<span class=";
-								echo "number";
-								echo ">";
-								echo $row_item['MerchID'];
-								echo "</span>";
-								echo "<span class=";
-								echo "price";
-								echo "><span>$</span>";
-								echo $row['SalePrice'];
-								echo "</span>";
-								echo "<div class=";
-								echo "cl";
-								echo ">&nbsp;</div>";
-								echo "</div>";
-								echo "</li>";
-								}
-							}
-						}											
-											
+					while ($row=mysql_fetch_array($raw_results)){
+					$count1=$count1+1;
+					
+					echo'<tr>';
+					echo"<td><a href=addCompany.php?CompanyID=".$row['CompanyID']." title=";
+					echo $row['CompanyID'];
+					echo '">';
+					echo $row['CompanyID'];
+					echo '</a></td>';
+					echo'<td>';
+					echo $row['BusinessName'];
+					echo '</td>';
+					echo'<td>';
+					echo $row['Address'];
+					echo '</td>';
+					echo'<td>';
+					echo $row['City'];
+					echo'</td>';
+					echo'<td>';
+					echo $row['State'];
+					echo'</td>';
+					echo'<td>';
+					echo $row['Zip'];
+					echo'</td>';
+					echo'<td>';
+					echo $row['Phone'];
+					echo'</td>';
+					echo'<td>';
+					echo $row['Fax'];
+					echo'</td>';
+					echo'<td>';
+					echo $row['ContactName'];
+					echo'</td>';
+					echo'</tr>';
+					
 					}
-				?>
-				</ul>
-				<div class="cl">&nbsp;</div>
-			</div>
-			<!-- End Promotions Slider -->
-		</div>
-		<!-- End Main -->
-		<!-- Begin Footer -->
-		<div id="footer">
-			<div class="boxes">
-				<!-- Begin Shell -->
-				<div class="shell">
-					<div class="box post-box">
-						<!--<h2>About SGC</h2>-->
-						<div class="box-entry">
-							<h1> Sporting Goods Company </h1>
-							
-							<div class="cl">&nbsp;</div>
-						</div>
-					</div>
+					echo'</table>';}
 				
-					</div>
-					<div class="box">
-						<!--<h2>Information</h2>
-						<ul>
-							<li><a href="#" title="Special Offers">Special Offers</a></li>
-							<li><a href="#" title="Privacy Policy">Privacy Policy</a></li>
-							<li><a href="#" title="Terms &amp; Conditions">Terms &amp; Conditions</a></li>
-							<li><a href="#" title="Contact Us">Contact Us</a></li>
-							<li><a href="#" title="Log In">Log In</a></li>
-							<li><a href="#" title="Account">Account</a></li>
-							<li><a href="#" title="Basket">Basket</a></li>
-						</ul>-->
-					</div>
-					<!--<div class="box last-box">
-						<h2>Categories</h2>
-						<ul>
-							<li><a href="#" title="Mens">Mens</a></li>
-							<li><a href="#" title="Ladies">Ladies</a></li>
-							<li><a href="#" title="Kids">Kids</a></li>
-							<li><a href="#" title="Football">Football</a></li>
-							<li><a href="#" title="Accessories">Accessories</a></li>
-							<li><a href="#" title="Sports">Sports</a></li>
-						</ul>
-					</div>-->
-					<div class="cl">&nbsp;</div>
+					//while($i_results = mysql_fetch_array($item_results)){
+						//echo "<p>".$i_results['ItemName']."</p>";}}
+                // posts results gotten from database(title and text) you can also show id ($results['id'])
+				
+            
+             
+        
+        else{ // if there is no matching rows do following
+            echo "No results";
+        }
+         }
+    
+    else{ // if query length is less than minimum
+        //echo "Minimum length is ".$min_length;
+    }
+?>
 				</div>
+			
+			</div>
+			<div class="cl">&nbsp;</div>
+				<a href="employee.php" title="Manage Information">Return to Manage Information</a>
+				</ul>
 				<!-- End Shell -->
 			</div>
 			<div class="copy">

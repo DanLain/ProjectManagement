@@ -76,13 +76,13 @@
 						if($_SESSION['Login'] != "True")
 						{
 							//echo "<a href='login.php' title='Profile Link'>Login</a>";
-							echo "<a href='registration.php' title='Profile Link'>Register</a>";
+							echo "<a href='userManagment.php' title='Profile Link'>Register</a>";
 						} 
 						else
 						{
 							
 								
-								echo "<a href='registration.php' title='Profile Link'>";
+								echo "<a href='userManagment.php' title='Profile Link'>";
 								echo $_SESSION['User'];
 								echo "</a>";
 								echo "<a href='logout.php' title='Logout'> Logout</a>";
