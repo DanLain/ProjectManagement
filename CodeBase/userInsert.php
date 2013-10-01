@@ -107,8 +107,8 @@ if($_REQUEST['Password'] != $_REQUEST['ConfirmPassword']){
 	}
 if ($_SESSION['GoodReg']=="True"){
 		$insert_query="Insert into employee 
-			values('Null',
-				   '$_REQUEST[Phone]',
+			(EmployeeID, Phone, Fax, FirstName, LastName, Address, City, State, Zip, Salary, CompanyID)
+			values('$_REQUEST[Phone]',
 				   '$_REQUEST[Fax]',
 				   '$_REQUEST[FirstName]',
 				   '$_REQUEST[LastName]',
