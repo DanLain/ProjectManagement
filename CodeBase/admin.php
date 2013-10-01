@@ -5,19 +5,11 @@
 		}
 
 		mysql_select_db("danlain_live");
-		if(!isset($_SESSION['cart'])){
-			$_SESSION['cart'] = array();
-			$_SESSION['cartQuantity'] = array();
-		}
-		if(!isset($_SESSION['OrderTotal']))
-		{
-			$_SESSION['OrderTotal'] = 0.00;
-		}
 		if(!isset($_SESSION['Login']))
 		{
 			$_SESSION['Login'] = "false";
 			$_SESSION['User'] = "Guest";
-			$_SESSION['EmployeeLogin'] = "False";
+			$_SESSION['adminLogin'] = "False";
 			$_SESSION['LoginTry']=0;
 			$_SESSION['BadLogin']="";
 			$_SESSION['Locked']="False";
