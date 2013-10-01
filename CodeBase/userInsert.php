@@ -6,7 +6,7 @@ $_SESSION['PasswordInvalid']="False";
 $_SESSION['EmailInvalid'] = "False";
 
 
-if(!$mysqlconnect){$mysqlconnect=mysql_connect('localhost','danla_web','thisiscool');
+if(!isset($mysqlconnect)){$mysqlconnect=mysql_connect('localhost','danla_web','thisiscool');
 //echo "Connected to MySQL";
 }
 
@@ -107,7 +107,7 @@ if($_REQUEST['Password'] != $_REQUEST['ConfirmPassword']){
 	}
 if ($_SESSION['GoodReg']=="True"){
 		$insert_query="Insert into employee 
-			(EmployeeID, Phone, Fax, FirstName, LastName, Address, City, State, Zip, Salary, CompanyID)
+			(Phone, Fax, FirstName, LastName, Address, City, State, Zip, Salary, Email, CompanyID)
 			values('$_REQUEST[Phone]',
 				   '$_REQUEST[Fax]',
 				   '$_REQUEST[FirstName]',
@@ -119,6 +119,12 @@ if ($_SESSION['GoodReg']=="True"){
 				   '$_REQUEST[Email]',
 				   '$_REQUEST[CompanyID]')";
 		mysql_query($insert_query);
+		
+		$new_number="Select EmployeeID from employee where Email = '$_REQUEST[Email]'";
+		$number_result=mysql_query($new_number);
+		$next_employee_ID = mysql_fetch_row($result)[0];
+		
+		
 		$insert_query="Insert into login 
 			values('$next_employee_ID',
 				   '$_REQUEST[Email]',
@@ -131,7 +137,7 @@ if ($_SESSION['GoodReg']=="True"){
 			}
 		$_SESSION['Login'] = "True";
 		$_SESSION['employeeID'] = $next_employee_ID;
-		$_SESSION['User'] = $_REQUEST[Email];
+		$_SESSION['User'] = $_REQUEST['Email'];
 
 		header("Location:http://localhost/flOhome.php");
 	}
