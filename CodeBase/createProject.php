@@ -1,6 +1,6 @@
 <?php session_start();
 
-		if(!$mysqlconnect){
+		if(!isset($mysqlconnect)){
 			$mysqlconnect=mysql_connect('localhost','danla_web','thisiscool');
 		}
 

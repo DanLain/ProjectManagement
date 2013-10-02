@@ -181,7 +181,7 @@
 					<ul>
 					<h3>Merchandise Management</h3> 
 						
-						<li><a href="NewProject.php" title="Vendor"><span>Add / Edit Projects</span></a></li>
+						<li><a href="createProject.php" title="Vendor"><span>Add / Edit Projects</span></a></li>
 						<li><a href="createCompany.php" title="Company"><span>Add Company</span></a></li>
 						<li><a href="createItem.php" title="Item"><span>Add Item</span></a></li>
 						<li><a href="createCategory.php" title="Category"><span>Add Category</span></a></li>

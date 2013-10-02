@@ -107,7 +107,7 @@ if($_REQUEST['Password'] != $_REQUEST['ConfirmPassword']){
 	}
 if ($_SESSION['GoodReg']=="True"){
 		$insert_query="Insert into employee 
-			(Phone, Fax, FirstName, LastName, Address, City, State, Zip, Salary, Email, CompanyID)
+			(Phone, Fax, FirstName, LastName, Address, City, State, Zip, Email, CompanyID)
 			values('$_REQUEST[Phone]',
 				   '$_REQUEST[Fax]',
 				   '$_REQUEST[FirstName]',
@@ -118,15 +118,14 @@ if ($_SESSION['GoodReg']=="True"){
 				   '$_REQUEST[Zip]',
 				   '$_REQUEST[Email]',
 				   '$_REQUEST[CompanyID]')";
-		mysql_query($insert_query);
+		$retval =mysql_query($insert_query);
 		
 		$new_number="Select EmployeeID from employee where Email = '$_REQUEST[Email]'";
 		$number_result=mysql_query($new_number);
-		$next_employee_ID = mysql_fetch_row($result)[0];
-		
+		$next_employee_ID = mysql_fetch_row($number_result);
 		
 		$insert_query="Insert into login 
-			values('$next_employee_ID',
+			values('$next_employee_ID[0]',
 				   '$_REQUEST[Email]',
 				   '$_REQUEST[Password]',
 				   '0',
