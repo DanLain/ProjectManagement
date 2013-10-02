@@ -5,14 +5,6 @@
 		}
 
 		mysql_select_db("danlain_live");
-		if(!isset($_SESSION['cart'])){
-			$_SESSION['cart'] = array();
-			$_SESSION['cartQuantity'] = array();
-		}
-		if(!isset($_SESSION['OrderTotal']))
-		{
-			$_SESSION['OrderTotal'] = 0.00;
-		}
 		if(!isset($_SESSION['Login']))
 		{
 			$_SESSION['Login'] = "false";
@@ -79,13 +71,13 @@
 						if($_SESSION['Login'] != "True")
 						{
 							//echo "<a href='login.php' title='Profile Link'>Login</a>";
-							echo "<a href='registration.php' title='Profile Link'>Register</a>";
+							echo "<a href='userManagment.php' title='Profile Link'>Register</a>";
 						} 
 						else
 						{
 							
 								
-								echo "<a href='registration.php' title='Profile Link'>";
+								echo "<a href='userManagment.php' title='Profile Link'>";
 								echo $_SESSION['User'];
 								echo "</a>";
 								echo "<a href='logout.php' title='Logout'> Logout</a>";
@@ -94,8 +86,7 @@
 						  
 
 
-					</span><span class="shopping">Shopping Cart <a href="cart.php" title="Shopping Cart">$<?php echo $_SESSION['OrderTotal'];?>
-					</a></span></p>
+					</span></p>
 					</div>
 					<!-- End Shell -->
 				</div>
@@ -192,7 +183,7 @@
 	<!--<li><a href="#" title="Contact"><span>Contact</span></a></li>-->
 						
 					</ul>
-					<h2>Employee Options</h2>
+					<h2>Project Options</h2>
 					<ul>
 					<div class="cl">&nbsp;</div>
 				</div>
@@ -203,9 +194,9 @@
 			<div id="content">
 			<div class="post">
 			
-				<li><a href="addCompany.php" title="Company"><span>Create New Company</span></a></li>
+				<li><a href="addProject.php" title="Project"><span>Create New Project</span></a></li>
 <?php
-       $raw_results = mysql_query("SELECT * FROM company") or die(mysql_error());
+       $raw_results = mysql_query("SELECT * FROM project") or die(mysql_error());
              
        
         if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
@@ -214,30 +205,24 @@
 					
 					echo"<table border='1'> ";
 					echo'<tr>';
-					echo'<th>CompanyID</th>';
+					echo'<th>ProjectID</th>';
 					echo'<th>';
-					echo'BusinessName';
+					echo'ProjectName';
 					echo'</th>';
 					echo'<th>';
-					echo'Address';
+					echo'TargetStartDate';
 					echo'</th>';
 					echo'<th>';
-					echo'City';
+					echo'TargetEndDate';
 					echo'</th>';
 					echo'<th>';
-					echo'State';
+					echo'BudgetDays';
 					echo'</th>';
 					echo'<th>';
-					echo'Zip';
+					echo'BudgetCurrancy';
 					echo'</th>';				
 					echo'<th>';
-					echo'Phone';
-					echo'</th>';
-					echo'<th>';
-					echo'Fax';
-					echo'</th>';
-					echo'<th>';
-					echo'ContactName';
+					echo'Manager';
 					echo'</th>';
 					echo'</tr>';
 					$count1=0;
@@ -247,34 +232,28 @@
 					$count1=$count1+1;
 					
 					echo'<tr>';
-					echo"<td><a href=addCompany.php?CompanyID=".$row['CompanyID']." title=";
-					echo $row['CompanyID'];
+					echo"<td><a href=addProject.php?ProjectID=".$row['ProjectID']." title=";
+					echo $row['ProjectIDID'];
 					echo '">';
-					echo $row['CompanyID'];
+					echo $row['ProjectID'];
 					echo '</a></td>';
 					echo'<td>';
-					echo $row['BusinessName'];
+					echo $row['ProjectName'];
 					echo '</td>';
 					echo'<td>';
-					echo $row['Address'];
+					echo $row['TargetStartDate'];
 					echo '</td>';
 					echo'<td>';
-					echo $row['City'];
+					echo $row['TargetEndDate'];
 					echo'</td>';
 					echo'<td>';
-					echo $row['State'];
+					echo $row['BudgetDays'];
 					echo'</td>';
 					echo'<td>';
-					echo $row['Zip'];
+					echo $row['BudgetCurrancy'];
 					echo'</td>';
 					echo'<td>';
-					echo $row['Phone'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['Fax'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['ContactName'];
+					echo $row['Manager'];
 					echo'</td>';
 					echo'</tr>';
 					
@@ -301,7 +280,7 @@
 			
 			</div>
 			<div class="cl">&nbsp;</div>
-				<a href="employee.php" title="Manage Information">Return to Manage Information</a>
+				<a href="flOhome.php" title="Main Menu">Return to Main Menu</a>
 				</ul>
 				<!-- End Shell -->
 			</div>
@@ -309,12 +288,7 @@
 				<!-- Begin Shell -->
 				<div class="shell">
 					<div class="carts">
-						<ul>
-							<li><span>We accept</span></li>
-							
-							<li><a href="#" title="VISA"><img src="images/cart-img2.jpg" alt="VISA" /></a></li>
-							<li><a href="#" title="MasterCard"><img src="images/cart-img3.jpg" alt="MasterCard" /></a></li>
-						</ul>
+						
 					</div>
 					<p>&copy; Sitename.com. Design by Gary Johns,Richard Sherrill,Dan Lain,and Jose Flores <br/>Template from <a href="http://css-free-templates.com/">CSS-FREE-TEMPLATES.COM</a></p>
 					<div class="cl">&nbsp;</div>
