@@ -6,16 +6,21 @@
 		}
 
 		mysql_select_db("danlain_live");
-		
+		if(!isset($_SESSION['Update']))
+		{
+			$_SESSION['Update'] = "False";
+		}
 		
 		if(!isset($_SESSION['Login']))
 		{
+			
 			$_SESSION['Login'] = "False";
 			$_SESSION['User'] = "Guest";
 			$_SESSION['EmployeeID'] = 0;
 			$_SESSION['LoginTry']=0;
 			$_SESSION['BadLogin']="";
 			$_SESSION['Locked']="False";
+			
 		}
 		?>
 		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -46,6 +51,13 @@
 					<!-- Begin Shell -->
 					<div class="shell">
 						<h2><span>
+						<!--<?php
+									//$mysqlquery="Select * from company";
+								    //$result=mysql_query($mysqlquery);
+									//while ($row=mysql_fetch_array($result)){
+										//echo $row['BusinessName'];
+									//}
+						?>-->
 						Better Software
 						</span></h2>
 						<div id="top-nav">
@@ -91,9 +103,9 @@
 					<!-- Begin Shell -->
 					<div class="shell">
 						
-							<!--<?php
+							<?php
 
-											$mysqlquery="Select * from type";
+											/*$mysqlquery="Select * from type";
 											$result=mysql_query($mysqlquery);
 
 											
@@ -132,8 +144,8 @@
 																echo "</ul>";
 														echo "</ul>";
 											}			
-
-										?>-->
+*/
+										?>
 							
 							
 										</li>
@@ -172,80 +184,66 @@
 			<div id="content">
 				<div class="post">
                                 <div class="welcome">
-					<?php 
-					if($_SESSION['Login'] != "True")
-					{
-						echo "<h2>Login</h2>";
-						
-					}
-					?>
+				
+				<?php 
 					
-					
-					<?php
-					if($_SESSION['Login'] != "True")
+					if($_SESSION['Login']=="True")
 					{
-						echo "<form  action='login.php' method='test'>
-
-						Emai Address: <input type='text' name='Email'><br />
-						<br />
-						Password: <input type='password' size='20' name='Password'><br />
-						";
-						if ($_SESSION['Locked']=="True"){
-								echo "Account ".$_SESSION['Email']." locked please contact customer service at dan@drlain.com<br /><br />";
-							}
-								
-						elseif ($_SESSION['LoginTry']!=0){
-							Echo "System will lock account after ".(6 - $_SESSION['LoginTry'])." more attempts. <br/> <br/>";
+						  
+						if($_SESSION['Update']=="True")
+						{
+							echo "<font color='red'>Updates Saved</font><br>";
 						}
-						
-
-						echo "<input  type='submit' >
-						</form>";
-					}	 
-					else
-					{
-						echo "Welcome ";
-						
-						
-						
-						echo $_SESSION['User'];
-						echo "<br />";
 						$adminSqlQuery="Select * from employee";
 						$adminResult=mysql_query($adminSqlQuery);
 						while($admin_row=mysql_fetch_array($adminResult))
 						{
 							if(($_SESSION['EmployeeID'] == $admin_row['EmployeeID']) && ($admin_row['Admin'] == 1))
 							{
-								echo "<a href='companyProperties.php' title='Company Properties'>Company Properties</a>	<br><br>";
+								
+								//need to get row from company from admin_row.companyID
+								$companySqlQuery="Select * from company WHERE CompanyID='$admin_row[CompanyID]'";
+								$companyResult=mysql_query($companySqlQuery);
+								$row=mysql_fetch_array($companyResult);
+
+								$_SESSION['BusinessName'] = $row['BusinessName'];
+								$_SESSION['Fax'] = $row['Fax'];
+								$_SESSION['ContactName'] = $row['ContactName'];
+								$_SESSION['Address']= $row['Address'];
+								$_SESSION['City'] = $row['City'];
+								$_SESSION['State'] = $row['State'];
+								$_SESSION['Zip'] = $row['Zip'];
+								$_SESSION['PhoneNumber'] = $row['Phone'];
+								
+								//$_SESSION['Email'] = $row['Email'];
+								//$_SESSION['UpdateCustomer']="True";
+								echo "<form action='updateCompanyProperties.php' method='post'>";
+
+								echo "First Name: <input type='text' name='ContactName' value=".$_SESSION['ContactName']." ><br><br>";
+								
+								echo "Business Name: <input type='text' name='BusinessName' value=".$_SESSION['BusinessName']."><br><br>";
+								echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['PhoneNumber']."><br /><br />";
+								
+								
+								
+								echo "Address: <input type='text' name='Address' value=".$_SESSION['Address']."><br /><br />";
+								echo "City: <input type='text' name='City' value=".$_SESSION['City']."><br /><br />";
+								echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
+								echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
+								echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
+								
+								echo "<input type='submit'>";	
+								echo "<br><br><a href='flOhome.php' title='home'> Home </a>";						
 							}
 						}
-
-
-						$getProjectSqlQuery="Select * from project";
-						$projectResult=mysql_query($getProjectSqlQuery);
-						$managerCount = 0;			
-						while($row_project=mysql_fetch_array($projectResult))
-						{
-							if($row_project['Manager'] == $_SESSION['EmployeeID'])
-							{
-								$managerCount = 1;
-							}
-						}
-						
-						if($managerCount = 1)
-						{
-							echo "<br /><a href='projectManager.php' title='Manage Information'>Manage Projects</a></h1>";
-							echo "<br />";
-							
-							echo "<br /><a href='adminUserManagement.php' title='Manage Users'>Manage Projects</a></h1>";
-						}
-
-						
-						
-						echo "<br /><br /><a href='transactionHistory.php' title='Projects'>Transaction History</a></h1>";
 						
 					}
-				?>					
+					else
+					{
+						echo "You shouldn't be here";
+					}
+				?>	
+								
 				</div>
 				</div>
 			</div>
@@ -340,7 +338,7 @@
 					<div class="box post-box">
 						<!--<h2>About SGC</h2>-->
 						<div class="box-entry">
-							<h1> Better Business, We make Magic Manageable </h1>
+							<h1> Better Software, We make Magic Manageable </h1>
 							
 							<div class="cl">&nbsp;</div>
 						</div>
