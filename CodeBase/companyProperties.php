@@ -194,11 +194,10 @@
 						{
 							echo "<font color='red'>Updates Saved</font><br>";
 						}
-						$adminSqlQuery="Select * from employee";
+						$adminSqlQuery="Select * from employee where EmployeeId = '$_SESSION[EmployeeID]' ";
 						$adminResult=mysql_query($adminSqlQuery);
 						while($admin_row=mysql_fetch_array($adminResult))
 						{
-							if(($_SESSION['EmployeeID'] == $admin_row['EmployeeID']) && ($admin_row['Admin'] == 1))
 							{
 								
 								//need to get row from company from admin_row.companyID
@@ -219,15 +218,15 @@
 								//$_SESSION['UpdateCustomer']="True";
 								echo "<form action='updateCompanyProperties.php' method='post'>";
 
-								echo "First Name: <input type='text' name='ContactName' value=".$_SESSION['ContactName']." ><br><br>";
+								echo "First Name: <input type='text' name='ContactName' value='".$_SESSION['ContactName']."' ><br><br>";
 								
-								echo "Business Name: <input type='text' name='BusinessName' value=".$_SESSION['BusinessName']."><br><br>";
+								echo "Business Name: <input type='text' name='BusinessName' value='".$_SESSION['BusinessName']."'><br><br>";
 								echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['PhoneNumber']."><br /><br />";
 								
 								
 								
-								echo "Address: <input type='text' name='Address' value=".$_SESSION['Address']."><br /><br />";
-								echo "City: <input type='text' name='City' value=".$_SESSION['City']."><br /><br />";
+								echo "Address: <input type='text' name='Address' value='".$_SESSION['Address']."'><br /><br />";
+								echo "City: <input type='text' name='City' value='".$_SESSION['City']."'><br /><br />";
 								echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
 								echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
 								echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";

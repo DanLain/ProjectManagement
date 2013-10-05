@@ -16,6 +16,7 @@
 			$_SESSION['LoginTry']=0;
 			$_SESSION['BadLogin']="";
 			$_SESSION['Locked']="False";
+			$_SESSION['Admin'] = 0;
 		}
 		?>
 		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -210,12 +211,13 @@
 						
 						echo $_SESSION['User'];
 						echo "<br />";
-						$adminSqlQuery="Select * from employee";
+						$adminSqlQuery="Select * from login where EmployeeID = '$_SESSION[EmployeeID]'";
 						$adminResult=mysql_query($adminSqlQuery);
 						while($admin_row=mysql_fetch_array($adminResult))
 						{
-							if(($_SESSION['EmployeeID'] == $admin_row['EmployeeID']) && ($admin_row['Admin'] == 1))
+							if(($admin_row['Admin'] == 1))
 							{
+							    $_SESSION['Admin'] = 1;
 								echo "<a href='companyProperties.php' title='Company Properties'>Company Properties</a>	<br><br>";
 							}
 						}
