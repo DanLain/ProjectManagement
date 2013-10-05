@@ -215,15 +215,12 @@
               <attribute id="a2a4dd1a6ba5a450b92f349c635e3f6ad456" name="salary" type="Real" type-id="Uml.Real" visibility="private" abstract="false" virtual="false" />
               <attribute id="a8c68d1d92eff4a86bb6b81c24afc0862677" name="userName" type="String" type-id="Uml.String" visibility="private" abstract="false" virtual="false" />
               <attribute id="a118c561765084e8ca7128d4f8e776722250" name="manager" type="Boolean" type-id="Uml.Boolean" visibility="private" abstract="false" virtual="false" />
-              <attribute id="a89e67f28f80745a1961bddf3039bc497132" name="admin" type="Boolean" type-id="Uml.Boolean" visibility="private" abstract="false" virtual="false" />
               <attribute id="a51c0be823a454b298ff748365b96c4ca578" name="developer" type="Boolean" type-id="Uml.Boolean" visibility="private" abstract="false" virtual="false" />
               <attribute id="aa3f860f29acc47968c952c80760aef5375" name="architect" type="Boolean" type-id="Uml.Boolean" visibility="private" abstract="false" virtual="false" />
             </attributes>
             <operations />
             <template-parameters>
-              <source-codes>
-                <source-code language="ActionScript" />
-              </source-codes>
+              <source-codes />
             </template-parameters>
           </item>
           <item id="di396359826666979034" cid="REL002" type="relationship" name="Assigned to" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/18/2013 21:44:02">
@@ -638,7 +635,6 @@
               <attribute uid="ac151ba273f654051b3c9bc55ba3f26e064" name="Zip" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="true" description="" default-value="" auto-increment="false" />
               <attribute uid="a7a7793322fba4de789b71e14fe549e82673" name="FirstName" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
               <attribute uid="a2f82323f83a44d669fb0f7443e6395fa207" name="LastName" type="String" type-id="Uml.String" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
-              <attribute uid="aeda2219c5a514d23ad4f1242211be52551" name="Admin" type="Boolean" type-id="Uml.Boolean" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
               <attribute uid="a3cb0b54dff3549cfbe84b114315ecdcb973" name="Developer" type="Boolean" type-id="Uml.Boolean" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
               <attribute uid="a5cc78491bf9f4e37bb1ed5e00b5e4da7740" name="Manager" type="Boolean" type-id="Uml.Boolean" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
               <attribute uid="ad1948ac7cbb5412f94b3e8140850b6fe561" name="Architect" type="Boolean" type-id="Uml.Boolean" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false" />
@@ -1095,7 +1091,7 @@
           </authors>
           <description />
           <creation-date>09/25/2013 18:21:10</creation-date>
-          <change-date>09/25/2013 18:21:23</change-date>
+          <change-date>10/05/2013 09:40:49</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -1142,7 +1138,7 @@
               </attributes>
             </object>
           </item>
-          <item id="di666760820330159539" cid="OBJ004" type="object" name="Enter Customer Information" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="02/24/2013 16:25:38">
+          <item id="di666760820330159539" cid="OBJ004" type="object" name="Enter Employee Information" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="02/24/2013 16:25:38">
             <stereotypes />
             <tagged-values />
             <documentation>
@@ -1283,40 +1279,6 @@
             <object classifier-name="">
               <attributes>
                 <attribute name="do:" value="User" />
-              </attributes>
-            </object>
-          </item>
-          <item id="di146113697954443671" cid="OBJ010" type="object" name="Edit Payment" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="02/24/2013 16:50:26">
-            <stereotypes />
-            <tagged-values />
-            <documentation>
-              <text>
-                <styles>
-                  <style name="S1" font-name="Arial" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
-                    <text>
-                      <solid-brush color="#FF000000" />
-                    </text>
-                  </style>
-                </styles>
-                <content>
-                  <paragraph line-spacing="1">
-                    <p s="S1">
-                      <t />
-                    </p>
-                  </paragraph>
-                </content>
-              </text>
-            </documentation>
-            <cooperation>
-              <participants />
-              <comments />
-            </cooperation>
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <object classifier-name="">
-              <attributes>
-                <attribute name="do:" value="update payment" />
               </attributes>
             </object>
           </item>
@@ -1507,57 +1469,7 @@
             <style class="default" />
             <control-flow guard="" />
           </item>
-          <item id="di439198599255567521" cid="ELEM004" type="control-flow" name="Payment" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="03/12/2013 07:52:59">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <control-flow guard="" />
-          </item>
           <item id="di524198604978254447" cid="ELEM005" type="control-flow" name="User Information" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="03/12/2013 07:53:47">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <control-flow guard="" />
-          </item>
-          <item id="di276089635599095791" cid="OBJ001" type="object" name="Edit Billing" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="03/12/2013 07:57:51">
-            <stereotypes />
-            <tagged-values />
-            <documentation>
-              <text>
-                <styles>
-                  <style name="S1" font-name="Arial" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
-                    <text>
-                      <solid-brush color="#FF000000" />
-                    </text>
-                  </style>
-                </styles>
-                <content>
-                  <paragraph line-spacing="1">
-                    <p s="S1">
-                      <t />
-                    </p>
-                  </paragraph>
-                </content>
-              </text>
-            </documentation>
-            <cooperation>
-              <participants />
-              <comments />
-            </cooperation>
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <object classifier-name="">
-              <attributes>
-                <attribute name="do:" value="Update Billing" />
-              </attributes>
-            </object>
-          </item>
-          <item id="di659895807296629281" cid="ELEM006" type="control-flow" name="Billing" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="03/12/2013 07:59:13">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -1589,29 +1501,6 @@
             <control-flow guard="" />
           </item>
           <item id="di984053647274440570" cid="ELEM009" type="control-flow" name="Complete" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="03/12/2013 09:27:17">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <control-flow guard="" />
-          </item>
-          <item id="di741801524150760218" cid="AFN003" type="activity-final-node" name="ActivityFinalNode3" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="03/12/2013 09:30:02">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-          </item>
-          <item id="di779696627365865711" cid="ELEM010" type="control-flow" name="Complete" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="03/12/2013 09:30:49">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <control-flow guard="" />
-          </item>
-          <item id="di660377565803967726" cid="ELEM011" type="control-flow" name="Complete" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="03/12/2013 09:32:36">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -1671,14 +1560,9 @@
           <item id="di509001831648110487" iid="ac8f4ba0c3bc4755a48552d71cb5d327" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="02/24/2013 16:50:06" order-index="22" type="entity">
             <layout ax="478.9616" ay="293" awidth="150" aheight="56.55233" x="535" y="298" width="0" height="46" angle="0" />
           </item>
-          <item id="di146113697954443671" iid="4beed3c688c449159488de9b6524db22" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="02/24/2013 16:50:26" order-index="23" type="entity">
-            <layout ax="735" ay="100" awidth="150" aheight="56.55233" x="718" y="100" width="0" height="46" angle="0" />
-          </item>
           <item id="di862615107907614239" iid="6f2f08c9eaf84c1e9db63abea3e9962a" name="Element3" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="02/24/2013 17:17:35" order-index="38" type="drawing-text">
             <layout ax="273" ay="7" awidth="464" aheight="53" x="273" y="7" width="464" height="53" angle="0" />
-            <drawing-text>
-              <text>UML - SGC - State Transition Diagram - Customer Setup and Maintanance</text>
-            </drawing-text>
+            <drawing-text />
             <style style-name="Custom Style" shadow-type="smooth" shadow-offset="-2,-2" shadow-size="6,6" shadow-color="#50000000" shadow-radius="6" wrap-name-text="true" wrap-other-text="true" glow-color="#FF000000" name-color="#FF000000" name-font="Microsoft Sans Serif;10;B" name-horizontal-alignment="center" name-vertical-alignment="center" part-header-color="#FF1E1E1E" part-header-font="Microsoft Sans Serif;9;I" part-header-horizontal-alignment="center" part-header-vertical-alignment="center" text-color="#FF000000" text-font="Microsoft Sans Serif;10;" text-horizontal-alignment="left" text-vertical-alignment="center" tagged-value-color="#FF1E1E1E" tagged-value-font="Microsoft Sans Serif;9;I" tagged-value-horizontal-alignment="center" tagged-value-vertical-alignment="center" stereotype-color="#FF1E1E1E" stereotype-font="Microsoft Sans Serif;9;I" stereotype-horizontal-alignment="center" stereotype-vertical-alignment="center">
               <background type="vertical-linear" color="#00FFFFFF" color2="#00FFFFFF" />
               <border color="#FF000000" width="0" />
@@ -1774,15 +1658,6 @@
             </layout>
             <relation from="di767921327269992391" from-iid="ed11464a57244f2f8f673e46e81e3a86" to="di504483758596991999" to-iid="05d04ab6c4104304bad37eb265554af8" />
           </item>
-          <item id="di439198599255567521" iid="ad715dc776764944aebe33ea89544ca5" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="03/12/2013 07:52:59" order-index="61" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" name-position="-18,-5" auto-path="" x1="629" y1="174" x2="735" y2="128" start-border-pos="0.29071864721231" end-border-pos="0.875">
-              <points>
-                <point x="629" y="174" />
-                <point x="735" y="128" />
-              </points>
-            </layout>
-            <relation from="di898666786652263297" from-iid="29b56c67c07644ea8d96cf47e79e1f83" to="di146113697954443671" to-iid="4beed3c688c449159488de9b6524db22" />
-          </item>
           <item id="di524198604978254447" iid="6b25541ac7f549de9eeeaae14adf90da" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="03/12/2013 07:53:47" order-index="62" type="relation">
             <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="2,1" auto-path="" x1="554" y1="222" x2="554" y2="293" start-border-pos="0.624936014811198" end-border-pos="0.125063985188802">
               <points>
@@ -1791,18 +1666,6 @@
               </points>
             </layout>
             <relation from="di898666786652263297" from-iid="29b56c67c07644ea8d96cf47e79e1f83" to="di509001831648110487" to-iid="ac8f4ba0c3bc4755a48552d71cb5d327" />
-          </item>
-          <item id="di276089635599095791" iid="67750d379a59419ca022b7beeb4a1b64" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="03/12/2013 07:57:51" order-index="63" type="entity">
-            <layout ax="735" ay="293" awidth="150" aheight="56.55233" x="735" y="297" width="0" height="52" angle="0" />
-          </item>
-          <item id="di659895807296629281" iid="aad076dc906a499094540e4cbd49233c" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="03/12/2013 07:59:13" order-index="64" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" auto-path="" x1="610" y1="222" x2="754" y2="293" start-border-pos="0.531602681477865" end-border-pos="0.0316666666666667">
-              <points>
-                <point x="610" y="222" />
-                <point x="754" y="293" />
-              </points>
-            </layout>
-            <relation from="di898666786652263297" from-iid="29b56c67c07644ea8d96cf47e79e1f83" to="di276089635599095791" to-iid="67750d379a59419ca022b7beeb4a1b64" />
           </item>
           <item id="di427114528528311618" iid="b2b4f4db44f240b19f6bb97c8a6923ae" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="03/12/2013 08:01:28" order-index="65" type="entity">
             <layout ax="678" ay="410" awidth="25" aheight="25" x="678" y="410" width="0" height="0" angle="0" name-position="30,-10" />
@@ -1840,29 +1703,6 @@
             <layout ax="13" ay="14" awidth="1" aheight="1" x="742" y="280" width="140" height="160" angle="0" />
             <drawing-line start-point="13,14" end-point="13,14" />
             <style class="default" />
-          </item>
-          <item id="di741801524150760218" iid="8607196d706848e2b47208a3fa908499" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="03/12/2013 09:30:02" order-index="70" type="entity">
-            <layout ax="796" ay="309" awidth="2" aheight="2" x="776" y="309" width="20" height="11" angle="0" name-position="30,-10" />
-          </item>
-          <item id="di779696627365865711" iid="fb64df9939094ac1a5ebb2a87ac86524" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="03/12/2013 09:30:49" order-index="71" type="relation">
-            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" name-position="133,54" auto-path="" x1="880" y1="293" x2="620" y2="222" start-border-pos="0.242142813546317" end-border-pos="0.514217158726283">
-              <points>
-                <point x="880" y="293" />
-                <point x="879" y="222" />
-                <point x="620" y="222" />
-              </points>
-            </layout>
-            <relation from="di276089635599095791" from-iid="67750d379a59419ca022b7beeb4a1b64" to="di898666786652263297" to-iid="29b56c67c07644ea8d96cf47e79e1f83" />
-          </item>
-          <item id="di660377565803967726" iid="79dc0649e22c4f9399e6bbde5956b7ee" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="03/12/2013 09:32:36" order-index="72" type="relation">
-            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" name-position="133,-16" auto-path="" x1="861" y1="157" x2="629" y2="194" start-border-pos="0.539880916050502" end-border-pos="0.380208333333333">
-              <points>
-                <point x="861" y="157" />
-                <point x="861" y="194" />
-                <point x="629" y="194" />
-              </points>
-            </layout>
-            <relation from="di146113697954443671" from-iid="4beed3c688c449159488de9b6524db22" to="di898666786652263297" to-iid="29b56c67c07644ea8d96cf47e79e1f83" />
           </item>
           <item id="di445335708504779793" iid="fd379a6128ea4a21aa8ef6655f725483" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="03/12/2013 09:35:01" order-index="73" type="relation">
             <layout line-style="oblique" lock-start-point="true" lock-end-point="false" name-position="-38,9" auto-path="" x1="220" y1="344" x2="220" y2="338" start-border-pos="0.773082005829025" end-border-pos="0.8">
