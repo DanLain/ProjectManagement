@@ -379,7 +379,7 @@ else
 					<div class="box post-box">
 						<!--<h2>About SGC</h2>-->
 						<div class="box-entry">
-							<h1> Sporting Goods Company </h1>
+							<h1> Better Business, We make Magic Manageable </h1>
 							
 							<div class="cl">&nbsp;</div>
 						</div>
