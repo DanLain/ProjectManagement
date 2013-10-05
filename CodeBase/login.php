@@ -29,7 +29,7 @@ if ($check_result['Locked']==0){
 			$_SESSION['adminLogin'] = ( $check_result['Admin']==0 ? "False":"True");
 			$_SESSION['Login'] = "True";
 			$_SESSION['User'] = $check_result['UserName']; 
-			$_SESSION['CustomerID']  = $check_result['CustomerID'];
+			$_SESSION['EmployeeID']  = $check_result['EmployeeID'];
 
 			if(isset($_SESSION['ReadyToCheckout'])){
 				if($_SESSION['ReadyToCheckout'] =="True")header("Location: http://checkout.php");
