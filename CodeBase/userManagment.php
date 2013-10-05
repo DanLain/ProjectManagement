@@ -153,16 +153,7 @@
 							<li><a href="#" title="Brands">Brands</a></li>
 							<li><a href="#" title="Promos">Promos</a></li>
 							<li><a href="#" title="Clinic">Clinic</a></li>   --> 
-							<li 
-							
-							 class="sale-item" <form action="userInsert.php" method="post">
-								<form action="search.php" method="GET">
-								<input type="text" name="query" />
-								<input type="submit" value="Search" />
-								</form>
-
-							</li>
-							></a>.
+							</a>.
 						</ul>
 						<div class="cl">&nbsp;</div>
 					</div>
