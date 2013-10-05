@@ -414,7 +414,7 @@ else
 				<!-- End Shell -->
 			</div>
 			<div class="copy">
-				<!-- Begin Shell -->
+				<!-- Begin Shell 
 				<div class="shell">
 					<div class="carts">
 						<ul>
@@ -426,7 +426,7 @@ else
 					</div>
 					<p>&copy; Sitename.com. Design by Gary Johns,Richard Sherrill,Dan Lain,and Jose Flores <br/>Template from <a href="http://css-free-templates.com/">CSS-FREE-TEMPLATES.COM</a></p>
 					<div class="cl">&nbsp;</div>
-				</div>
+				</div>-->
 				<!-- End Shell -->
 			</div>
 		</div>
