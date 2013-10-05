@@ -314,57 +314,57 @@ else
 			<div id="product-slider">
 				<h2>Promotions</h2>
 				<ul>
-				<?php
+				// <?php
 			
-					$mysqlquery="Select * from promotions JOIN merchandise WHERE promotions.MerchID = merchandise.MerchID";
-					$result=mysql_query($mysqlquery);
+					// $mysqlquery="Select * from promotions JOIN merchandise WHERE promotions.MerchID = merchandise.MerchID";
+					// $result=mysql_query($mysqlquery);
 										
-					$mysqlqueryitem="Select * from merchandise";
-					//$item_result=mysql_query($mysqlqueryitem);
+					// $mysqlqueryitem="Select * from merchandise";
+					// //$item_result=mysql_query($mysqlqueryitem);
 
 									
 
-					while ($row=mysql_fetch_array($result)){
-						$item_result=mysql_query($mysqlqueryitem);
-						while ($row_item=mysql_fetch_array($item_result)){
-							if ($row_item['MerchID'] == $row['MerchID']){
-								if(date("Y-m-d")>=$row['StartDate'] & date("Y-m-d")<=$row['EndDate']){
-								echo "<li>";
-								echo "<a href='productDetails.php?varname=".$row['MerchID']."' title=";
-								echo "Product Link";
-								echo "><img src=";
-								echo "images/";
-								echo $row_item['Picture'];
-								echo " alt=";
-								echo"Product Image"; 
-								echo "/></a>";
-								echo "<div class=";
-								echo "info";
-								echo ">";
-								echo "<h4>";
-								echo $row_item['Name'];
-								echo "</h4>";
-								echo "<span class=";
-								echo "number";
-								echo ">";
-								echo $row_item['MerchID'];
-								echo "</span>";
-								echo "<span class=";
-								echo "price";
-								echo "><span>$</span>";
-								echo $row['SalePrice'];
-								echo "</span>";
-								echo "<div class=";
-								echo "cl";
-								echo ">&nbsp;</div>";
-								echo "</div>";
-								echo "</li>";
-								}
-							}
-						}											
+					// while ($row=mysql_fetch_array($result)){
+						// $item_result=mysql_query($mysqlqueryitem);
+						// while ($row_item=mysql_fetch_array($item_result)){
+							// if ($row_item['MerchID'] == $row['MerchID']){
+								// if(date("Y-m-d")>=$row['StartDate'] & date("Y-m-d")<=$row['EndDate']){
+								// echo "<li>";
+								// echo "<a href='productDetails.php?varname=".$row['MerchID']."' title=";
+								// echo "Product Link";
+								// echo "><img src=";
+								// echo "images/";
+								// echo $row_item['Picture'];
+								// echo " alt=";
+								// echo"Product Image"; 
+								// echo "/></a>";
+								// echo "<div class=";
+								// echo "info";
+								// echo ">";
+								// echo "<h4>";
+								// echo $row_item['Name'];
+								// echo "</h4>";
+								// echo "<span class=";
+								// echo "number";
+								// echo ">";
+								// echo $row_item['MerchID'];
+								// echo "</span>";
+								// echo "<span class=";
+								// echo "price";
+								// echo "><span>$</span>";
+								// echo $row['SalePrice'];
+								// echo "</span>";
+								// echo "<div class=";
+								// echo "cl";
+								// echo ">&nbsp;</div>";
+								// echo "</div>";
+								// echo "</li>";
+								// }
+							// }
+						// }											
 											
-					}
-				?>
+					// }
+				// ?>
 				</ul>
 				<div class="cl">&nbsp;</div>
 			</div>
