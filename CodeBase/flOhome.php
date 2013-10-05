@@ -218,7 +218,7 @@
 							if(($admin_row['Admin'] == 1))
 							{
 							    $_SESSION['Admin'] = 1;
-								echo "<a href='companyProperties.php' title='Company Properties'>Company Properties</a>	<br><br>";
+								echo "<a href='companyProperties.php' title='Company Properties'>Company Properties</a><br>";
 							}
 						}
 
@@ -239,12 +239,10 @@
 							echo "<br /><a href='projectManager.php' title='Manage Information'>Manage Projects</a></h1>";
 							echo "<br />";
 							
-							echo "<br /><a href='adminUserManagement.php' title='Manage Users'>Manage Projects</a></h1>";
+							echo "<br /><a href='adminUserManagement.php' title='Manage Users'>Manage Users</a></h1>";
 						}
 
 						
-						
-						echo "<br /><br /><a href='transactionHistory.php' title='Projects'>Transaction History</a></h1>";
 						
 					}
 				?>					
