@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2013 at 06:28 PM
+-- Generation Time: Oct 05, 2013 at 04:21 PM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -70,21 +70,26 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `Email` varchar(100) NOT NULL,
   `Salary` decimal(10,2) NOT NULL,
   `CompanyID` bigint(20) NOT NULL,
+  `ProjectID` int(11) NOT NULL,
+  `Admin` int(11) NOT NULL,
+  `Developer` int(11) NOT NULL,
+  `Manager` int(11) NOT NULL,
+  `Architect` int(11) NOT NULL,
   PRIMARY KEY (`EmployeeID`),
   UNIQUE KEY `CustomerID` (`EmployeeID`),
   UNIQUE KEY `EmployeeID` (`EmployeeID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`EmployeeID`, `Phone`, `Fax`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `Salary`, `CompanyID`) VALUES
-(1, '817-308-2582', '', 'Dan', 'Lain', '1003 Cooper Square Circle', 'Arlington', 'Te', '76013', 'danlain@live.com', '0.00', 0),
-(3, '555-555-5555', '', 'Richard', 'Sherrill', '1313', 'Arlington', 'TX', '76012', 'richardzsherrill@yahoo.com', '0.00', 0),
-(4, '682-555-1111', '', 'john', 'john', '12', 'Here', 'HI', '43433', 'john@live.com', '0.00', 0),
-(5, '1234561234', '682453124', 'Jon', 'Snow', '123', 'The', 'My', '71234', 'WhiteWalker@MiddleEarth.com', '0.00', 0),
-(6, '555-555-5555', '', 'Jose', 'Flores', '111 Flores Way', 'Ft.', 'TX', '', 'jose@jose.com', '0.00', 0);
+INSERT INTO `employee` (`EmployeeID`, `Phone`, `Fax`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `Salary`, `CompanyID`, `ProjectID`, `Admin`, `Developer`, `Manager`, `Architect`) VALUES
+(1, '817-308-2582', '', 'Dan', 'Lain', '1003 Cooper Square Circle', 'Arlington', 'Te', '76013', 'danlain@live.com', '0.00', 0, 0, 0, 0, 0, 0),
+(3, '555-555-5555', '', 'Richard', 'Sherrill', '1313', 'Arlington', 'TX', '76012', 'richardzsherrill@yahoo.com', '0.00', 0, 0, 0, 0, 0, 0),
+(4, '682-555-1111', '', 'john', 'john', '12', 'Here', 'HI', '43433', 'john@live.com', '0.00', 0, 0, 0, 0, 0, 0),
+(5, '1234561234', '682453124', 'Jon', 'Snow', '123', 'The', 'My', '71234', 'WhiteWalker@MiddleEarth.com', '0.00', 0, 0, 0, 0, 0, 0),
+(13, '8173082582', '', 'Daniel', 'Lain', '1003 Cooper Square Circle', 'Arlington', 'TX', '76013', 'danlain123@live.com', '0.00', 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -126,7 +131,7 @@ INSERT INTO `login` (`EmployeeID`, `UserName`, `Password`, `Admin`, `Locked`) VA
 (3, 'richardzsherrill@yahoo.com', '1Richard', 1, 0),
 (4, 'john@live.com', '123456Uu', 0, 0),
 (5, 'WhiteWalker@MiddleEarth.com', 'Iamatest1', 0, 0),
-(6, 'jose@jose.com', '1JoseFlores', 1, 0);
+(13, 'danlain123@live.com', '1loveAlison', 0, 0);
 
 -- --------------------------------------------------------
 
