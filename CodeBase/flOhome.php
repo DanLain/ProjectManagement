@@ -236,6 +236,7 @@
 						if($managerCount = 1)
 						{
 							echo "<br /><a href='projectManager.php' title='Manage Information'>Manage Projects</a></h1>";
+							echo "<br /><a href='adminUserManagement.php' title='Manage Information'>Manage Projects</a></h1>";
 						}
 						
 						echo "<br /><br /><a href='transactionHistory.php' title='Projects'>Transaction History</a></h1>";

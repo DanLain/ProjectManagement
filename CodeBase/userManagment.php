@@ -314,7 +314,7 @@ else
 			<div id="product-slider">
 				<h2>Promotions</h2>
 				<ul>
-				// <?php
+				 <?php
 			
 					// $mysqlquery="Select * from promotions JOIN merchandise WHERE promotions.MerchID = merchandise.MerchID";
 					// $result=mysql_query($mysqlquery);
