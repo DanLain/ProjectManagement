@@ -87,8 +87,7 @@
 						  
 
 
-					</span><span class="shopping">Shopping Cart <a href="cart.php" title="Shopping Cart">$<?php echo $_SESSION['OrderTotal'];?>
-					</a></span></p>
+					</span></p>
 					</div>
 					<!-- End Shell -->
 				</div>
