@@ -209,7 +209,7 @@ if($_SESSION['Login']=="True"){
 			$_SESSION['Zip'] = $row['Zip'];
 			$_SESSION['Email'] = $row['Email'];
 			$_SESSION['Salary'] = $row['Salary'];
-			$_SESSION['EmployeeID']=$row('EmployeeID');
+			//$_SESSION['EmployeeID']=$row('EmployeeID');
 		
 	}
 }
