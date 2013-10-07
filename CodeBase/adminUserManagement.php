@@ -79,7 +79,7 @@ if(!isset($_SESSION['Login']))
 				if($_SESSION['Login'] != "True")
 				{
 					//echo "<a href='login.php' title='Profile Link'>Login</a>";
-					echo "<a href='registration.php' title='Profile Link'>Register</a>";
+					echo "<a href='userManagement.php' title='Profile Link'>Register</a>";
 				} 
 				else
 				{
