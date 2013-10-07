@@ -219,11 +219,12 @@
 							{
 							    $_SESSION['Admin'] = 1;
 								echo "<a href='companyProperties.php' title='Company Properties'>Company Properties</a><br>";
+								echo "<br /><a href='adminUserManagement.php' title='Manage Users'>Manage Users</a></h1>";
 							}
 						}
 
 
-						$getProjectSqlQuery="Select * from project";
+						/*$getProjectSqlQuery="Select * from project";
 						$projectResult=mysql_query($getProjectSqlQuery);
 						$managerCount = 0;			
 						while($row_project=mysql_fetch_array($projectResult))
@@ -239,8 +240,8 @@
 							echo "<br /><a href='projectManager.php' title='Manage Information'>Manage Projects</a></h1>";
 							echo "<br />";
 							
-							echo "<br /><a href='adminUserManagement.php' title='Manage Users'>Manage Users</a></h1>";
-						}
+
+						}*/
 
 						
 						

@@ -10,15 +10,11 @@ if(!isset($mysqlconnect)){
 
 		mysql_select_db("danlain_live");
 
-	$adminSqlQuery="Select * from employee";
+	$adminSqlQuery="Select * from employee where employeee.EmployeeID = '$_SESSION[EmployeeID]'";
 	$adminResult=mysql_query($adminSqlQuery);
-	while($admin_row=mysql_fetch_array($adminResult))
+	while($adminResult)
 	{
-		if(($_SESSION['EmployeeID'] == $admin_row['EmployeeID']) && ($admin_row['Admin'] == 1))
 		{
-								
-			
-
 			$updateQuery=" UPDATE company
 			SET BusinessName='$_REQUEST[BusinessName]', Fax='$_REQUEST[Fax]',
 			ContactName='$_REQUEST[ContactName]', 
