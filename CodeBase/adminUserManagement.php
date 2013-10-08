@@ -205,13 +205,13 @@ if(!isset($_SESSION['Login']))
 					
 					echo"<table border='1'> ";
 					echo'<tr>';
-					echo'<th>Unlock Account</th>';
+					if($_SESSION['Admin']) echo'<th>Unlock Account</th>';
 					echo'<th>UserName</th>';
 					echo'<th>Locked</th>';
 					echo'<th>Admin</th>';
-					echo'<th>Set Admin</th>';
+					if($_SESSION['Admin']) echo'<th>Set Admin</th>';
 					echo'<th>Manager</th>';
-					echo'<th>Set Manager</th>';
+					if($_SESSION['Admin']) echo'<th>Set Manager</th>';
 					echo'<th>Architect</th>';
 					echo'<th>Set Architect</th>';
 					echo'<th>Developer</th>';
@@ -225,13 +225,13 @@ if(!isset($_SESSION['Login']))
 					$count1=$count2+1;
 					
 					echo'<tr>';
-					echo"<td><a href=clearlock.php?EmployeeID=".$row['EmployeeID']." title=".$row['EmployeeID'].">".$row['EmployeeID'].'</a></td>';
+					if($_SESSION['Admin']) echo"<td><a href=clearlock.php?EmployeeID=".$row['EmployeeID']." title=".$row['EmployeeID'].">".$row['EmployeeID'].'</a></td>';
 					echo'<td>'.$row['UserName'].'</td>';
 					echo'<td>'.($row['Locked']==0 ? "":"Locked").'</td>';
 					echo'<td>'.($row['Admin']==0 ? "":"Admin").'</td>';
-					echo"<td><a href=setAdmin.php?EmployeeID=".$row['EmployeeID']." title=".$row['EmployeeID'].'>'.$row['EmployeeID'].'</a></td>';
+					if($_SESSION['Admin']) echo"<td><a href=setAdmin.php?EmployeeID=".$row['EmployeeID']." title=".$row['EmployeeID'].'>'.$row['EmployeeID'].'</a></td>';
 					echo'<td>'.($row['Manager']==0 ? "":"Manager").'</td>';
-					echo"<td><a href=setManager.php?EmployeeID=".$row['EmployeeID']." title=".$row['EmployeeID'].'>'.$row['EmployeeID'].'</a></td>';
+					if($_SESSION['Admin']) echo"<td><a href=setManager.php?EmployeeID=".$row['EmployeeID']." title=".$row['EmployeeID'].'>'.$row['EmployeeID'].'</a></td>';
 					echo'<td>'.($row['Architect']==0 ? "":"Architect").'</td>';
 					echo"<td><a href=setArchitect.php?EmployeeID=".$row['EmployeeID']." title=".$row['EmployeeID'].'>'.$row['EmployeeID'].'</a></td>';
 					echo'<td>'.($row['Developer']==0 ? "":"Developer").'</td>';
