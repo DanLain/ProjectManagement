@@ -194,48 +194,38 @@
 						{
 							echo "<font color='red'>Updates Saved</font><br>";
 						}
-						$adminSqlQuery="Select * from employee";
+						$adminSqlQuery="Select * from employee where EmployeeID='$_SESSION[EmployeeID]'";
 						$adminResult=mysql_query($adminSqlQuery);
-						while($admin_row=mysql_fetch_array($adminResult))
-						{
-							if(($_SESSION['EmployeeID'] == $admin_row['EmployeeID']) && ($admin_row['Admin'] == 1))
+						$admin_row=mysql_fetch_array($adminResult);
+						
+							if($_SESSION['Admin'] == 1)
 							{
 								
-								//need to get row from company from admin_row.companyID
+								
 								$companySqlQuery="Select * from company WHERE CompanyID='$admin_row[CompanyID]'";
 								$companyResult=mysql_query($companySqlQuery);
 								$row=mysql_fetch_array($companyResult);
 
-								$_SESSION['BusinessName'] = $row['BusinessName'];
-								$_SESSION['Fax'] = $row['Fax'];
-								$_SESSION['ContactName'] = $row['ContactName'];
-								$_SESSION['Address']= $row['Address'];
-								$_SESSION['City'] = $row['City'];
-								$_SESSION['State'] = $row['State'];
-								$_SESSION['Zip'] = $row['Zip'];
-								$_SESSION['PhoneNumber'] = $row['Phone'];
-								
-								//$_SESSION['Email'] = $row['Email'];
-								//$_SESSION['UpdateCustomer']="True";
-								echo "<form action='updateCompanyProperties.php' method='post'>";
 
-								echo "First Name: <input type='text' name='ContactName' value=".$_SESSION['ContactName']." ><br><br>";
+								echo "<form action='newUpdateCompanyProperties.php' method='post'>";
+
+								echo "First Name: <input type='name' name='ContactName' value='".$row['ContactName']."' ><br><br>";
 								
-								echo "Business Name: <input type='text' name='BusinessName' value=".$_SESSION['BusinessName']."><br><br>";
-								echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['PhoneNumber']."><br /><br />";
+								echo "Business Name: <input type='text' name='BusinessName' value='".$row['BusinessName']."'><br><br>";
+								echo "Phone Number: <input type='text' name='Phone' value=".$row['Phone']."><br /><br />";
 								
 								
 								
-								echo "Address: <input type='text' name='Address' value=".$_SESSION['Address']."><br /><br />";
-								echo "City: <input type='text' name='City' value=".$_SESSION['City']."><br /><br />";
-								echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
-								echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
-								echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
+								echo "Address: <input type='text' name='Address' value='".$row['Address']."'><br /><br />";
+								echo "City: <input type='text' name='City' value='".$row['City']."'><br /><br />";
+								echo "State: <input type='text' name='State' value='".$row['State']."'><br /><br />";
+								echo "Zip Code: <input type='text' name='Zip' value='".$row['Zip']."'><br /><br />";
+								echo "Fax: <input type='text' name='Fax' value='".$row['Fax']."'><br /><br /><br />";
 								
 								echo "<input type='submit'>";	
 								echo "<br><br><a href='flOhome.php' title='home'> Home </a>";						
 							}
-						}
+						
 						
 					}
 					else
