@@ -185,13 +185,19 @@
 				<div class="post">
                                 <div class="welcome">
 				
-				<?php 
+				<?php
+					if(!isset($ProjectID))$ProjectID=0;
 					echo "<form action='updateEpic.php' method='post'>";
-
-					echo "First Name: <input type='text' name='ProjectID' ' ><br><br>";
-					
-					echo "Business Name: <input type='text' name='Name' ><br><br>";
-					echo "Phone Number: <input type='text' name='Phone' ><br /><br />";
+					echo "Project ID: <select name='ProjectID'>";
+					$projectQuery="Select * from project";
+					$result=mysql_query($projectQuery);
+					while ($projectrow=mysql_fetch_array($result))
+					{
+						echo "<option value='".$projectrow['ProjectID']."'>".$projectrow['ProjectName']."</option>";
+					}
+					echo "</select></br></br>";
+					echo "Epic Name: <input type='text' name='Name' ><br><br>";
+					echo "Description: <textarea name='Description' rows='10' cols='50'></textarea><br /><br />";
 					echo "<input type='submit'>";	
 					echo "<br><br><a href='flOhome.php' title='home'> Home </a>";
 					/*$adminSqlQuery="Select * from employee where EmployeeId = '$_SESSION[EmployeeID]' ";
