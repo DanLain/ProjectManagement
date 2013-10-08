@@ -40,7 +40,7 @@ if ($_SESSION['GoodReg']=="True"){
 				   '$_REQUEST[TargetEndDate]',
 				   '$_REQUEST[BudgetDays]',
 				   '$_REQUEST[BudgetCurancy]',
-				   '$_REQUEST[EmployeeID]')";
+				   '$_SESSION[EmployeeID]')";
 		$retval =mysql_query($insert_query);
 		
 	}
