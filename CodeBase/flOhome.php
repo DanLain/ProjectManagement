@@ -16,6 +16,7 @@
 			$_SESSION['LoginTry']=0;
 			$_SESSION['BadLogin']="";
 			$_SESSION['Locked']="False";
+			$_SESSION['Admin'] = 0;
 		}
 		?>
 		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -210,18 +211,38 @@
 						
 						echo $_SESSION['User'];
 						echo "<br />";
-						$adminSqlQuery="Select * from employee";
+						$adminSqlQuery="Select * from login where EmployeeID = '$_SESSION[EmployeeID]'";
 						$adminResult=mysql_query($adminSqlQuery);
-						while($admin_row=mysql_fetch_array($adminResult))
+						$admin_row=mysql_fetch_array($adminResult);
+						$empSqlQuery = "Select * from employee where EmployeeID = '$_SESSION[EmployeeID]'";
+						$empResult = mysql_query($empSqlQuery);
+						$emp_row=mysql_fetch_array($empResult);
+						if(($admin_row['Admin'] == 1))
 						{
-							if(($_SESSION['EmployeeID'] == $admin_row['EmployeeID']) && ($admin_row['Admin'] == 1))
-							{
-								echo "<a href='companyProperties.php' title='Company Properties'>Company Properties</a>	<br><br>";
-							}
+							$_SESSION['Admin'] = 1;
+							echo "<a href='companyProperties.php' title='Company Properties'>Company Properties</a><br>";
+							echo "<br /><a href='adminUserManagement.php' title='Manage Users'>Manage Users</a></h1>";
+						}
+						if($emp_row['Manager'] ==1)
+						{
+							$_SESSION['Manager'] = 1;
+							echo "<br /><a href='adminUserManagement.php' title='Manage Users'>Manage Users</a></h1>";
+						}
+						
+						if($emp_row['Developer'] ==1)
+						{
+							$_SESSION['Developer'] = 1;
+							
+						}
+						
+						if($emp_row['Architect'] ==1)
+						{
+							$_SESSION['Architect'] = 1;
+							
 						}
 
 
-						$getProjectSqlQuery="Select * from project";
+						/*$getProjectSqlQuery="Select * from project";
 						$projectResult=mysql_query($getProjectSqlQuery);
 						$managerCount = 0;			
 						while($row_project=mysql_fetch_array($projectResult))
@@ -237,12 +258,10 @@
 							echo "<br /><a href='projectManager.php' title='Manage Information'>Manage Projects</a></h1>";
 							echo "<br />";
 							
-							echo "<br /><a href='adminUserManagement.php' title='Manage Users'>Manage Projects</a></h1>";
-						}
+
+						}*/
 
 						
-						
-						echo "<br /><br /><a href='transactionHistory.php' title='Projects'>Transaction History</a></h1>";
 						
 					}
 				?>					

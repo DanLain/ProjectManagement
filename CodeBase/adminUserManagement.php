@@ -1,6 +1,6 @@
 <?php session_start();
 
-if(!$mysqlconnect){
+if(!isset($mysqlconnect)){
 	$mysqlconnect=mysql_connect('localhost','danla_web','thisiscool');
 }
 
@@ -79,7 +79,7 @@ if(!isset($_SESSION['Login']))
 				if($_SESSION['Login'] != "True")
 				{
 					//echo "<a href='login.php' title='Profile Link'>Login</a>";
-					echo "<a href='registration.php' title='Profile Link'>Register</a>";
+					echo "<a href='userManagement.php' title='Profile Link'>Register</a>";
 				} 
 				else
 				{
@@ -160,15 +160,6 @@ if(!isset($_SESSION['Login']))
 					<li><a href="#" title="Brands">Brands</a></li>
 					<li><a href="#" title="Promos">Promos</a></li>
 					<li><a href="#" title="Clinic">Clinic</a></li>   --> 
-					<li 
-					
-					 class="sale-item" <form action="first3.php" method="post">
-						<form action="search.php" method="GET">
-						<input type="text" name="query" />
-						<input type="submit" value="Search" />
-						</form>
-
-					</li>
 					></a>.
 				</ul>
 				<div class="cl">&nbsp;</div>
@@ -191,7 +182,7 @@ if(!isset($_SESSION['Login']))
 	<!--<li><a href="#" title="Contact"><span>Contact</span></a></li>-->
 						
 					</ul>
-					<h2>Employee Options</h2>
+					<h2>User Administration</h2>
 					<ul>
 					<div class="cl">&nbsp;</div>
 				</div>
@@ -205,7 +196,7 @@ if(!isset($_SESSION['Login']))
 				<li>Account Management</span></li>
 <?php
    
-        $raw_results = mysql_query("SELECT * FROM login") or die(mysql_error());
+        $raw_results = mysql_query("SELECT * FROM login left join employee on login.EmployeeId = employee.EmployeeId") or die(mysql_error());
              
        
         if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
@@ -214,17 +205,17 @@ if(!isset($_SESSION['Login']))
 					
 					echo"<table border='1'> ";
 					echo'<tr>';
-					echo'<th>Unlock Account</th>';
-					echo'<th>Set as Employee</th>';
-					echo'<th>';
-					echo'UserName';
-					echo'</th>';
-					echo'<th>';
-					echo'Locked';
-					echo'</th>';
-					echo'<th>';
-					echo'Employee';
-					echo'</th>';
+					if($_SESSION['Admin']) echo'<th>Unlock Account</th>';
+					echo'<th>UserName</th>';
+					echo'<th>Locked</th>';
+					echo'<th>Admin</th>';
+					if($_SESSION['Admin']) echo'<th>Set Admin</th>';
+					echo'<th>Manager</th>';
+					if($_SESSION['Admin']) echo'<th>Set Manager</th>';
+					echo'<th>Architect</th>';
+					echo'<th>Set Architect</th>';
+					echo'<th>Developer</th>';
+					echo'<th>Set Developer</th>';
 					
 					echo'</tr>';
 					$count2=0;
@@ -234,25 +225,17 @@ if(!isset($_SESSION['Login']))
 					$count1=$count2+1;
 					
 					echo'<tr>';
-					echo"<td><a href=clearlock.php?CustomerID=".$row['CustomerID']." title=";
-					echo $row['CustomerID'];
-					echo '">';
-					echo $row['CustomerID'];
-					echo '</a></td>';
-					echo"<td><a href=setEmp.php?CustomerID=".$row['CustomerID']." title=";
-					echo $row['CustomerID'];
-					echo '">';
-					echo $row['CustomerID'];
-					echo '</a></td>';
-					echo'<td>';
-					echo $row['UserName'];
-					echo '</td>';
-					echo'<td>';
-					echo ($row['Locked']==0 ? "":"Locked");
-					echo '</td>';
-					echo'<td>';
-					echo ($row['Emp']==0 ? "":"Employee");
-					echo '</td>';
+					if($_SESSION['Admin']) echo"<td><a href=clearlock.php?EmployeeID=".$row['EmployeeID']." title=".$row['EmployeeID'].">".$row['EmployeeID'].'</a></td>';
+					echo'<td>'.$row['UserName'].'</td>';
+					echo'<td>'.($row['Locked']==0 ? "":"Locked").'</td>';
+					echo'<td>'.($row['Admin']==0 ? "":"Admin").'</td>';
+					if($_SESSION['Admin']) echo"<td><a href=setAdmin.php?EmployeeID=".$row['EmployeeID']." title=".$row['EmployeeID'].'>'.$row['EmployeeID'].'</a></td>';
+					echo'<td>'.($row['Manager']==0 ? "":"Manager").'</td>';
+					if($_SESSION['Admin']) echo"<td><a href=setManager.php?EmployeeID=".$row['EmployeeID']." title=".$row['EmployeeID'].'>'.$row['EmployeeID'].'</a></td>';
+					echo'<td>'.($row['Architect']==0 ? "":"Architect").'</td>';
+					echo"<td><a href=setArchitect.php?EmployeeID=".$row['EmployeeID']." title=".$row['EmployeeID'].'>'.$row['EmployeeID'].'</a></td>';
+					echo'<td>'.($row['Developer']==0 ? "":"Developer").'</td>';
+					echo"<td><a href=setDeveloper.php?EmployeeID=".$row['EmployeeID']." title=".$row['EmployeeID'].'>'.$row['EmployeeID'].'</a></td>';
 					
 					echo'</tr>';
 					
@@ -279,7 +262,7 @@ if(!isset($_SESSION['Login']))
 			
 			</div>
 			<div class="cl">&nbsp;</div>
-				<a href="employee.php" title="Manage Information">Return to Manage Information</a>
+				<a href="flohome.php" title="Main Menu">Return to Main Menu</a>
 				</ul>
 				
 				<!-- End Shell -->
@@ -288,12 +271,6 @@ if(!isset($_SESSION['Login']))
 				<!-- Begin Shell -->
 				<div class="shell">
 					<div class="carts">
-						<ul>
-							<li><span>We accept</span></li>
-							
-							<li><a href="#" title="VISA"><img src="images/cart-img2.jpg" alt="VISA" /></a></li>
-							<li><a href="#" title="MasterCard"><img src="images/cart-img3.jpg" alt="MasterCard" /></a></li>
-						</ul>
 					</div>
 					<p>&copy; Sitename.com. Design by Gary Johns,Richard Sherrill,Dan Lain,and Jose Flores <br/>Template from <a href="http://css-free-templates.com/">CSS-FREE-TEMPLATES.COM</a></p>
 					<div class="cl">&nbsp;</div>

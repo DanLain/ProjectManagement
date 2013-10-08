@@ -194,11 +194,18 @@
 						{
 							echo "<font color='red'>Updates Saved</font><br>";
 						}
+<<<<<<< HEAD
 						$adminSqlQuery="Select * from employee where EmployeeID='$_SESSION[EmployeeID]'";
 						$adminResult=mysql_query($adminSqlQuery);
 						$admin_row=mysql_fetch_array($adminResult);
 						
 							if($_SESSION['Admin'] == 1)
+=======
+						$adminSqlQuery="Select * from employee where EmployeeId = '$_SESSION[EmployeeID]' ";
+						$adminResult=mysql_query($adminSqlQuery);
+						while($admin_row=mysql_fetch_array($adminResult))
+						{
+>>>>>>> e199b27296e144853c66a497c87ee166e649f3ec
 							{
 								
 								
@@ -207,6 +214,7 @@
 								$row=mysql_fetch_array($companyResult);
 
 
+<<<<<<< HEAD
 								echo "<form action='newUpdateCompanyProperties.php' method='post'>";
 
 								echo "First Name: <input type='name' name='ContactName' value='".$row['ContactName']."' ><br><br>";
@@ -221,6 +229,20 @@
 								echo "State: <input type='text' name='State' value='".$row['State']."'><br /><br />";
 								echo "Zip Code: <input type='text' name='Zip' value='".$row['Zip']."'><br /><br />";
 								echo "Fax: <input type='text' name='Fax' value='".$row['Fax']."'><br /><br /><br />";
+=======
+								echo "First Name: <input type='text' name='ContactName' value='".$_SESSION['ContactName']."' ><br><br>";
+								
+								echo "Business Name: <input type='text' name='BusinessName' value='".$_SESSION['BusinessName']."'><br><br>";
+								echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['PhoneNumber']."><br /><br />";
+								
+								
+								
+								echo "Address: <input type='text' name='Address' value='".$_SESSION['Address']."'><br /><br />";
+								echo "City: <input type='text' name='City' value='".$_SESSION['City']."'><br /><br />";
+								echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
+								echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
+								echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
+>>>>>>> e199b27296e144853c66a497c87ee166e649f3ec
 								
 								echo "<input type='submit'>";	
 								echo "<br><br><a href='flOhome.php' title='home'> Home </a>";						
