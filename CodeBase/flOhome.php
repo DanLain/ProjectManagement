@@ -91,6 +91,7 @@
 				<div id="navigation">
 					<!-- Begin Shell -->
 					<div class="shell">
+					<ul><li class = "active"><a href='projectCreation.php' title='Profile Link'>New Project</a>
 						
 							<!--<?php
 
