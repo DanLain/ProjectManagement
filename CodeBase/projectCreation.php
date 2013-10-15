@@ -181,101 +181,28 @@
 					</h2>
 					<form action="projectInsert.php" method="post">
 <?php
-if($_SESSION['Login']=="True"){
 
-
-	$mysqlquery1="Select * from Project where ProjectID = '$_SESSION[ProjectID]'";
-	$result1=mysql_query($mysqlquery1);
-	while ($row=mysql_fetch_array($result1))
-	{
-			
-			$_SESSION['ProjectName'] = $row['ProjectName'];
-			$_SESSION['TargetStartDate'] = $row['TargetStartDate'];
-			$_SESSION['TargetEndDate'] = $row['TargetEndDate'];
-			$_SESSION['BudgetDays'] = $row['BudgetDays'];
-			$_SESSION['BudgetCurancy']= $row['BudgetCurancy'];
 		
-		
-	}
-}
-
-
-/*if (isset($_SESSION['BadEmail']) || isset($_SESSION['BadPassword'])){
-	if ($_SESSION['BadEmail'] == "True"){
-			echo "First Name: <input type='text' name='FirstName' value='".$_SESSION['FirstName']."' >";
-			echo "Last Name: <input type='text' name='LastName'value='".$_SESSION['LastName']."'><br /><br />";
-			echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
-			echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email'].">";
-			if ($_SESSION['EmailInvalid'] =="True"){
-				Echo "Email address is invalid.<br /><br />";
-			}
-			else{
-				Echo "Email address already used please enter a different one <br /><br />";
-			}
-			echo "Password: <input type='password' name='Password'><br /><br />";
-			echo "Confirm Password: <input type='password' name='ConfirmPassword' ><br /><br />";
-			echo "Address: <input type='text' name='Address' value='".$_SESSION['Address']."'><br /><br />";
-			echo "City: <input type='text' name='City' value='".$_SESSION['City']."'><br /><br />";
-			echo "State: <input type='text' name='State' value='".$_SESSION['State']."'><br /><br />";
-			echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
-			echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
-			echo "CompanyID: <input type='text' name='CompanyId' value=".$_SESSION['CompanyID']."><br /><br />";
-		}
-	else if ($_SESSION['BadPassword'] == "True"){
-		echo "First Name: <input type='text' name='FirstName' value='".$_SESSION['FirstName']."' >";
-		echo "Last Name: <input type='text' name='LastName'value='".$_SESSION['LastName']."'><br /><br />";
-		echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
-		echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email']."><br /><br />";
-		echo "Password: <input type='password' name='Password'>";
-		Echo "Passwords do not match<br /> or the password must be at least 8 characters and must contain at least one lower case letter, one upper case letter and one digi<br /><br />";
-		echo "Confirm Password: <input type='password' name='ConfirmPassword'>";
-		Echo "Passwords do not match<br /> or the password must be at least 8 characters and must contain at least one lower case letter, one upper case letter and one digi<br /><br />";
-		echo "Address: <input type='text' name='Address' value='".$_SESSION['Address']."'><br /><br />";
-		echo "City: <input type='text' name='City' value='".$_SESSION['City']."'><br /><br />";
-		echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
-		echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
-		echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
-		//echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
-	}
-	else if ($_SESSION['Login']=="True"){
-			echo "First Name: <input type='text' name='FirstName' value='".$_SESSION['FirstName']."'>";
-			echo "Last Name: <input type='text' name='LastName'value='".$_SESSION['LastName']."'><br /><br />";
-			echo "Phone Number: <input type='text' name='Phone' value=".$_SESSION['Phone']."><br /><br />";
-			echo "E-Mail: <input type='text' name='Email' value=".$_SESSION['Email'].">";
-			Echo " <br /><br />";
-			echo "Password: <input type='password' name='Password'><br /><br />";
-			echo "Confirm Password: <input type='password' name='ConfirmPassword' ><br /><br />";
-			echo "Address: <input type='text' name='Address' value='".$_SESSION['Address']."'><br /><br />";
-			echo "City: <input type='text' name='City' value=".$_SESSION['City']."><br /><br />";
-			echo "State: <input type='text' name='State' value=".$_SESSION['State']."><br /><br />";
-			echo "Zip Code: <input type='text' name='Zip' value=".$_SESSION['Zip']."><br /><br />";
-			echo "Fax: <input type='text' name='Fax' value=".$_SESSION['Fax']."><br /><br /><br />";
-			//echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
-		}
-	
-	}*/
-else
-	{
-		if ($_SESSION['Login']=="True"){
-			echo "Project Name: <input type='text' name='ProjectName' value='".$_SESSION['ProjectName']."' ><br /><br />";
-			echo "Target Start Date: <input type='text' name='TargetStartDate'value='".$_SESSION['TargetStartDate']."'><br /><br />";
-			echo "Target End Date: <input type='text' name='TargetEndDate' value=".$_SESSION['TargetEndDate']."><br /><br />";
-			echo "Budget Days: <input type='text' name='BudgetDays' value=".$_SESSION['BudgetDays'].">";
-			Echo " <br /><br />";
-			echo "Budget Curancy: <input type='text' name='BudgetCurancy' value=".$_SESSION['BudgetCurancy']."><br /><br />";
+		//if ($_SESSION['Login']=="True"){
+			//echo "Project Name: <input type='text' name='ProjectName' value='".$_SESSION['ProjectName']."' ><br /><br />";
+			//echo "Target Start Date: <input type='text' name='TargetStartDate'value='".$_SESSION['TargetStartDate']."'><br /><br />";
+			//echo "Target End Date: <input type='text' name='TargetEndDate' value=".$_SESSION['TargetEndDate']."><br /><br />";
+			//echo "Budget Days: <input type='text' name='BudgetDays' value=".$_SESSION['BudgetDays'].">";
+			//Echo " <br /><br />";
+			//echo "Budget Curancy: <input type='text' name='BudgetCurancy' value=".$_SESSION['BudgetCurancy']."><br /><br />";
 			
 			
 			//echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
-		}
-		else {
+		//}
+		//else {
 			echo "Project Name: <input type='text' name='ProjectName'><br /><br />";
 			echo "Target Start Date: <input type='text' name='TargetStartDate'>yyyy-mm-dd<br /><br />";
 			echo "Target End Date: <input type='text' name='TargetEndDate'>yyyy-mm-dd<br /><br />";
 			echo "Budget Days: <input type='text' name='BudgetDays'><br /><br />";
 			echo "Budget Curancy: <input type='text' name='BudgetCurancy' ><br /><br />";
 		
-		}
-	}
+		//}
+	//}
 	?>
 <input type="submit">
 </form>
