@@ -17,6 +17,9 @@
 			$_SESSION['BadLogin']="";
 			$_SESSION['Locked']="False";
 			$_SESSION['Admin'] = 0;
+			$_SESSION['Manager'] = 0;
+			$_SESSION['Architect'] = 0;
+			$_SESSION['Developer'] = 0;
 		}
 		?>
 		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -91,8 +94,12 @@
 				<div id="navigation">
 					<!-- Begin Shell -->
 					<div class="shell">
-					<!--<ul><li class = "active"><a href='projectCreation.php' title='Profile Link'>New Project</a>-->
-						
+					
+					<ul><?php
+						if($_SESSION['Admin'] == 1|| $_SESSION['Manager'] == 1)
+						{echo '<li class = "active"><a href="projectCreation.php" title="Profile Link">New Project</a>';
+						}
+						?>
 							<!--<?php
 
 											$mysqlquery="Select * from type";
