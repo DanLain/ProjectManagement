@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2013 at 04:21 PM
+-- Generation Time: Oct 16, 2013 at 12:59 AM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -29,6 +29,7 @@ USE `danlain_live`;
 -- Table structure for table `company`
 --
 
+DROP TABLE IF EXISTS `company`;
 CREATE TABLE IF NOT EXISTS `company` (
   `CompanyID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `BusinessName` varchar(255) NOT NULL,
@@ -57,6 +58,7 @@ INSERT INTO `company` (`CompanyID`, `BusinessName`, `Address`, `City`, `State`, 
 -- Table structure for table `employee`
 --
 
+DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
   `EmployeeID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `Phone` varchar(12) NOT NULL,
@@ -69,27 +71,25 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `Zip` varchar(5) NOT NULL,
   `Email` varchar(100) NOT NULL,
   `Salary` decimal(10,2) NOT NULL,
-  `CompanyID` bigint(20) NOT NULL,
+  `CompanyID` bigint(20) NOT NULL DEFAULT '1',
   `ProjectID` int(11) NOT NULL,
-  `Admin` int(11) NOT NULL,
   `Developer` int(11) NOT NULL,
   `Manager` int(11) NOT NULL,
   `Architect` int(11) NOT NULL,
   PRIMARY KEY (`EmployeeID`),
   UNIQUE KEY `CustomerID` (`EmployeeID`),
   UNIQUE KEY `EmployeeID` (`EmployeeID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`EmployeeID`, `Phone`, `Fax`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `Salary`, `CompanyID`, `ProjectID`, `Admin`, `Developer`, `Manager`, `Architect`) VALUES
-(1, '817-308-2582', '', 'Dan', 'Lain', '1003 Cooper Square Circle', 'Arlington', 'Te', '76013', 'danlain@live.com', '0.00', 0, 0, 0, 0, 0, 0),
-(3, '555-555-5555', '', 'Richard', 'Sherrill', '1313', 'Arlington', 'TX', '76012', 'richardzsherrill@yahoo.com', '0.00', 0, 0, 0, 0, 0, 0),
-(4, '682-555-1111', '', 'john', 'john', '12', 'Here', 'HI', '43433', 'john@live.com', '0.00', 0, 0, 0, 0, 0, 0),
-(5, '1234561234', '682453124', 'Jon', 'Snow', '123', 'The', 'My', '71234', 'WhiteWalker@MiddleEarth.com', '0.00', 0, 0, 0, 0, 0, 0),
-(13, '8173082582', '', 'Daniel', 'Lain', '1003 Cooper Square Circle', 'Arlington', 'TX', '76013', 'danlain123@live.com', '0.00', 0, 0, 0, 0, 0, 0);
+INSERT INTO `employee` (`EmployeeID`, `Phone`, `Fax`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `Salary`, `CompanyID`, `ProjectID`, `Developer`, `Manager`, `Architect`) VALUES
+(1, '817-308-2582', '', 'Dan', 'Lain', '1003 Cooper Square Circle', 'Arlington', 'Te', '76013', 'danlain@live.com', '0.00', 1, 0, 0, 0, 0),
+(3, '555-555-5555', '', 'Richard', 'Sherrill', '1313', 'Arlington', 'TX', '76012', 'richardzsherrill@yahoo.com', '0.00', 1, 0, 0, 0, 0),
+(4, '682-555-1111', '', 'john', 'john', '12', 'Here', 'HI', '43433', 'john@live.com', '0.00', 1, 0, 0, 1, 0),
+(5, '1234561234', '682453124', 'Jon', 'Snow', '123', 'The', 'My', '71234', 'WhiteWalker@MiddleEarth.com', '0.00', 1, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -97,6 +97,7 @@ INSERT INTO `employee` (`EmployeeID`, `Phone`, `Fax`, `FirstName`, `LastName`, `
 -- Table structure for table `epic`
 --
 
+DROP TABLE IF EXISTS `epic`;
 CREATE TABLE IF NOT EXISTS `epic` (
   `EpicID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `ProjectID` bigint(20) NOT NULL,
@@ -111,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `epic` (
 -- Table structure for table `login`
 --
 
+DROP TABLE IF EXISTS `login`;
 CREATE TABLE IF NOT EXISTS `login` (
   `EmployeeID` bigint(20) NOT NULL,
   `UserName` varchar(255) NOT NULL,
@@ -127,11 +129,9 @@ CREATE TABLE IF NOT EXISTS `login` (
 
 INSERT INTO `login` (`EmployeeID`, `UserName`, `Password`, `Admin`, `Locked`) VALUES
 (1, 'danlain@live.com', 'damn', 1, 0),
-(2, 'gjohns1007@verizon.net', 'damn', 1, 0),
-(3, 'richardzsherrill@yahoo.com', '1Richard', 1, 0),
-(4, 'john@live.com', '123456Uu', 0, 0),
-(5, 'WhiteWalker@MiddleEarth.com', 'Iamatest1', 0, 0),
-(13, 'danlain123@live.com', '1loveAlison', 0, 0);
+(3, 'richardzsherrill@yahoo.com', '1Richard', 0, 0),
+(4, 'john@live.com', 'damn', 0, 0),
+(5, 'WhiteWalker@MiddleEarth.com', 'Iamatest1', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -139,6 +139,7 @@ INSERT INTO `login` (`EmployeeID`, `UserName`, `Password`, `Admin`, `Locked`) VA
 -- Table structure for table `project`
 --
 
+DROP TABLE IF EXISTS `project`;
 CREATE TABLE IF NOT EXISTS `project` (
   `ProjectID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `ProjectName` varchar(20) NOT NULL,
@@ -149,7 +150,15 @@ CREATE TABLE IF NOT EXISTS `project` (
   `Manager` bigint(20) NOT NULL,
   PRIMARY KEY (`ProjectID`),
   UNIQUE KEY `ProjectID` (`ProjectID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `project`
+--
+
+INSERT INTO `project` (`ProjectID`, `ProjectName`, `TargetStartDate`, `TargetEndDate`, `BudgetDays`, `BudgetCurancy`, `Manager`) VALUES
+(1, 'Test', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0.00', 0),
+(2, 'test2', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0.00', 0);
 
 -- --------------------------------------------------------
 
@@ -157,6 +166,7 @@ CREATE TABLE IF NOT EXISTS `project` (
 -- Table structure for table `sprint`
 --
 
+DROP TABLE IF EXISTS `sprint`;
 CREATE TABLE IF NOT EXISTS `sprint` (
   `ProjectID` int(11) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -171,6 +181,7 @@ CREATE TABLE IF NOT EXISTS `sprint` (
 -- Table structure for table `story`
 --
 
+DROP TABLE IF EXISTS `story`;
 CREATE TABLE IF NOT EXISTS `story` (
   `StoryID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `EpicID` int(11) NOT NULL,
