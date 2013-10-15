@@ -231,6 +231,10 @@
 							
 							echo "<br /><a href='adminUserManagement.php' title='Manage Users'>Manage Users</a></h1>";
 						}
+						if($_SESSION['Manager'] == 1 || $_SESSION['Architect'] == 1)
+						{
+							echo "<br /><a href='createSprint.php' title='Create a Sprint'>Create a Sprint</a></h1>";
+						}
 						
 						
 
