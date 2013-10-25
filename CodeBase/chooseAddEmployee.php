@@ -177,7 +177,7 @@
 					</h2>
 					<form name="input" action="addToProject.php" method="get">
 					<?php
-					echo $_SESSION['ProjectID'];
+					
 					echo '<input type="radio" name="choice" value="Now">Add Employee Now<br>';
 					echo '<input type="radio" name="choice" value="Later">Add Employee Later<br>';
 					?>

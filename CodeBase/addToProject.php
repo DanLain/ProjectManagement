@@ -179,7 +179,7 @@
 						
 					 ?>
 					</h2>
-					<form action="projectInsert.php" method="post">
+					<form action="commitEmpAddToProject.php" method="post">
 <?php
 
 		
@@ -191,7 +191,7 @@
 		$result=mysql_query($typequery);
 		while ($typerow=mysql_fetch_array($result))
 		{
-		    echo "<option value='".$typerow['Firstname']."' >".$typerow['FirstName']."</option>";
+		    echo "<option value='".$typerow['EmployeeID']."' >".$typerow['FirstName']."</option>";
 		}
 		echo "</select></br></br>";
 			
