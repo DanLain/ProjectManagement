@@ -6,27 +6,34 @@
 		}
 
 		mysql_select_db("danlain_live");
+		if(!isset($_SESSION['Update']))
+		{
+			$_SESSION['Update'] = "False";
+		}
+		if(!isset($_SESSION['sameNameSprint']))
+		{
+			$_SESSION['sameNameSprint'] = "False";
+		}
+		
 		if(!isset($_SESSION['Login']))
 		{
-			$_SESSION['Login'] = "false";
+			
+			$_SESSION['Login'] = "False";
 			$_SESSION['User'] = "Guest";
-			$_SESSION['EmployeeLogin'] = "False";
+			$_SESSION['EmployeeID'] = 0;
 			$_SESSION['LoginTry']=0;
 			$_SESSION['BadLogin']="";
 			$_SESSION['Locked']="False";
+			
 		}
 		?>
-		
-		<html>
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+		<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 		<head>
 			<title>
-			<?php
-			$mysqlquery="Select * from company";
-		    $result=mysql_query($mysqlquery);
-			while ($row=mysql_fetch_array($result)){
-				echo $row['BusinessName'];
-			}
-			?></title>
+			Better Software</title>
+
+
 			<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 			<link rel="shortcut icon" href="css/images/favicon.ico" />
 			<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
@@ -48,13 +55,14 @@
 					<!-- Begin Shell -->
 					<div class="shell">
 						<h2><span>
-						<?php
-									$mysqlquery="Select * from company";
-								    $result=mysql_query($mysqlquery);
-									while ($row=mysql_fetch_array($result)){
-										echo $row['BusinessName'];
-									}
-						?>
+						<!--<?php
+									//$mysqlquery="Select * from company";
+								    //$result=mysql_query($mysqlquery);
+									//while ($row=mysql_fetch_array($result)){
+										//echo $row['BusinessName'];
+									//}
+						?>-->
+						Better Software
 						</span></h2>
 						<div id="top-nav">
 							<ul>
@@ -87,7 +95,9 @@
 						  
 
 
-					</span></p>
+					</span>
+					<!--<span class="shopping">Shopping Cart <a href="cart.php" title="Shopping Cart">$<?php echo $_SESSION['OrderTotal'];?>
+					</a></span>--></p>
 					</div>
 					<!-- End Shell -->
 				</div>
@@ -99,7 +109,7 @@
 						
 							<?php
 
-											$mysqlquery="Select * from type";
+											/*$mysqlquery="Select * from type";
 											$result=mysql_query($mysqlquery);
 
 											
@@ -138,7 +148,7 @@
 																echo "</ul>";
 														echo "</ul>";
 											}			
-
+*/
 										?>
 							
 							
@@ -152,8 +162,17 @@
 					<!--		<li><a href="#" title="Sports">Sports</a></li>
 							<li><a href="#" title="Brands">Brands</a></li>
 							<li><a href="#" title="Promos">Promos</a></li>
-							<li><a href="#" title="Clinic">Clinic</a></li>   --> 
-							</a>.
+							<li><a href="#" title="Clinic">Clinic</a></li>   
+							<li>
+							
+							  class="sale-item" <form action="first3.php" method="post">
+								-<form action="search.php" method="GET">
+								<input type="text" name="query" />
+								<input type="submit" value="Search" />
+								</form>
+
+							</li>-->
+							></a>.
 						</ul>
 						<div class="cl">&nbsp;</div>
 					</div>
@@ -168,111 +187,145 @@
 			<!-- Begin Content -->
 			<div id="content">
 				<div class="post">
-					<h2>
-					 <?php
-						if($_SESSION['Login']=="True"){
-							echo "Update Project Information";
-						}
-						else {
-							echo "Create Project";
-						}
+                                <div class="welcome">
+				
+				<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  				<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+					<script>   
+    				$(function() {
+         			$( "#calendar" ).datepicker();   
+    				}); 
+					</script>
+					<script>   
+    				$(function() {
+         			$( "#nextcalendar" ).datepicker();   
+    				}); 
+					</script>
+					<h2>Create a Sprint</h2>
+				<?php 
+					if($_SESSION['sameNameSprint'] == 'True')
+					{
+						echo "Can not have sprints with the same name";
+					}
+					echo "<form action='insertSprint.php' method='post'>";
+
+					echo "Project: ";
+					echo "<select id='projID' name='projID'>";
+					$employeeSqlQuery="Select * from employee WHERE EmployeeID ='$_SESSION[EmployeeID]'";
+					$employeeResult=mysql_query($employeeSqlQuery);
+					
+					while($employee_row=mysql_fetch_array($employeeResult))
+					{
 						
-					 ?>
-					</h2>
-					<form action="projectInsert.php" method="post">
-<?php
-
-		
-		//if ($_SESSION['Login']=="True"){
-			//echo "Project Name: <input type='text' name='ProjectName' value='".$_SESSION['ProjectName']."' ><br /><br />";
-			//echo "Target Start Date: <input type='text' name='TargetStartDate'value='".$_SESSION['TargetStartDate']."'><br /><br />";
-			//echo "Target End Date: <input type='text' name='TargetEndDate' value=".$_SESSION['TargetEndDate']."><br /><br />";
-			//echo "Budget Days: <input type='text' name='BudgetDays' value=".$_SESSION['BudgetDays'].">";
-			//Echo " <br /><br />";
-			//echo "Budget Curancy: <input type='text' name='BudgetCurancy' value=".$_SESSION['BudgetCurancy']."><br /><br />";
-			
-			
-			//echo "CompanyID: <input type='text' name='CompanyID' value=".$_SESSION['CompanyID']."><br /><br />";
-		//}
-		//else {
-			echo "Project Name: <input type='text' name='ProjectName'><br /><br />";
-			echo "Target Start Date: <input type='text' name='TargetStartDate'>yyyy-mm-dd<br /><br />";
-			echo "Target End Date: <input type='text' name='TargetEndDate'>yyyy-mm-dd<br /><br />";
-			echo "Budget Days: <input type='text' name='BudgetDays'><br /><br />";
-			echo "Budget Curancy: <input type='text' name='BudgetCurancy' ><br /><br />";
-		
-		//}
-	//}
-	?>
-<input type="submit">
-</form>
-
-					<div class="cl">&nbsp;</div>
+						echo "<option name='projectID' value='$employee_row[ProjectID]'>";
+						echo $employee_row['ProjectID'];
+						echo ".   ";
+						$projectSqlQuery="Select * from project WHERE ProjectID ='$employee_row[ProjectID]'";
+						$projectResult=mysql_query($projectSqlQuery);
+						$project_row=mysql_fetch_array($projectResult);
+						echo $project_row['ProjectName'];
+						echo "</option>";
+						
+						
+					}
+					echo $manager_row['ProjectName'];
+					echo "</select><br><br>";
+					?>
+					Name: <input type="text" name="name"  ><br><br>
+					Start Date: <input type="text" name="startDate" id="calendar" />    
+					End Date: <input type="text" name="endDate" id="nextcalendar" >
+					<br /><br /><br><br><br><br><br><br><br>
+					<input type='submit'>	
+					<br><br><a href='flOhome.php' title='home'> Home </a>
+					
+				
+								
+				</div>
 				</div>
 			</div>
 			<!-- End Content -->
+		
 			<div class="cl">&nbsp;</div>
-		<!-- Begin Promotions -->
-			<div id="product-slider">
-				<h2>Promotions</h2>
-				<ul>
-				 <?php
+			<!-- Begin Promotions -->
+			<div id="project-slider">
+				
+				<?php
 			
-					// $mysqlquery="Select * from promotions JOIN merchandise WHERE promotions.MerchID = merchandise.MerchID";
-					// $result=mysql_query($mysqlquery);
-										
-					// $mysqlqueryitem="Select * from merchandise";
-					// //$item_result=mysql_query($mysqlqueryitem);
+					if($_SESSION['Login'] == "True")
+					{
 
+						echo "<h2>Projects</h2>
+						<ul>";
+
+					//EmployeeID under session
+					$getStorySqlQuery="Select * from story";
+					$storyResult=mysql_query($getStorySqlQuery);
+																
+
+					while ($row=mysql_fetch_array($storyResult))
+					{
+						if($row['EmployeeID'] == $_SESSION['EmployeeID'])
+						{
+							$getEpicSqlQuery="Select * from epic";
+							$epicResult=mysql_query($getEpicSqlQuery);
+
+							while($row_epic=mysql_fetch_array($epicResult))
+							{
+								if($row['EpicID']==$row_epic['EpicID'])
+								{
+									$getProjectSqlQuery="Select * from project";
+									$projectResult=mysql_query($getProjectSqlQuery);
 									
-
-					// while ($row=mysql_fetch_array($result)){
-						// $item_result=mysql_query($mysqlqueryitem);
-						// while ($row_item=mysql_fetch_array($item_result)){
-							// if ($row_item['MerchID'] == $row['MerchID']){
-								// if(date("Y-m-d")>=$row['StartDate'] & date("Y-m-d")<=$row['EndDate']){
-								// echo "<li>";
-								// echo "<a href='productDetails.php?varname=".$row['MerchID']."' title=";
-								// echo "Product Link";
-								// echo "><img src=";
-								// echo "images/";
-								// echo $row_item['Picture'];
-								// echo " alt=";
-								// echo"Product Image"; 
-								// echo "/></a>";
-								// echo "<div class=";
-								// echo "info";
-								// echo ">";
-								// echo "<h4>";
-								// echo $row_item['Name'];
-								// echo "</h4>";
-								// echo "<span class=";
-								// echo "number";
-								// echo ">";
-								// echo $row_item['MerchID'];
-								// echo "</span>";
-								// echo "<span class=";
-								// echo "price";
-								// echo "><span>$</span>";
-								// echo $row['SalePrice'];
-								// echo "</span>";
-								// echo "<div class=";
-								// echo "cl";
-								// echo ">&nbsp;</div>";
-								// echo "</div>";
-								// echo "</li>";
-								// }
-							// }
-						// }											
-											
-					// }
-				// ?>
+									while($row_project=mysql_fetch_array($projectResult))
+									{
+										if($row_project['ProjectID'] == $row_epic['ProjectID'])
+										{
+											//output
+											echo "<li>";
+											echo "<a href='projectDetails.php?varname=".$row_project['ProjectID']."' title=";
+											echo "Project Link";
+											echo "><img src=";
+											echo "images/";
+											echo "baseball1.jpg";//BASEBALL IMAGE TEMPORARY
+											echo " alt=";
+											echo"Product Image/>"; 
+											echo "</a>";
+											echo "<div class=";
+											echo "info";
+											echo ">";
+											echo "<h4>";
+											echo $row_project['ProjectName'];
+											echo "</h4>";
+											echo "<span class=";
+											echo "Start Date";
+											echo ">";
+											echo $row_project['TargetStartDate'];
+											echo "</span>";
+											echo "<span class=";
+											echo "End Date";
+											echo "><span>$</span>";
+											echo $row_project['TargetEndDate'];
+											echo "</span>";
+											echo "<div class=";
+											echo "cl";
+											echo ">&nbsp;</div>";
+											echo "</div>";
+											echo "</li>";
+										}
+									}
+								}
+							}
+						}
+					}	
+				}
+				?>
 				</ul>
 				<div class="cl">&nbsp;</div>
 			</div>
-			<!-- End Promotions Slider -->
+			<!-- End Project Slider -->
 		</div>
 		<!-- End Main -->
+
 		<!-- Begin Footer -->
 		<div id="footer">
 			<div class="boxes">
@@ -281,7 +334,7 @@
 					<div class="box post-box">
 						<!--<h2>About SGC</h2>-->
 						<div class="box-entry">
-							<h1> Better Business, We make Magic Manageable </h1>
+							<h1> Better Software, We make Magic Manageable </h1>
 							
 							<div class="cl">&nbsp;</div>
 						</div>
@@ -316,19 +369,19 @@
 				<!-- End Shell -->
 			</div>
 			<div class="copy">
-				<!-- Begin Shell 
+				<!-- Begin Shell -->
 				<div class="shell">
 					<div class="carts">
-						<ul>
+						<!--<ul>
 							<li><span>We accept</span></li>
 							
 							<li><a href="#" title="VISA"><img src="images/cart-img2.jpg" alt="VISA" /></a></li>
 							<li><a href="#" title="MasterCard"><img src="images/cart-img3.jpg" alt="MasterCard" /></a></li>
-						</ul>
+						</ul>-->
 					</div>
-					<p>&copy; Sitename.com. Design by Gary Johns,Richard Sherrill,Dan Lain,and Jose Flores <br/>Template from <a href="http://css-free-templates.com/">CSS-FREE-TEMPLATES.COM</a></p>
+					<p>&copy; Sitename.com. Design by Gary Johns,Dan Lain,and Jose Flores <br/>Template from <a href="http://css-free-templates.com/">CSS-FREE-TEMPLATES.COM</a></p>
 					<div class="cl">&nbsp;</div>
-				</div>-->
+				</div>
 				<!-- End Shell -->
 			</div>
 		</div>
