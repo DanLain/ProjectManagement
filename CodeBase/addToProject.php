@@ -143,12 +143,16 @@
 							
 							
 										</li>
-										
+										<!--<li><a href="#" title="Drop down menu 4">Drop down menu 4</a></li>
+										<li><a href="#" title="Drop down menu 5">Drop down menu 5</a></li> -->
 									</ul>
 								</div>
 							</li>
 							
-					
+					<!--		<li><a href="#" title="Sports">Sports</a></li>
+							<li><a href="#" title="Brands">Brands</a></li>
+							<li><a href="#" title="Promos">Promos</a></li>
+							<li><a href="#" title="Clinic">Clinic</a></li>   --> 
 							</a>.
 						</ul>
 						<div class="cl">&nbsp;</div>
@@ -170,7 +174,7 @@
 							echo "Update Project Information";
 						}
 						else {
-							echo "Create Project";
+							echo "Add Employee to Project";
 						}
 						
 					 ?>
@@ -179,14 +183,21 @@
 <?php
 
 		
+		if($_REQUEST['choice'] == "Later")
+		{ header("Location: http://localhost/flOhome.php");}
+		else
+		{echo "Employee Name: <select name='FirstName'>";
+		$typequery="Select * from employee";
+		$result=mysql_query($typequery);
+		while ($typerow=mysql_fetch_array($result))
+		{
+		    echo "<option value='".$typerow['Firstname']."' >".$typerow['FirstName']."</option>";
+		}
+		echo "</select></br></br>";
+			
 		
-			echo "Project Name: <input type='text' name='ProjectName'><br /><br />";
-			echo "Target Start Date: <input type='text' name='TargetStartDate'>yyyy-mm-dd<br /><br />";
-			echo "Target End Date: <input type='text' name='TargetEndDate'>yyyy-mm-dd<br /><br />";
-			echo "Budget Days: <input type='text' name='BudgetDays'><br /><br />";
-			echo "Budget Curancy: <input type='text' name='BudgetCurancy' ><br /><br />";
-		
-		
+		}
+	//}
 	?>
 <input type="submit">
 </form>
@@ -200,7 +211,57 @@
 			<div id="product-slider">
 				<h2>Promotions</h2>
 				<ul>
-				 
+				 <?php
+			
+					// $mysqlquery="Select * from promotions JOIN merchandise WHERE promotions.MerchID = merchandise.MerchID";
+					// $result=mysql_query($mysqlquery);
+										
+					// $mysqlqueryitem="Select * from merchandise";
+					// //$item_result=mysql_query($mysqlqueryitem);
+
+									
+
+					// while ($row=mysql_fetch_array($result)){
+						// $item_result=mysql_query($mysqlqueryitem);
+						// while ($row_item=mysql_fetch_array($item_result)){
+							// if ($row_item['MerchID'] == $row['MerchID']){
+								// if(date("Y-m-d")>=$row['StartDate'] & date("Y-m-d")<=$row['EndDate']){
+								// echo "<li>";
+								// echo "<a href='productDetails.php?varname=".$row['MerchID']."' title=";
+								// echo "Product Link";
+								// echo "><img src=";
+								// echo "images/";
+								// echo $row_item['Picture'];
+								// echo " alt=";
+								// echo"Product Image"; 
+								// echo "/></a>";
+								// echo "<div class=";
+								// echo "info";
+								// echo ">";
+								// echo "<h4>";
+								// echo $row_item['Name'];
+								// echo "</h4>";
+								// echo "<span class=";
+								// echo "number";
+								// echo ">";
+								// echo $row_item['MerchID'];
+								// echo "</span>";
+								// echo "<span class=";
+								// echo "price";
+								// echo "><span>$</span>";
+								// echo $row['SalePrice'];
+								// echo "</span>";
+								// echo "<div class=";
+								// echo "cl";
+								// echo ">&nbsp;</div>";
+								// echo "</div>";
+								// echo "</li>";
+								// }
+							// }
+						// }											
+											
+					// }
+				// ?>
 				</ul>
 				<div class="cl">&nbsp;</div>
 			</div>
@@ -223,15 +284,46 @@
 				
 					</div>
 					<div class="box">
-						
+						<!--<h2>Information</h2>
+						<ul>
+							<li><a href="#" title="Special Offers">Special Offers</a></li>
+							<li><a href="#" title="Privacy Policy">Privacy Policy</a></li>
+							<li><a href="#" title="Terms &amp; Conditions">Terms &amp; Conditions</a></li>
+							<li><a href="#" title="Contact Us">Contact Us</a></li>
+							<li><a href="#" title="Log In">Log In</a></li>
+							<li><a href="#" title="Account">Account</a></li>
+							<li><a href="#" title="Basket">Basket</a></li>
+						</ul>-->
 					</div>
-					
+					<!--<div class="box last-box">
+						<h2>Categories</h2>
+						<ul>
+							<li><a href="#" title="Mens">Mens</a></li>
+							<li><a href="#" title="Ladies">Ladies</a></li>
+							<li><a href="#" title="Kids">Kids</a></li>
+							<li><a href="#" title="Football">Football</a></li>
+							<li><a href="#" title="Accessories">Accessories</a></li>
+							<li><a href="#" title="Sports">Sports</a></li>
+						</ul>
+					</div>-->
 					<div class="cl">&nbsp;</div>
 				</div>
 				<!-- End Shell -->
 			</div>
 			<div class="copy">
-				
+				<!-- Begin Shell 
+				<div class="shell">
+					<div class="carts">
+						<ul>
+							<li><span>We accept</span></li>
+							
+							<li><a href="#" title="VISA"><img src="images/cart-img2.jpg" alt="VISA" /></a></li>
+							<li><a href="#" title="MasterCard"><img src="images/cart-img3.jpg" alt="MasterCard" /></a></li>
+						</ul>
+					</div>
+					<p>&copy; Sitename.com. Design by Gary Johns,Richard Sherrill,Dan Lain,and Jose Flores <br/>Template from <a href="http://css-free-templates.com/">CSS-FREE-TEMPLATES.COM</a></p>
+					<div class="cl">&nbsp;</div>
+				</div>-->
 				<!-- End Shell -->
 			</div>
 		</div>

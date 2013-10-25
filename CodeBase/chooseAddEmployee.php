@@ -148,7 +148,7 @@
 								</div>
 							</li>
 							
-					
+					  
 							</a>.
 						</ul>
 						<div class="cl">&nbsp;</div>
@@ -170,26 +170,20 @@
 							echo "Update Project Information";
 						}
 						else {
-							echo "Create Project";
+							echo "Add Employee to Project";
 						}
 						
 					 ?>
 					</h2>
-					<form action="projectInsert.php" method="post">
-<?php
-
-		
-		
-			echo "Project Name: <input type='text' name='ProjectName'><br /><br />";
-			echo "Target Start Date: <input type='text' name='TargetStartDate'>yyyy-mm-dd<br /><br />";
-			echo "Target End Date: <input type='text' name='TargetEndDate'>yyyy-mm-dd<br /><br />";
-			echo "Budget Days: <input type='text' name='BudgetDays'><br /><br />";
-			echo "Budget Curancy: <input type='text' name='BudgetCurancy' ><br /><br />";
-		
-		
-	?>
-<input type="submit">
-</form>
+					<form name="input" action="addToProject.php" method="get">
+					<?php
+					echo $_SESSION['ProjectID'];
+					echo '<input type="radio" name="choice" value="Now">Add Employee Now<br>';
+					echo '<input type="radio" name="choice" value="Later">Add Employee Later<br>';
+					?>
+					<input type="submit" value="Submit">
+					</form>
+					
 
 					<div class="cl">&nbsp;</div>
 				</div>
@@ -200,7 +194,7 @@
 			<div id="product-slider">
 				<h2>Promotions</h2>
 				<ul>
-				 
+				
 				</ul>
 				<div class="cl">&nbsp;</div>
 			</div>
@@ -232,7 +226,6 @@
 			</div>
 			<div class="copy">
 				
-				<!-- End Shell -->
 			</div>
 		</div>
 		<!-- End Footer -->

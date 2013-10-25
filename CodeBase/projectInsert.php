@@ -34,8 +34,14 @@ mysql_select_db("danlain_live");
 			  die('Could not update data: ' . mysql_error());
 			}
 		
-		
-		
-		header("Location: http://localhost/flOhome.php");
+		$insert_query1="SELECT ProjectID FROM project WHERE ProjectName = '$_REQUEST[ProjectName]'";
+		$result = mysql_query($insert_query1);
+		$array = mysql_fetch_array($result);
+		$_SESSION['ProjectID'] = $array['ProjectID'];
+		if(! $insert_query1 ){
+			  die('Could not update data: ' . mysql_error());
+			}
+		header("Location: http://localhost/chooseAddEmployee.php");
+		/*not getting variable for project id*/
 	
 ?>
