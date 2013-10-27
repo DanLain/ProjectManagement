@@ -119,6 +119,53 @@
 				<div class="post">
 					<h2>Project Options</h2>
 					<ul>
+						<li><a href="updateProject.php" title="Epic"><span>Add Project</span></a></li>
+						<?php
+								$raw_results = mysql_query("SELECT * FROM project") or die(mysql_error());
+								$count = 0;
+								$rows = mysql_num_rows($raw_results);
+							   
+								if($rows){ // if one or more rows are returned do following
+																	
+									if (mysql_num_rows($raw_results)>0){
+											
+											echo"<table border='1'> ";
+											echo'<tr>';
+											echo'<th>ProjectID</th>';
+											echo'<th>ProjectName</th>';
+											echo'<th>TargetStartDate</th>';
+											echo'<th>TargetEndDate</th>';
+											echo'<th>BudgetDays</th>';
+											echo'<th>BudgetCurancy</th>';
+											echo'<th>Manager</th>';
+											
+											while ($row=mysql_fetch_array($raw_results)){
+												$story_results = mysql_query("SELECT * FROM project WHERE ProjectID = '$row[ProjectID]'") or die(mysql_error());
+										
+												
+												$count += 1;
+												echo"<tr><td><a href='updateProject.php?ProjectID=".$row['ProjectID']."' title='Edit ".$row['ProjectName']."'>".$row['ProjectID']."</a></td>";
+												//echo"<td><a href='projectOperations.php".(!(isset($_GET['ProjectID']) && ($row['ProjectID'] == $_GET['ProjectID'])) ? "?ProjectID=".$row['ProjectID']."' title='Show Projects'>Show Projects" : "' title='Hide Projects'>Hide Projects")."</a></td>";
+												//echo"<td>".$row['ProjectID']."</td>";
+												echo"<td>".$row['ProjectName']."</td>";
+												echo"<td>".$row['TargetStartDate']."</td>";
+												echo"<td>".$row['TargetEndDate']."</td>";
+												echo"<td>".$row['BudgetDays']."</td>";
+												echo"<td>".$row['BudgetCurancy']."</td>";
+												echo"<td>".$row['Manager']."</td>";
+												
+												echo'</tr>';
+												
+												
+											}
+												
+										}
+										echo'</table>';
+								}
+								else{ // if there is no matching rows do following
+									echo "No results";
+								}
+						?>
 						<li><a href="createEpic.php" title="Epic"><span>Add Epic</span></a></li>
 						<?php
 								$raw_results = mysql_query("SELECT * FROM epic") or die(mysql_error());
