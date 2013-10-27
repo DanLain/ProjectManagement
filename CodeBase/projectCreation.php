@@ -181,8 +181,8 @@
 		
 		
 			echo "Project Name: <input type='text' name='ProjectName'><br /><br />";
-			echo "Target Start Date: <input type='text' name='TargetStartDate'>yyyy-mm-dd<br /><br />";
-			echo "Target End Date: <input type='text' name='TargetEndDate'>yyyy-mm-dd<br /><br />";
+			echo "Target Start Date: <input type='date' name='TargetStartDate'>yyyy-mm-dd<br /><br />";
+			echo "Target End Date: <input type='date' name='TargetEndDate'>yyyy-mm-dd<br /><br />";
 			echo "Budget Days: <input type='text' name='BudgetDays'><br /><br />";
 			echo "Budget Curancy: <input type='text' name='BudgetCurancy' ><br /><br />";
 		
