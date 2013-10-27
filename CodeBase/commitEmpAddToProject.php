@@ -1,7 +1,6 @@
 <?php
 session_start();
-
-
+echo $_REQUEST['EmployeeID'];
 
 if(!isset($mysqlconnect)){$mysqlconnect=mysql_connect('localhost','danla_web','thisiscool');
 //echo "Connected to MySQL";
