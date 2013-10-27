@@ -8,16 +8,6 @@ if(!isset($mysqlconnect)){$mysqlconnect=mysql_connect('localhost','danla_web','t
 }
 
 mysql_select_db("danlain_live");
-
-
-
-	
-	
-
-
-	
-
-
 		$insert_query="Insert into Project 
 			(ProjectName, TargetStartDate, TargetEndDate, BudgetDays, BudgetCurancy, Manager)
 			values('$_REQUEST[ProjectName]',

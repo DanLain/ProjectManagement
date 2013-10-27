@@ -119,350 +119,127 @@
 				<div class="post">
 					<h2>Project Options</h2>
 					<ul>
-						<li><a href="addVendor.php" title="Vendor"><span>Add Vendor</span></a></li>
-<?php
-        $raw_results = mysql_query("SELECT * FROM vendor") or die(mysql_error());
-             
-       
-        if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
-           									
-			if (mysql_num_rows($raw_results)>0){
-					
-					echo"<table border='1'> ";
-					echo'<tr>';
-					echo'<th>VendorID</th>';
-					echo'<th>';
-					echo'VendorName';
-					echo'</th>';
-					echo'<th>';
-					echo'Address';
-					echo'</th>';
-					echo'<th>';
-					echo'City';
-					echo'</th>';
-					echo'<th>';
-					echo'State';
-					echo'</th>';
-					echo'<th>';
-					echo'Zip';
-					echo'</th>';
-					echo'<th>';
-					echo'ContactName';
-					echo'</th>';
-					echo'<th>';
-					echo'Phone';
-					echo'</th>';
-					echo'<th>';
-					echo'Fax';
-					echo'</th>';
-					echo'<th>';
-					echo'MerchID';
-					echo'</th>';
-					echo'</tr>';
-					$count =0;
-					
-
-					while ($row=mysql_fetch_array($raw_results)){
-					$count =$count+1;
-					
-
-					
-					echo"<tr><td><a href='addVendor.php?VendorID=".$row['VendorID']."' title=".$row['VendorID'].">".$row['VendorID']."</a></td>";
-					echo"<td>".$row['VendorName']."</td>";
-					echo"<td>".$row['Address']."</td>";
-					echo"<td>".$row['City']."</td>";
-					echo'<td>';
-					echo $row['State'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['Zip'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['ContactName'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['Phone'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['Fax'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['MerchID'];
-					echo'</td>';
-					echo'</tr>';
-					
-					}
-				echo'</table>';}
-				
-					//while($i_results = mysql_fetch_array($item_results)){
-						//echo "<p>".$i_results['ItemName']."</p>";}}
-                // posts results gotten from database(title and text) you can also show id ($results['id'])
-				
-            
-             
-        
-        else{ // if there is no matching rows do following
-            echo "No results";
-        }
-         }
-    
-    else{ // if query length is less than minimum
-       // echo "Minimum length is ".$min_length;
-    }
-?>
-						<li><a href="addCompany.php" title="Company"><span>Add Company</span></a></li>
-<?php
-        $raw_results = mysql_query("SELECT * FROM company") or die(mysql_error());
-             
-       
-        if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
-           									
-			if (mysql_num_rows($raw_results)>0){
-					
-					echo"<table border='1'> ";
-					echo'<tr>';
-					echo'<th>CompanyID</th>';
-					echo'<th>';
-					echo'BusinessName';
-					echo'</th>';
-					echo'<th>';
-					echo'Address';
-					echo'</th>';
-					echo'<th>';
-					echo'City';
-					echo'</th>';
-					echo'<th>';
-					echo'State';
-					echo'</th>';
-					echo'<th>';
-					echo'Zip';
-					echo'</th>';				
-					echo'<th>';
-					echo'Phone';
-					echo'</th>';
-					echo'<th>';
-					echo'Fax';
-					echo'</th>';
-					echo'<th>';
-					echo'ContactName';
-					echo'</th>';
-					echo'</tr>';
-					$count1=0;
-					
-
-					while ($row=mysql_fetch_array($raw_results)){
-					$count1=$count1+1;
-					
-					echo'<tr>';
-					echo"<td><a href=addCompany.php?CompanyID=".$row['CompanyID']." title=";
-					echo $row['CompanyID'];
-					echo '">';
-					echo $row['CompanyID'];
-					echo '</a></td>';
-					echo'<td>';
-					echo $row['BusinessName'];
-					echo '</td>';
-					echo'<td>';
-					echo $row['Address'];
-					echo '</td>';
-					echo'<td>';
-					echo $row['City'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['State'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['Zip'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['Phone'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['Fax'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['ContactName'];
-					echo'</td>';
-					echo'</tr>';
-					
-					}
-					echo'</table>';}
-				
-					//while($i_results = mysql_fetch_array($item_results)){
-						//echo "<p>".$i_results['ItemName']."</p>";}}
-                // posts results gotten from database(title and text) you can also show id ($results['id'])
-				
-            
-             
-        
-        else{ // if there is no matching rows do following
-            echo "No results";
-        }
-         }
-    
-    else{ // if query length is less than minimum
-        //echo "Minimum length is ".$min_length;
-    }
-?>
-						<li><a href="addMerch.php" title="Item"><span>Add Item</span></a></li>
-<?php
-
-        $raw_results = mysql_query("SELECT * FROM merchandise") or die(mysql_error());
-             
-       
-        if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
-           									
-			if (mysql_num_rows($raw_results)>0){
-					
-					echo"<table border='1'> ";
-					echo'<tr>';
-					echo'<th>MerchID</th>';
-					echo'<th>';
-					echo'Name';
-					echo'</th>';
-					echo'<th>';
-					echo'Description';
-					echo'</th>';
-					echo'<th>';
-					echo'Picture';
-					echo'</th>';
-					echo'<th>';
-					echo'CategoryID';
-					echo'</th>';
-					echo'<th>';
-					echo'TypeID';
-					echo'</th>';
-					echo'<th>';
-					echo'BasePrice';
-					echo'</th>';
-					echo'</tr>';
-					$count2=0;
-					
-
-					while ($row=mysql_fetch_array($raw_results)){
-					$count2=$count2+1;
-					
-					echo'<tr>';
-					echo"<td><a href=addMerch.php?MerchID=".$row['MerchID']." title=";
-					echo $row['MerchID'];
-					echo '">';
-					echo $row['MerchID'];
-					echo '</a></td>';
-					echo'<td>';
-					echo $row['Name'];
-					echo '</td>';
-					echo'<td>';
-					echo $row['Description'];
-					echo '</td>';
-					echo'<td>';
-					echo $row['Picture'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['CategoryID'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['TypeID'];
-					echo'</td>';
-					echo'<td>$';
-					echo $row['BasePrice'];
-					echo'</td>';
-					echo'</tr>';
-					
-					}
-				echo'</table>';}
-				
-					//while($i_results = mysql_fetch_array($item_results)){
-						//echo "<p>".$i_results['ItemName']."</p>";}}
-                // posts results gotten from database(title and text) you can also show id ($results['id'])
-				
-            
-             
-        
-        else{ // if there is no matching rows do following
-            echo "No results";
-        }
-         }
-    
-    else{ // if query length is less than minimum
-        echo "Minimum length is ".$min_length;
-    }
-?>
-						<li>Account Management</span></li>
-<?php
-   
-        $raw_results = mysql_query("SELECT * FROM login") or die(mysql_error());
-             
-       
-        if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
-           									
-			if (mysql_num_rows($raw_results)>0){
-					
-					echo"<table border='1'> ";
-					echo'<tr>';
-					echo'<th>Unlock Account</th>';
-					echo'<th>Set as Employee</th>';
-					echo'<th>';
-					echo'UserName';
-					echo'</th>';
-					echo'<th>';
-					echo'Locked';
-					echo'</th>';
-					echo'<th>';
-					echo'Employee';
-					echo'</th>';
-					
-					echo'</tr>';
-					$count2=0;
-					
-
-					while ($row=mysql_fetch_array($raw_results)){
-					$count1=$count2+1;
-					
-					echo'<tr>';
-					echo"<td><a href=clearlock.php?CustomerID=".$row['CustomerID']." title=";
-					echo $row['CustomerID'];
-					echo '">';
-					echo $row['CustomerID'];
-					echo '</a></td>';
-					echo"<td><a href=setEmp.php?CustomerID=".$row['CustomerID']." title=";
-					echo $row['CustomerID'];
-					echo '">';
-					echo $row['CustomerID'];
-					echo '</a></td>';
-					echo'<td>';
-					echo $row['UserName'];
-					echo '</td>';
-					echo'<td>';
-					echo ($row['Locked']==0 ? "":"Locked");
-					echo '</td>';
-					echo'<td>';
-					echo ($row['Emp']==0 ? "":"Employee");
-					echo '</td>';
-					
-					echo'</tr>';
-					
-					}
-					echo'</table>';}
-				
-					//while($i_results = mysql_fetch_array($item_results)){
-						//echo "<p>".$i_results['ItemName']."</p>";}}
-                // posts results gotten from database(title and text) you can also show id ($results['id'])
-				
-            
-             
-        
-        else{ // if there is no matching rows do following
-            echo "No results";
-        }
-         }
-    
-    else{ // if query length is less than minimum
-        echo "Minimum length is ".$min_length;
-    }
-?>
-<li> <span>Managment Reports</span></li>
+						<li><a href="createEpic.php" title="Epic"><span>Add Epic</span></a></li>
 						<?php
-        $raw_results = mysql_query("SELECT * FROM inventory") or die(mysql_error());
+								$raw_results = mysql_query("SELECT * FROM epic") or die(mysql_error());
+								$count = 0;
+								$rows = mysql_num_rows($raw_results);
+							   
+								if($rows){ // if one or more rows are returned do following
+																	
+									if (mysql_num_rows($raw_results)>0){
+											
+											echo"<table border='1'> ";
+											echo'<tr>';
+											echo'<th>EpicID</th>';
+											echo'<th>Show Stories</th>';
+											echo'<th>ProjectID</th>';
+											echo'<th>Name</th>';
+											echo'<th>Description</th>';
+											echo'<th>Days Planned</th>';
+											echo'<th>Days Worked</th>';
+											echo'<th>Days Remaining</th>';
+											echo'<th>Story Points</th>';
+											echo'<th>Add Story</th></tr>';
+											while ($row=mysql_fetch_array($raw_results)){
+												$story_results = mysql_query("SELECT * FROM story WHERE story.EpicID = '$row[EpicID]'") or die(mysql_error());
+												$storyPoints = 0;
+												$planDays = 0;
+												$workDays = 0;
+												$remainDays = 0;
+												while($row3=mysql_fetch_array($story_results)){
+													$storyPoints += $row3['StoryPoints'];
+													$planDays += $row3['PlannedDays'];
+													$workDays += $row3['WorkedDays'];
+													$remainDays += $row3['RemainingDays'];
+												}
+												$count += 1;
+												echo"<tr><td><a href='createEpic.php?EpicID=".$row['EpicID']."' title='Edit ".$row['Name']."'>".$row['EpicID']."</a></td>";
+												echo"<td><a href='projectOperations.php".(!(isset($_GET['EpicID']) && ($row['EpicID'] == $_GET['EpicID'])) ? "?EpicID=".$row['EpicID']."' title='Show Stories'>Show Stories" : "' title='Hide Stories'>Hide Stories")."</a></td>";
+												echo"<td>".$row['ProjectID']."</td>";
+												echo"<td>".$row['Name']."</td>";
+												echo"<td>".$row['Description']."</td>";
+												echo"<td>".$planDays."</td>";
+												echo"<td>".$workDays."</td>";
+												echo"<td>".$remainDays."</td>";
+												echo"<td>".$storyPoints."</td>";
+												echo"<td><a href='createStory.php?EpicID=".$row['EpicID']."' title='Add Story to ".$row['Name']."'>Add Story</a></td>";
+												echo'</tr>';
+												if(isset($_GET['EpicID']) && ($row['EpicID'] == $_GET['EpicID'])){
+													$detailQuery="Select * from story WHERE story.EpicID = '".$row['EpicID']."'";
+													$detailResult=mysql_query($detailQuery);					
+													
+													if(mysql_num_rows($detailResult)>0){
+														echo '</table>';
+														echo ' <h2>Stories for '.$row['Name'].'</h2>';
+														echo '<table border=1 style="margin-left:12px;">
+														<tr>
+														<th>Story ID</th>
+														<th>Name</th>
+														<th>Description</th>
+														<th>Planned Days</th>
+														<th>Worked Days</th>
+														<th>Remaining Days</th>
+														<th>Story Points</th>
+														<th>Employee ID</th>
+														</tr>';
+														
+														while($row2=mysql_fetch_array($detailResult)){
+															echo "<tr><td><a href='createStory.php?StoryID=".$row2['StoryID']."' title='Edit ".$row2['Name']."'>".$row2['StoryID']."</a></td>";
+															echo "<td>".$row2['Name']."</td>";
+															echo "<td>".$row2['Description']."</td>";
+															echo "<td>".$row2['PlannedDays']."</td>";
+															echo "<td>".$row2['WorkedDays']."</td>";
+															echo "<td>".$row2['RemainingDays']."</td>";
+															echo "<td>".$row2['StoryPoints']."</td>";
+															echo "<td>".$row2['EmployeeID']."</td>";
+															
+														}
+														echo '</table>';
+														if($rows > $count){
+															echo"<table border='1'> ";
+															echo'<tr>';
+															echo'<th>EpicID</th>';
+															echo'<th>Show Stories</th>';
+															echo'<th>ProjectID</th>';
+															echo'<th>Name</th>';
+															echo'<th>Description</th>';
+															echo'<th>Days Planned</th>';
+															echo'<th>Days Worked</th>';
+															echo'<th>Days Remaining</th>';
+															echo'<th>Story Points</th>';
+															echo'<th>Add Story</th></tr>';
+														}
+													}
+													else{
+														echo '<tr><td></td><td></td><td></td><td></td><td><h3>There are no Stories for '.$row['Name'].'</h3></td><td></td></tr>';
+														if($rows > $count){
+															echo'<tr>';
+															echo'<th>EpicID</th>';
+															echo'<th>Show Stories</th>';
+															echo'<th>ProjectID</th>';
+															echo'<th>Name</th>';
+															echo'<th>Description</th>';
+															echo'<th>Days Planned</th>';
+															echo'<th>Days Worked</th>';
+															echo'<th>Days Remaining</th>';
+															echo'<th>Story Points</th>';
+															echo'<th>Add Story</th></tr>';
+														}
+													}
+												}
+											}
+												
+										}
+										echo'</table>';
+								}
+								else{ // if there is no matching rows do following
+									echo "No results";
+								}
+						?>
+						<li><a href="createSprint.php" title="Add Sprint"><span>Add Sprint</span></a></li>
+<?php
+        $raw_results = mysql_query("SELECT * FROM sprint") or die(mysql_error());
              
        
         if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
@@ -471,159 +248,35 @@
 					
 					echo"<table border='1'> ";
 					echo'<tr>';
-					echo'<th>Location</th>';
-					
-					
-					echo'</tr>';
-					$count3=0;
-					$local=0;
-
-					while ($row=mysql_fetch_array($raw_results)){
-					
-					$count1=$count3+1;
-					if($row['LocationID']!=$local){
-					  $local=$row['LocationID'];
-					echo'<tr>';
-					echo"<td><a href=reports.php?varname=".$row['LocationID']." title=";
-					echo $row['LocationID'];
-					echo '">';
-					echo $row['LocationID'];
-					echo '</a></td>';
-					
-					
-					echo'</tr>';}
-					else{
-					continue;
-					}
-					
-					}
-					echo'</table>';}
-			
-        else{ // if there is no matching rows do following
-            echo "No results";
-        }
-         }
-    
-    //else{ // if query length is less than minimum
-        //echo "Minimum length is ".$min_length;
-    //}
-?>
-						<!--<li> <span>Merchandise Managment </span></li>-->
-						<li><a href="orderMerch.php" tilte="order">Order Product</a></li>
-						
-<?php
-						
-		$raw_results = mysql_query("SELECT * FROM purchaseorders") or die(mysql_error());
-             
-       
-        if(mysql_num_rows($raw_results) > 0){
-					echo"<table border='1'> ";
-					echo'<tr>';
-					echo'<th>PONumber</th>';
-					echo'<th>';
-					echo'Merch ID';
-					echo'</th>';
-					echo'<th>';
-					echo'Vendor ID';
-					echo'</th>';
-					echo'<th>';
-					echo'Quantity';
-					echo'</th>';
-					echo'<th>';
-					echo'Received Quantity';
-					echo'</th>';
-					echo'<th>';
-					echo'Unit Price';
-					echo'</th>';
+					echo'<th>Name</th>';
+					echo'<th>Start Date</th>';
+					echo'<th>End Date</th>';
+					echo'<th>Initial Story Points</th>';
+					echo'<th>Locked</th>';
+					echo'<th>Current Story Points</th>';
+					echo'<th>Show Stories</th>';
+					echo'<th>Add Stories</th>';
 					echo'</tr>';
 					
 					while ($row=mysql_fetch_array($raw_results)){
-						echo'<tr>';
-						echo "<td><a href='orderMerch.php?PONumber= ".$row['PONumber']." title=".$row['PONumber'].">".$row['PONumber']."</a></td>";
-						echo"<td>".$row['MerchID']."</td>";
-						echo"<td>".$row['VendorID']."</td>";
-						echo'<td>';
-						echo $row['Quantity'];
-						echo'</td>';
-						echo'<td>';
-						echo $row['RecievedQuantity'];
-						echo'</td>';
-						echo'<td>';
-						echo $row['Price'];
-						echo'</td>';
-						echo'</tr>';
+						$sprint = $row['ProjectID'].$row['Name'];
+						$story_result = mysql_query("SELECT * FROM story where story.SprintID = '$sprint'") or die(mysql_error());
+						
+						$storyPoints = 0;
+						while($row3=mysql_fetch_array($story_result)){
+							$storyPoints += $row3['StoryPoints'];
 						}
-				echo'</table>';
-				}
-				
-?>
-					<li><span><a href="createPromo.php" tilte="order">Create Promotions</a></span></li>
 						
-						<?php
-						
-        $raw_results = mysql_query("SELECT * FROM promotions") or die(mysql_error());
-             
-       
-        if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
-           									
-			if (mysql_num_rows($raw_results)>0){
-					
-					echo"<table border='1'> ";
-					echo'<tr>';
-					echo'<th>PromotionID</th>';
-					echo'<th>';
-					echo'Merchandise ID';
-					echo'</th>';
-					echo'<th>';
-					echo'Location ID';
-					echo'</th>';
-					echo'<th>';
-					echo'Description';
-					echo'</th>';
-					echo'<th>';
-					echo'Sale Price';
-					echo'</th>';
-					echo'<th>';
-					echo'Start Date';
-					echo'</th>';
-					echo'<th>';
-					echo'End Date';
-					echo'</th>';
-					echo'</tr>';
-					$count2=0;
-					
-
-					while ($row=mysql_fetch_array($raw_results)){
-					$count2=$count2+1;
-					
-					echo'<tr>';
-					echo'<td><a href="createPromo.php" title="';
-					echo $count2;
-					echo '">';
-					echo $row['PromotionID'];
-					echo '</a></td>';
-					echo'<td>';
-					echo $row['MerchID'];
-					echo '</td>';
-					echo'<td>';
-					echo $row['LocationID'];
-					echo '</td>';
-					echo'<td>';
-					echo $row['Description'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['SalePrice'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['StartDate'];
-					echo'</td>';
-					echo'<td>';
-					echo $row['EndDate'];
-					echo'</td>';
-					echo'</tr>';
-					
+						echo'<tr>';
+						echo"<td><a href=createSprint.php?SprintID=".$row['SprintID']." title='".$row['Name']."'>".$row['Name']."</a></td>";
+						echo'<td>'.$row['StartDate'].'</td>';
+						echo'<td>'.$row['EndDate'].'</td>';
+						echo'<td>'.$row['InitialStoryPoints'].'</td>';
+						echo'<td>'.($row['Locked'] == 1 ?'Locked':'').'</td>';
+						echo'<td>'.$storyPoints.'</td>';
+						echo'</tr>';
 					}
-				echo'</table>';}
+					echo'</table>';}
 				
 					//while($i_results = mysql_fetch_array($item_results)){
 						//echo "<p>".$i_results['ItemName']."</p>";}}
@@ -637,113 +290,10 @@
         }
          }
     
-    //else{ // if query length is less than minimum
+    else{ // if query length is less than minimum
         //echo "Minimum length is ".$min_length;
-    //}
-?>					<br ><br />
-						<div>Cash On Hand</div>
-<?php
-
-   $inventorytotal=0;
-   $raw_results = mysql_query("SELECT * FROM merchandise") or die(mysql_error());
-             
-       
-        if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
-           									
-			if (mysql_num_rows($raw_results)>0){
-					while ($row=mysql_fetch_array($raw_results)){
-					$inventorytotal=$inventorytotal+$row['BasePrice'];
-					}
-            }
-        
-        else{ // if there is no matching rows do following
-            echo "No results";
-        }
-         }
-   $raw_results = mysql_query("SELECT * FROM purchaseorders") or die(mysql_error());
-             
-	$POtotal=0;
-	$received=0;
-	if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
-		if (mysql_num_rows($raw_results)>0){
-				while ($row=mysql_fetch_array($raw_results)){
-				$POtotal=$POtotal+$row['Price'];
-				$received=$received+($row['Price']*$row['RecievedQuantity']);
-				}
-			
-			$POtotal=$POtotal-$received;
-        }
-        else{ // if there is no matching rows do following
-            echo "No results";
-        }
-		}
-   
-        $raw_results = mysql_query("SELECT * FROM ordertable") or die(mysql_error());
-        
-        if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
-           									
-			if (mysql_num_rows($raw_results)>0){
-					$CODtotal=0;     
-					$Credittotal=0; 
-					$Total=0;
-					echo"<table border='1'> ";
-					echo'<tr>';
-					echo'<th>Cash Total</th>';
-					echo'<th>';
-					echo'Credit Total';
-					echo'</th>';
-					echo'<th>';
-					echo'PO Total';
-					echo'</th>';
-					echo'<th>';
-					echo'Inventory on Hand';
-					echo'</th>';
-					echo'<th>';
-					echo'Total Cash on Hand';
-					echo'</th>';
-					echo'<th>';
-					echo'Total Assets';
-					echo'</th>';
-					echo'</tr>';
-					$count2=0;
-					
-
-					while ($row=mysql_fetch_array($raw_results)){
-					$count2=$count2+1;
-					if($row['PaymentType']=='COD'){
-					$CODtotal=$CODtotal+$row['OrderTotal'];}
-					if($row['PaymentType']=='Credit'){
-					$Credittotal=$Credittotal+$row['OrderTotal'];}
-					
-					}
-				echo'<tr>';
-					echo'<td>';
-					echo $CODtotal;
-					echo '</td>';
-					echo'<td>';
-					echo $Credittotal;
-					echo '</td>';
-					echo'<td>';
-					echo $POtotal;
-					echo '</td>';
-					echo'<td>';
-					echo $inventorytotal;
-					echo '</td>';
-					echo'<td>';
-					echo ($CODtotal+$Credittotal);
-					echo'</td>';
-					echo'<td>';
-					echo ($CODtotal+$Credittotal+$inventorytotal);
-					echo'</td>';
-					echo'</tr>';	
-				echo'</table>';}
-
-        else{ // if there is no matching rows do following
-            echo "No results";
-        }
-         }
+    }
 ?>
-
 					</ul>
 					
 					<div class="cl">&nbsp;</div>
