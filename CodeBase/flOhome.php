@@ -26,7 +26,14 @@
 		<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 		<head>
 			<title>
-			Better Software</title>
+			<?php
+			$mysqlquery="Select * from company";
+		    $result=mysql_query($mysqlquery);
+			while ($row=mysql_fetch_array($result)){
+				echo $row['BusinessName'];
+			}
+			?>
+			</title>
 
 
 			<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -50,42 +57,39 @@
 					<!-- Begin Shell -->
 					<div class="shell">
 						<h2><span>
-						Better Software
+						<?php
+						$mysqlquery="Select * from company";
+						$result=mysql_query($mysqlquery);
+						while ($row=mysql_fetch_array($result)){
+							echo $row['BusinessName'];
+						}
+						?>
 						</span></h2>
 						<div id="top-nav">
 							<ul>
 								<li class="active"><a href="flOhome.php" title="Home"><span>Home</span></a></li>
-								<li><!--a href="#" title="Promotions &amp; News"><span>Promotions &amp; Sales</span></a>--></li>
-								<!--<li><a href="#" title="Contact"><span>Contact</span></a></li>-->
-								
 							</ul>
 						</div>
 						<div class="cl">&nbsp;</div>
-						<p id="cart"><span class="profile">Welcome, 
-						
-					
-						<?php
-						if($_SESSION['Login'] != "True")
-						{
-							//echo "<a href='login.php' title='Profile Link'>Login</a>";
-							echo "<a href='userManagment.php' title='Profile Link'>Register</a>";
-						} 
-						else
-						{
-							
+						<p id="cart"><span class="profile">Welcome, 					
+							<?php
+							if($_SESSION['Login'] != "True")
+							{
+								//echo "<a href='login.php' title='Profile Link'>Login</a>";
+								echo "<a href='userManagment.php' title='Profile Link'>Register</a>";
+							} 
+							else
+							{
 								
-								echo "<a href='userManagment.php' title='Profile Link'>";
-								echo $_SESSION['User'];
-								echo "</a>";
-								echo "<a href='logout.php' title='Logout'> Logout</a>";
-						}
-						?>
-						  
-
-
-					</span>
-					<!--<span class="shopping">Shopping Cart <a href="cart.php" title="Shopping Cart">$<?php echo $_SESSION['OrderTotal'];?>
-					</a></span>--></p>
+									
+									echo "<a href='userManagment.php' title='Profile Link'>";
+									echo $_SESSION['User'];
+									echo "</a>";
+									echo "<a href='logout.php' title='Logout'> Logout</a>";
+							}
+							?>							  
+							</span>
+						</p>
 					</div>
 					<!-- End Shell -->
 				</div>
@@ -93,182 +97,89 @@
 				<!-- Begin Navigation -->
 				<div id="navigation">
 					<!-- Begin Shell -->
-					<div class="shell">
-					
-					<ul><?php
-						if($_SESSION['Admin'] == 1|| $_SESSION['Manager'] == 1)
-						{echo '<li class = "active"><a href="projectCreation.php" title="Profile Link">New Project</a>';
-						}
-						?>
-							<!--<?php
-
-											$mysqlquery="Select * from type";
-											$result=mysql_query($mysqlquery);
-
-											
-
-											while ($row=mysql_fetch_array($result)){
-												echo"<ul>";
-												echo "<li class=";
-												echo "active";
-												echo"><a href=";
-												echo"merchandise.php?varname=".$row['TypeName'];
-												echo " title=";
-												echo $row['TypeName'];
-												echo ">";
-												echo $row['TypeName'];
-												echo"</a>";
-													echo"<div class=";
-													echo "dd";
-													echo ">";
-														echo "<ul>";
-															$mysqlquery2="Select * from category";
-															$result2=mysql_query($mysqlquery2);
-															while ($row2=mysql_fetch_array($result2))
-																{
-																	if ($row['TypeID']== $row2['TypeID'])
-																		{
-																			echo"<li><A href=";
-																			//echo"images/soc1.jpg";
-																			echo "merchandise.php?varname=".$row2['CategoryID'];
-																			echo" title=";
-																			echo $row2['CatName'];
-																			echo">";
-																			echo $row2['CatName'];
-																			echo"</A></li>";	
-																		}
-																}
-																echo "</ul>";
-														echo "</ul>";
-											}			
-
-										?>-->
-							
-							
-										</li>
-										<!--<li><a href="#" title="Drop down menu 4">Drop down menu 4</a></li>
-										<li><a href="#" title="Drop down menu 5">Drop down menu 5</a></li> -->
-									</ul>
-								</div>
-							</li>
-							
-					<!--		<li><a href="#" title="Sports">Sports</a></li>
-							<li><a href="#" title="Brands">Brands</a></li>
-							<li><a href="#" title="Promos">Promos</a></li>
-							<li><a href="#" title="Clinic">Clinic</a></li>   
-							<li>
-							
-							  class="sale-item" <form action="first3.php" method="post">
-								-<form action="search.php" method="GET">
-								<input type="text" name="query" />
-								<input type="submit" value="Search" />
-								</form>
-
-							</li>-->
-							></a>.
+					<div class="shell">					
+						<ul><?php
+							if($_SESSION['Admin'] == 1|| $_SESSION['Manager'] == 1)
+							{echo '<li class = "active"><a href="projectCreation.php" title="Profile Link">New Project</a></li>';
+							}
+							?>
 						</ul>
-						<div class="cl">&nbsp;</div>
 					</div>
-					<!-- End Shell -->
+						
+					<div class="cl">&nbsp;</div>
 				</div>
+					<!-- End Shell -->
+			</div>
 				<!-- End Navigation -->
-		
-		</div>
 		<!-- End Slider -->
 		<!-- Begin Main -->
 		<div  id="main" class="shell">
 			<!-- Begin Content -->
 			<div id="content">
 				<div class="post">
-                                <div class="welcome">
-					<?php 
-					if($_SESSION['Login'] != "True")
-					{
-						echo "<h2>Login</h2>";
-						
-					}
-					?>
-					
-					
-					<?php
-					if($_SESSION['Login'] != "True")
-					{
-						echo "<form  action='login.php' method='test'>
-
-						Emai Address: <input type='text' name='Email'><br />
-						<br />
-						Password: <input type='password' size='20' name='Password'><br />
-						";
-						if ($_SESSION['Locked']=="True"){
-								echo "Account ".$_SESSION['Email']." locked please contact customer service at dan@drlain.com<br /><br />";
-							}
-								
-						elseif ($_SESSION['LoginTry']!=0){
-							Echo "System will lock account after ".(6 - $_SESSION['LoginTry'])." more attempts. <br/> <br/>";
-						}
-						
-
-						echo "<input  type='submit' >
-						</form>";
-					}	 
-					else
-					{
-						echo "Welcome ";
-						
-						
-						
-						echo $_SESSION['User'];
-						echo "<br />";
-						
-						if(($_SESSION['Admin'] == 1))
+					<div class="welcome">
+						<?php 
+						if($_SESSION['Login'] != "True")
 						{
+							echo "<h2>Login</h2>";
 							
-							echo "<a href='companyProperties.php' title='Company Properties'>Company Properties</a><br>";
-							echo "<br /><a href='adminUserManagement.php' title='Manage Users'>Manage Users</a></h1>";
 						}
-						if($_SESSION['Manager'] == 1)
-						{
-							
-							echo "<br /><a href='adminUserManagement.php' title='Manage Users'>Manage Users</a></h1>";
-						}
-						if($_SESSION['Manager'] == 1 || $_SESSION['Architect'] == 1)
-						{
-							echo "<br /><a href='createSprint.php' title='Create a Sprint'>Create a Sprint</a></h1>";
-						}
+						?>
 						
 						
-
-
-						/*$getProjectSqlQuery="Select * from project";
-						$projectResult=mysql_query($getProjectSqlQuery);
-						$managerCount = 0;			
-						while($row_project=mysql_fetch_array($projectResult))
+						<?php
+						if($_SESSION['Login'] != "True")
 						{
-							if($row_project['Manager'] == $_SESSION['EmployeeID'])
-							{
-								$managerCount = 1;
+							echo "<form  action='login.php' method='test'>
+
+							Emai Address: <input type='text' name='Email'><br />
+							<br />
+							Password: <input type='password' size='20' name='Password'><br />
+							";
+							if ($_SESSION['Locked']=="True"){
+									echo "Account ".$_SESSION['Email']." locked please contact customer service at dan@drlain.com<br /><br />";
+								}
+									
+							elseif ($_SESSION['LoginTry']!=0){
+								Echo "System will lock account after ".(6 - $_SESSION['LoginTry'])." more attempts. <br/> <br/>";
 							}
-						}
-						
-						if($managerCount = 1)
+							
+
+							echo "<input  type='submit' >
+							</form>";
+						}	 
+						else
 						{
-							echo "<br /><a href='projectManager.php' title='Manage Information'>Manage Projects</a></h1>";
+							echo "Welcome ";
+							
+							
+							
+							echo $_SESSION['User'];
 							echo "<br />";
 							
-
-						}*/
-
-						
-						
-					}
-				?>					
-				</div>
+							if($_SESSION['Admin'] == 1)
+							{
+								
+								echo "<a href='companyProperties.php' title='Company Properties'>Company Properties</a><br>";
+							}
+							if($_SESSION['Manager'] == 1 || $_SESSION['Admin'] == 1)
+							{
+								
+								echo "<br /><a href='adminUserManagement.php' title='Manage Users'>Manage Users</a></h1>";
+							}
+							if($_SESSION['Manager'] == 1 || $_SESSION['Architect'] == 1)
+							{
+								echo "<br /><a href='ProjectOperations.php' title='Manage Project'>Manage Project</a></h1>";
+							}
+						}
+						?>					
+					</div>
 				</div>
 			</div>
 			<!-- End Content -->
 		
 			<div class="cl">&nbsp;</div>
-			<!-- Begin Promotions -->
+			<!-- Begin Projects -->
 			<div id="project-slider">
 				
 				<?php

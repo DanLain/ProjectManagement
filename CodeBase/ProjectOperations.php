@@ -117,45 +117,192 @@
 			<!-- Begin Content -->
 			<div id="content">
 				<div class="post">
-					<h2>
-					<?php
-					echo (isset($_GET['EpicID'])?'Update Epic':'Add Epic');
-					?></h2>
-					<?php 
-					echo "<form action='addEpic.php".(isset($_GET['EpicID'])? "?EpicID=".$_GET['EpicID'] : "")."' method='post'>";
-					?>
-
+					<h2>Project Options</h2>
+					<ul>
+						<li><a href="createEpic.php" title="Epic"><span>Add Epic</span></a></li>
 						<?php
-						if(isset($_GET['EpicID'])){
-								$_SESSION['EpicID'] = $EpicID=$_GET['EpicID'];
-
-								$mysqlquery1="Select * from epic where EpicID = '$EpicID'";
-								$result1=mysql_query($mysqlquery1);
-								while ($row=mysql_fetch_array($result1))
-								{
-										$ProjectID = $row['ProjectID'];
-										$Name = $row['Name'];
-										$Description = $row['Description'];
+								$raw_results = mysql_query("SELECT * FROM epic") or die(mysql_error());
+								$count = 0;
+								$rows = mysql_num_rows($raw_results);
+							   
+								if($rows){ // if one or more rows are returned do following
+																	
+									if (mysql_num_rows($raw_results)>0){
+											
+											echo"<table border='1'> ";
+											echo'<tr>';
+											echo'<th>EpicID</th>';
+											echo'<th>Show Stories</th>';
+											echo'<th>ProjectID</th>';
+											echo'<th>Name</th>';
+											echo'<th>Description</th>';
+											echo'<th>Days Planned</th>';
+											echo'<th>Days Worked</th>';
+											echo'<th>Days Remaining</th>';
+											echo'<th>Story Points</th>';
+											echo'<th>Add Story</th></tr>';
+											while ($row=mysql_fetch_array($raw_results)){
+												$story_results = mysql_query("SELECT * FROM story WHERE story.EpicID = '$row[EpicID]'") or die(mysql_error());
+												$storyPoints = 0;
+												$planDays = 0;
+												$workDays = 0;
+												$remainDays = 0;
+												while($row3=mysql_fetch_array($story_results)){
+													$storyPoints += $row3['StoryPoints'];
+													$planDays += $row3['PlannedDays'];
+													$workDays += $row3['WorkedDays'];
+													$remainDays += $row3['RemainingDays'];
+												}
+												$count += 1;
+												echo"<tr><td><a href='createEpic.php?EpicID=".$row['EpicID']."' title='Edit ".$row['Name']."'>".$row['EpicID']."</a></td>";
+												echo"<td><a href='projectOperations.php".(!(isset($_GET['EpicID']) && ($row['EpicID'] == $_GET['EpicID'])) ? "?EpicID=".$row['EpicID']."' title='Show Stories'>Show Stories" : "' title='Hide Stories'>Hide Stories")."</a></td>";
+												echo"<td>".$row['ProjectID']."</td>";
+												echo"<td>".$row['Name']."</td>";
+												echo"<td>".$row['Description']."</td>";
+												echo"<td>".$planDays."</td>";
+												echo"<td>".$workDays."</td>";
+												echo"<td>".$remainDays."</td>";
+												echo"<td>".$storyPoints."</td>";
+												echo"<td><a href='createStory.php?EpicID=".$row['EpicID']."' title='Add Story to ".$row['Name']."'>Add Story</a></td>";
+												echo'</tr>';
+												if(isset($_GET['EpicID']) && ($row['EpicID'] == $_GET['EpicID'])){
+													$detailQuery="Select * from story WHERE story.EpicID = '".$row['EpicID']."'";
+													$detailResult=mysql_query($detailQuery);					
+													
+													if(mysql_num_rows($detailResult)>0){
+														echo '</table>';
+														echo ' <h2>Stories for '.$row['Name'].'</h2>';
+														echo '<table border=1 style="margin-left:12px;">
+														<tr>
+														<th>Story ID</th>
+														<th>Name</th>
+														<th>Description</th>
+														<th>Planned Days</th>
+														<th>Worked Days</th>
+														<th>Remaining Days</th>
+														<th>Story Points</th>
+														<th>Employee ID</th>
+														</tr>';
+														
+														while($row2=mysql_fetch_array($detailResult)){
+															echo "<tr><td><a href='createStory.php?StoryID=".$row2['StoryID']."' title='Edit ".$row2['Name']."'>".$row2['StoryID']."</a></td>";
+															echo "<td>".$row2['Name']."</td>";
+															echo "<td>".$row2['Description']."</td>";
+															echo "<td>".$row2['PlannedDays']."</td>";
+															echo "<td>".$row2['WorkedDays']."</td>";
+															echo "<td>".$row2['RemainingDays']."</td>";
+															echo "<td>".$row2['StoryPoints']."</td>";
+															echo "<td>".$row2['EmployeeID']."</td>";
+															
+														}
+														echo '</table>';
+														if($rows > $count){
+															echo"<table border='1'> ";
+															echo'<tr>';
+															echo'<th>EpicID</th>';
+															echo'<th>Show Stories</th>';
+															echo'<th>ProjectID</th>';
+															echo'<th>Name</th>';
+															echo'<th>Description</th>';
+															echo'<th>Days Planned</th>';
+															echo'<th>Days Worked</th>';
+															echo'<th>Days Remaining</th>';
+															echo'<th>Story Points</th>';
+															echo'<th>Add Story</th></tr>';
+														}
+													}
+													else{
+														echo '<tr><td></td><td></td><td></td><td></td><td><h3>There are no Stories for '.$row['Name'].'</h3></td><td></td></tr>';
+														if($rows > $count){
+															echo'<tr>';
+															echo'<th>EpicID</th>';
+															echo'<th>Show Stories</th>';
+															echo'<th>ProjectID</th>';
+															echo'<th>Name</th>';
+															echo'<th>Description</th>';
+															echo'<th>Days Planned</th>';
+															echo'<th>Days Worked</th>';
+															echo'<th>Days Remaining</th>';
+															echo'<th>Story Points</th>';
+															echo'<th>Add Story</th></tr>';
+														}
+													}
+												}
+											}
+												
+										}
+										echo'</table>';
 								}
-								echo "Name: <input type='text' name='Name' value ='".$Name."'><br /><br />";      
-								echo "Description: <input type='text' name='Description' value='".$Description."'><br /><br />";
-							}	
-
-						else{
-								echo "Name: <input type='text' name='Name'><br /><br />";
-								echo "Description: <input type='text' name='Description'><br /><br />";
-							}
+								else{ // if there is no matching rows do following
+									echo "No results";
+								}
 						?>
-						<input type="submit">
-					</form>
+						<li><a href="createSprint.php" title="Add Sprint"><span>Add Sprint</span></a></li>
+<?php
+        $raw_results = mysql_query("SELECT * FROM sprint") or die(mysql_error());
+             
+       
+        if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
+           									
+			if (mysql_num_rows($raw_results)>0){
+					
+					echo"<table border='1'> ";
+					echo'<tr>';
+					echo'<th>Name</th>';
+					echo'<th>Start Date</th>';
+					echo'<th>End Date</th>';
+					echo'<th>Initial Story Points</th>';
+					echo'<th>Locked</th>';
+					echo'<th>Current Story Points</th>';
+					echo'<th>Show Stories</th>';
+					echo'<th>Add Stories</th>';
+					echo'</tr>';
+					
+					while ($row=mysql_fetch_array($raw_results)){
+						$sprint = $row['ProjectID'].$row['Name'];
+						$story_result = mysql_query("SELECT * FROM story where story.SprintID = '$sprint'") or die(mysql_error());
+						
+						$storyPoints = 0;
+						while($row3=mysql_fetch_array($story_result)){
+							$storyPoints += $row3['StoryPoints'];
+						}
+						
+						echo'<tr>';
+						echo"<td><a href=createSprint.php?SprintID=".$row['SprintID']." title='".$row['Name']."'>".$row['Name']."</a></td>";
+						echo'<td>'.$row['StartDate'].'</td>';
+						echo'<td>'.$row['EndDate'].'</td>';
+						echo'<td>'.$row['InitialStoryPoints'].'</td>';
+						echo'<td>'.($row['Locked'] == 1 ?'Locked':'').'</td>';
+						echo'<td>'.$storyPoints.'</td>';
+						echo'</tr>';
+					}
+					echo'</table>';}
+				
+					//while($i_results = mysql_fetch_array($item_results)){
+						//echo "<p>".$i_results['ItemName']."</p>";}}
+                // posts results gotten from database(title and text) you can also show id ($results['id'])
+				
+            
+             
+        
+        else{ // if there is no matching rows do following
+            echo "No results";
+        }
+         }
+    
+    else{ // if query length is less than minimum
+        //echo "Minimum length is ".$min_length;
+    }
+?>
+					</ul>
+					
 					<div class="cl">&nbsp;</div>
 				</div>
 			</div>
 			<!-- End Content -->
 		
 			<div class="cl">&nbsp;</div>
-			
-			<!-- Begin Projects -->
+						<!-- Begin Projects -->
 			<div id="project-slider">
 				
 				<?php

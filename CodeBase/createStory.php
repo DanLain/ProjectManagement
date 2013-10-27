@@ -119,31 +119,61 @@
 				<div class="post">
 					<h2>
 					<?php
-					echo (isset($_GET['EpicID'])?'Update Epic':'Add Epic');
+					echo (isset($_GET['StoryID'])?'Update Story':'Add Story');
 					?></h2>
 					<?php 
-					echo "<form action='addEpic.php".(isset($_GET['EpicID'])? "?EpicID=".$_GET['EpicID'] : "")."' method='post'>";
+					echo "<form action='addStory.php".(isset($_GET['StoryID'])? "?StoryID=".$_GET['StoryID'] : "")."' method='post'>";
 					?>
 
 						<?php
-						if(isset($_GET['EpicID'])){
-								$_SESSION['EpicID'] = $EpicID=$_GET['EpicID'];
-
-								$mysqlquery1="Select * from epic where EpicID = '$EpicID'";
+						if(isset($_GET['StoryID'])){
+								$_SESSION['StoryID'] = $StoryID=$_GET['StoryID'];
+								$mysqlquery1="Select * from story where StoryID = '$StoryID'";
 								$result1=mysql_query($mysqlquery1);
 								while ($row=mysql_fetch_array($result1))
 								{
-										$ProjectID = $row['ProjectID'];
+										$EmployeeID = $row['EmployeeID'];
 										$Name = $row['Name'];
 										$Description = $row['Description'];
+										$PlannedDays = $row['PlannedDays'];
+										$WorkedDays = $row['WorkedDays'];
+										$RemainingDays = $row['RemainingDays'];
+										$StoryPoints = $row['StoryPoints'];
 								}
 								echo "Name: <input type='text' name='Name' value ='".$Name."'><br /><br />";      
 								echo "Description: <input type='text' name='Description' value='".$Description."'><br /><br />";
+								echo "PlannedDays: <input type='text' name='PlannedDays' value='".$PlannedDays."'><br /><br />";
+								echo "WorkedDays: <input type='text' name='WorkedDays' value='".$WorkedDays."'><br /><br />";
+								echo "RemainingDays: <input type='text' name='RemainingDays' value='".$RemainingDays."'><br /><br />";
+								echo "StoryPoints: <input type='text' name='StoryPoints' value='".$StoryPoints."'><br /><br />";
+								echo "Assigned to Name: <select name='EmployeeID'>";
+								$typequery="Select * from employee";
+								$result=mysql_query($typequery);
+								while ($typerow=mysql_fetch_array($result))
+								{
+									if($typerow['EmployeeID'] == $EmployeeID )
+										echo "<option selected='selected' value='".$typerow['EmployeeID']."' >".$typerow['FirstName']."</option>";
+									else echo "<option value='".$typerow['EmployeeID']."' >".$typerow['FirstName']."</option>";
+								}
+								echo "</select><br /><br />";
 							}	
 
-						else{
+						else{	
+								$_SESSION['EpicID'] = $_GET['EpicID'];
 								echo "Name: <input type='text' name='Name'><br /><br />";
 								echo "Description: <input type='text' name='Description'><br /><br />";
+								echo "PlannedDays: <input type='text' name='PlannedDays'><br /><br />";
+								echo "WorkedDays: <input type='text' name='WorkedDays'><br /><br />";
+								echo "RemainingDays: <input type='text' name='RemainingDays'><br /><br />";
+								echo "StoryPoints: <input type='text' name='StoryPoints'><br /><br />";
+								echo "Assigned to Name: <select name='EmployeeID'>";
+								$typequery="Select * from employee";
+								$result=mysql_query($typequery);
+								while ($typerow=mysql_fetch_array($result))
+								{
+									echo "<option value='".$typerow['EmployeeID']."' >".$typerow['FirstName']."</option>";
+								}
+								echo "</select><br /><br />";
 							}
 						?>
 						<input type="submit">

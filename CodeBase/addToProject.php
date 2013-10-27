@@ -186,7 +186,7 @@
 		if($_REQUEST['choice'] == "Later")
 		{ header("Location: http://localhost/flOhome.php");}
 		else
-		{echo "Employee Name: <select name='FirstName'>";
+		{echo "Employee Name: <select name='EmployeeID'>";
 		$typequery="Select * from employee";
 		$result=mysql_query($typequery);
 		while ($typerow=mysql_fetch_array($result))
