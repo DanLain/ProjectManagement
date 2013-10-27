@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2013 at 12:59 AM
+-- Generation Time: Oct 27, 2013 at 06:45 PM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -16,7 +16,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-DROP DATABASE `danlain_live`;
 --
 -- Database: `danlain_live`
 --
@@ -29,7 +28,6 @@ USE `danlain_live`;
 -- Table structure for table `company`
 --
 
-DROP TABLE IF EXISTS `company`;
 CREATE TABLE IF NOT EXISTS `company` (
   `CompanyID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `BusinessName` varchar(255) NOT NULL,
@@ -50,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `company` (
 --
 
 INSERT INTO `company` (`CompanyID`, `BusinessName`, `Address`, `City`, `State`, `Zip`, `Phone`, `Fax`, `ContactName`) VALUES
-(1, 'Better Software\r\n', '21 Jump Street', 'Lost', 'TX', '76666', '890-555-3421', '890-555-3421', 'Sally Smith');
+(1, 'This is a test', '21 Jump Street', 'Lost', 'TX', '76666', '890-555-3421', '890-555-3421', 'Sally Smith');
 
 -- --------------------------------------------------------
 
@@ -58,7 +56,6 @@ INSERT INTO `company` (`CompanyID`, `BusinessName`, `Address`, `City`, `State`, 
 -- Table structure for table `employee`
 --
 
-DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
   `EmployeeID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `Phone` varchar(12) NOT NULL,
@@ -79,17 +76,18 @@ CREATE TABLE IF NOT EXISTS `employee` (
   PRIMARY KEY (`EmployeeID`),
   UNIQUE KEY `CustomerID` (`EmployeeID`),
   UNIQUE KEY `EmployeeID` (`EmployeeID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `employee`
 --
 
 INSERT INTO `employee` (`EmployeeID`, `Phone`, `Fax`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `Salary`, `CompanyID`, `ProjectID`, `Developer`, `Manager`, `Architect`) VALUES
-(1, '817-308-2582', '', 'Dan', 'Lain', '1003 Cooper Square Circle', 'Arlington', 'Te', '76013', 'danlain@live.com', '0.00', 1, 0, 0, 0, 0),
+(1, '817-308-2582', '', 'Dan', 'Lain', '1003 Cooper Square Circle', 'Arlington', 'Te', '76013', 'danlain@live.com', '0.00', 1, 12, 0, 0, 0),
 (3, '555-555-5555', '', 'Richard', 'Sherrill', '1313', 'Arlington', 'TX', '76012', 'richardzsherrill@yahoo.com', '0.00', 1, 0, 0, 0, 0),
 (4, '682-555-1111', '', 'john', 'john', '12', 'Here', 'HI', '43433', 'john@live.com', '0.00', 1, 0, 0, 1, 0),
-(5, '1234561234', '682453124', 'Jon', 'Snow', '123', 'The', 'My', '71234', 'WhiteWalker@MiddleEarth.com', '0.00', 1, 0, 0, 0, 0);
+(5, '1234561234', '682453124', 'Jon', 'Snow', '123', 'The', 'My', '71234', 'WhiteWalker@MiddleEarth.com', '0.00', 1, 0, 0, 0, 0),
+(21, '', '', 'Dan', 'Lain', '', '', '', '', 'daniel.lain@mavs.uta.edu', '0.00', 0, 13, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -97,14 +95,21 @@ INSERT INTO `employee` (`EmployeeID`, `Phone`, `Fax`, `FirstName`, `LastName`, `
 -- Table structure for table `epic`
 --
 
-DROP TABLE IF EXISTS `epic`;
 CREATE TABLE IF NOT EXISTS `epic` (
   `EpicID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `ProjectID` bigint(20) NOT NULL,
   `Name` varchar(200) NOT NULL,
   `Description` longtext NOT NULL,
   UNIQUE KEY `EpicID` (`EpicID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `epic`
+--
+
+INSERT INTO `epic` (`EpicID`, `ProjectID`, `Name`, `Description`) VALUES
+(1, 13, 'Dan Test12', 'I hope this will be a good epic buy gollyu'),
+(2, 13, 'Dan Test', 'Test Story 1');
 
 -- --------------------------------------------------------
 
@@ -112,7 +117,6 @@ CREATE TABLE IF NOT EXISTS `epic` (
 -- Table structure for table `login`
 --
 
-DROP TABLE IF EXISTS `login`;
 CREATE TABLE IF NOT EXISTS `login` (
   `EmployeeID` bigint(20) NOT NULL,
   `UserName` varchar(255) NOT NULL,
@@ -131,7 +135,8 @@ INSERT INTO `login` (`EmployeeID`, `UserName`, `Password`, `Admin`, `Locked`) VA
 (1, 'danlain@live.com', 'damn', 1, 0),
 (3, 'richardzsherrill@yahoo.com', '1Richard', 0, 0),
 (4, 'john@live.com', 'damn', 0, 0),
-(5, 'WhiteWalker@MiddleEarth.com', 'Iamatest1', 0, 0);
+(5, 'WhiteWalker@MiddleEarth.com', 'Iamatest1', 0, 0),
+(21, 'daniel.lain@mavs.uta.edu', 'damn', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -139,7 +144,6 @@ INSERT INTO `login` (`EmployeeID`, `UserName`, `Password`, `Admin`, `Locked`) VA
 -- Table structure for table `project`
 --
 
-DROP TABLE IF EXISTS `project`;
 CREATE TABLE IF NOT EXISTS `project` (
   `ProjectID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `ProjectName` varchar(20) NOT NULL,
@@ -149,8 +153,9 @@ CREATE TABLE IF NOT EXISTS `project` (
   `BudgetCurancy` decimal(20,2) NOT NULL,
   `Manager` bigint(20) NOT NULL,
   PRIMARY KEY (`ProjectID`),
-  UNIQUE KEY `ProjectID` (`ProjectID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  UNIQUE KEY `ProjectID` (`ProjectID`),
+  UNIQUE KEY `ProjectName` (`ProjectName`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `project`
@@ -158,7 +163,14 @@ CREATE TABLE IF NOT EXISTS `project` (
 
 INSERT INTO `project` (`ProjectID`, `ProjectName`, `TargetStartDate`, `TargetEndDate`, `BudgetDays`, `BudgetCurancy`, `Manager`) VALUES
 (1, 'Test', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0.00', 0),
-(2, 'test2', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0.00', 0);
+(2, 'test2', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0.00', 0),
+(3, 'New Project', '1999-01-01 00:00:00', '2013-10-31 00:00:00', 12202, '120000.00', 1),
+(5, 'New Project2', '1999-01-01 00:00:00', '2013-10-31 00:00:00', 12498, '12409.00', 1),
+(6, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0.00', 1),
+(7, 'New Project3', '1999-01-01 00:00:00', '2013-10-31 00:00:00', 12202, '120000.00', 1),
+(11, 'New Project4', '1999-01-01 00:00:00', '2013-10-31 00:00:00', 12202, '120000.00', 1),
+(12, 'New Project5', '1999-01-01 00:00:00', '2013-10-31 00:00:00', 12202, '120000.00', 1),
+(13, 'Dan Test', '1999-01-01 00:00:00', '0000-00-00 00:00:00', 0, '0.00', 21);
 
 -- --------------------------------------------------------
 
@@ -166,14 +178,23 @@ INSERT INTO `project` (`ProjectID`, `ProjectName`, `TargetStartDate`, `TargetEnd
 -- Table structure for table `sprint`
 --
 
-DROP TABLE IF EXISTS `sprint`;
 CREATE TABLE IF NOT EXISTS `sprint` (
+  `SprintID` int(11) NOT NULL AUTO_INCREMENT,
   `ProjectID` int(11) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `StartDate` date NOT NULL,
   `EndDate` date NOT NULL,
-  `InitialStoryPoints` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `InitialStoryPoints` int(11) NOT NULL,
+  `Locked` int(11) NOT NULL,
+  PRIMARY KEY (`SprintID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `sprint`
+--
+
+INSERT INTO `sprint` (`SprintID`, `ProjectID`, `Name`, `StartDate`, `EndDate`, `InitialStoryPoints`, `Locked`) VALUES
+(1, 13, 'Version 1.0', '2013-10-28', '2013-11-08', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -181,7 +202,6 @@ CREATE TABLE IF NOT EXISTS `sprint` (
 -- Table structure for table `story`
 --
 
-DROP TABLE IF EXISTS `story`;
 CREATE TABLE IF NOT EXISTS `story` (
   `StoryID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `EpicID` int(11) NOT NULL,
@@ -192,9 +212,20 @@ CREATE TABLE IF NOT EXISTS `story` (
   `WorkedDays` int(11) NOT NULL,
   `RemainingDays` int(11) NOT NULL,
   `StoryPoints` int(11) NOT NULL,
+  `SprintID` int(11) NOT NULL,
   PRIMARY KEY (`StoryID`),
   UNIQUE KEY `StoryID` (`StoryID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `story`
+--
+
+INSERT INTO `story` (`StoryID`, `EpicID`, `EmployeeID`, `Name`, `Description`, `PlannedDays`, `WorkedDays`, `RemainingDays`, `StoryPoints`, `SprintID`) VALUES
+(1, 1, 4, 'What the Fork', 'I hope this will be a good Story', 12, 1, 11, 5, 0),
+(2, 1, 1, 'Rhis should be fixed', 'I hope this will be another good Story', 13, 0, 13, 6, 0),
+(3, 1, 3, 'Test2', 'Hope this works', 13, 12, 10, 5, 0),
+(4, 2, 5, 'This is another test', 'this is amazing', 12, 1, 11, 4, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
