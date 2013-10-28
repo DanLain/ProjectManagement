@@ -119,7 +119,7 @@
 				<div class="post">
 					<h2>Project Options</h2>
 					<ul>
-						<li><a href="updateProject.php" title="Epic"><span>Add Project</span></a></li>
+						<li><a href="projectCreation.php" title="New Project"><span>Add Project</span></a></li>
 						<?php
 								$raw_results = mysql_query("SELECT * FROM project") or die(mysql_error());
 								$count = 0;

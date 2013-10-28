@@ -22,5 +22,6 @@ mysql_select_db("danlain_live");
 			if(! $retval ){
 			  die('Could not update data: ' . mysql_error());
 			}
+			header("Location: http://localhost/projectOperations.php");
 		
 		?>
