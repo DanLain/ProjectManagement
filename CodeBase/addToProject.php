@@ -58,7 +58,7 @@
 						</span></h2>
 						<div id="top-nav">
 							<ul>
-								<li class="active"><a href="flOhome.php" title="Home"><span>Home</span></a></li>
+								<li class="active"><a href="home.php" title="Home"><span>Home</span></a></li>
 								<li><!--a href="#" title="Promotions &amp; News"><span>Promotions &amp; Sales</span></a>--></li>
 								<!--<li><a href="#" title="Contact"><span>Contact</span></a></li>-->
 								
@@ -184,7 +184,7 @@
 
 		
 		if($_REQUEST['choice'] == "Later")
-		{ header("Location: http://localhost/flOhome.php");}
+		{ header("Location: http://localhost/home.php");}
 		else
 		{echo "Employee Name: <select name='EmployeeID'>";
 		$typequery="Select * from employee";

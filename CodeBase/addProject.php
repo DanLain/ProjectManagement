@@ -65,7 +65,7 @@
 						</span></h2>
 						<div id="top-nav">
 							<ul>
-								<li class="active"><a href="flOhome.php" title="Home"><span>Home</span></a></li>
+								<li class="active"><a href="home.php" title="Home"><span>Home</span></a></li>
 								<li><!--a href="#" title="Promotions &amp; News"><span>Promotions &amp; Sales</span></a>--></li>
 								<!--<li><a href="#" title="Contact"><span>Contact</span></a></li>-->
 								

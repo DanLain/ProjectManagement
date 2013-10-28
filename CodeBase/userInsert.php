@@ -133,7 +133,7 @@ if ($_SESSION['GoodReg']=="True"){
 		$_SESSION['employeeID'] = $next_employee_ID;
 		$_SESSION['User'] = $_REQUEST['Email'];
 
-		header("Location:http://localhost/flOhome.php");
+		header("Location:http://localhost/home.php");
 	}
 else if ($_SESSION['Login']=="True" && ($_SESSION['BadPassword']=="False") && $_SESSION['EmailInvalid']=="False"){
 		$update_query="UPDATE employee  
@@ -162,6 +162,6 @@ else if ($_SESSION['Login']=="True" && ($_SESSION['BadPassword']=="False") && $_
 				}
 		}
 		
-		header("Location: http://localhost/flOhome.php");
+		header("Location: http://localhost/home.php");
 	}
 ?>

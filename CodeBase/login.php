@@ -23,7 +23,7 @@ if ($check_result['Locked']==0){
 					WHERE login.UserName = '$_REQUEST[Email]'";
 					mysql_query($update_query);
 			}
-			header("Location: http://localhost/flohome.php");		
+			header("Location: http://localhost/home.php");		
 		}	
 		else{
 			$_SESSION['adminLogin'] = ( $check_result['Admin']==0 ? "False":"True");
@@ -62,10 +62,10 @@ if ($check_result['Locked']==0){
 
 			if(isset($_SESSION['ReadyToCheckout'])){
 				if($_SESSION['ReadyToCheckout'] =="True")header("Location: http://checkout.php");
-				else header("Location:http://localhost/flohome.php");
+				else header("Location:http://localhost/home.php");
 				}
 			else {
-				header("Location:http://localhost/flohome.php");		
+				header("Location:http://localhost/home.php");		
 				}
 		}
 	}
@@ -73,7 +73,7 @@ else {
 		$_SESSION['Locked'] = "True";
 		$_SESSION['BadLogin'] = $_REQUEST['Email'];
 		$_SESSION['Email'] = $_REQUEST['Email'];
-		header("http://localhost/flohome.php");
+		header("http://localhost/home.php");
 	}
 ?>
 

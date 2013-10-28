@@ -35,7 +35,7 @@ if(!isset($mysqlconnect)){
 			mysql_query($insertQuery);
 		
 			$_SESSION['sameNameSprint'] = "False";
-			header("Location: http://localhost/flOhome.php");
+			header("Location: http://localhost/home.php");
 		}
 		
 ?>

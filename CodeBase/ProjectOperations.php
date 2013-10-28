@@ -67,7 +67,7 @@
 						</span></h2>
 						<div id="top-nav">
 							<ul>
-								<li class="active"><a href="flOhome.php" title="Home"><span>Home</span></a></li>
+								<li class="active"><a href="home.php" title="Home"><span>Home</span></a></li>
 							</ul>
 						</div>
 						<div class="cl">&nbsp;</div>
