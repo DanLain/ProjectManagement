@@ -130,6 +130,7 @@
 								$mysqlquery1="Select * from sprint where SprintID = '$_GET[SprintID]'";
 								$result1=mysql_query($mysqlquery1);
 								while ($row=mysql_fetch_array($result1)){
+										$SprintID = $row['SprintID'];
 										$ProjectID = $row['ProjectID'];
 										$Name = $row['Name'];
 										$StartDate = $row['StartDate'];
@@ -137,6 +138,7 @@
 										$InitialStoryPoints = $row['InitialStoryPoints'];
 										$Locked = $row['Locked'];
 								}
+								echo "Sprint ID: <input type='text' name='SprintID' value ='".$SprintID."' readonly><br /><br />";
 								echo "Projetc Name: <select name='ProjectID'>";
 								$typequery="Select * from project where Manager = '$_SESSION[EmployeeID]'";
 								$result=mysql_query($typequery);

@@ -234,7 +234,7 @@
 					
 					echo'<tr>';
 					echo"<td><a href=addProject.php?ProjectID=".$row['ProjectID']." title=";
-					echo $row['ProjectIDID'];
+					echo $row['ProjectID'];
 					echo '">';
 					echo $row['ProjectID'];
 					echo '</a></td>';

@@ -8,7 +8,7 @@ mysql_select_db("danlain_live");
 
 if(strlen($_REQUEST['Name'])<1){header("Location: http://localhost/createSprint.php");}
 else{
-	if(isset($_GET['SprintID'])){
+	if(isset($_REQUEST['SprintID'])){
 			$update_query="UPDATE sprint SET 
 					sprint.Name = '$_REQUEST[Name]',
 					sprint.ProjectID = '$_REQUEST[ProjectID]',

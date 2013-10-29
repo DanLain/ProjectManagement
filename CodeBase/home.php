@@ -215,7 +215,7 @@
 										{
 											//output
 											echo "<li>";
-											echo "<a href='projectDetails.php?varname=".$row_project['ProjectID']."' title=";
+											echo "<a href='createProject.php?ProjectID=".$row_project['ProjectID']."' title=";
 											echo "Project Link";
 											echo "><img src=";
 											echo "images/";
