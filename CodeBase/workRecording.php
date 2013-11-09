@@ -62,7 +62,7 @@
 						</span></h2>
 						<div id="top-nav">
 							<ul>
-								<li class="active"><a href="flOhome.php" title="Home"><span>Home</span></a></li>
+								<li class="active"><a href="home.php" title="Home"><span>Home</span></a></li>
 								<li><!--a href="#" title="Promotions &amp; News"><span>Promotions &amp; Sales</span></a>--></li>
 								<!--<li><a href="#" title="Contact"><span>Contact</span></a></li>-->
 								
@@ -264,7 +264,7 @@
 						echo "<br><br><a href='workRecording.php' title='home'> Select Story </a>";
 						
 					}
-					echo "<br><a href='flOhome.php' title='home'> Home </a>";
+					echo "<br><a href='home.php' title='home'> Home </a>";
 					?>
 					<!--Hours: <input type="text" name="hours"  ><br><br>
 					<!--Start Date: <input type="text" name="startDate" id="calendar" />    
