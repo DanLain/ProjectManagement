@@ -171,6 +171,7 @@
 							{
 								echo "<br /><a href='ProjectOperations.php' title='Manage Project'>Manage Project</a></h1>";
 							}
+							echo "<a href='workRecording.php' title='Manage Hours'>Manage Hours</a><br>";
 						}
 						?>					
 					</div>
