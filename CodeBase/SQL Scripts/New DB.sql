@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2013 at 04:30 AM
+-- Generation Time: Nov 10, 2013 at 06:14 AM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -16,11 +16,11 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-DROP DATABASE `danlain_live`;
-
 --
 -- Database: `danlain_live`
 --
+DROP DATABASE `danlain_live`;
+
 CREATE DATABASE IF NOT EXISTS `danlain_live` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `danlain_live`;
 
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `sprint` (
 
 INSERT INTO `sprint` (`SprintID`, `ProjectID`, `Name`, `StartDate`, `EndDate`, `InitialStoryPoints`, `Locked`) VALUES
 (1, 15, 'Version 1.0', '2013-10-28', '2013-11-08', 0, 0),
-(2, 13, 'Version 2.0', '2013-10-29', '2013-10-31', 0, 0);
+(2, 13, 'Version 2.0', '2013-10-29', '2013-10-31', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -220,9 +220,9 @@ CREATE TABLE IF NOT EXISTS `story` (
 --
 
 INSERT INTO `story` (`StoryID`, `EpicID`, `EmployeeID`, `Name`, `Description`, `PlannedDays`, `WorkedDays`, `RemainingDays`, `StoryPoints`, `SprintID`) VALUES
-(1, 1, 4, 'What the Fork', 'I hope this will be a good Story', 12, 1, 11, 5, 0),
-(2, 1, 1, 'Rhis should be fixed', 'I hope this will be another good Story', 13, 0, 13, 6, 0),
-(3, 1, 3, 'Test2', 'Hope this works', 13, 12, 10, 5, 0),
+(1, 1, 4, 'What the Fork', 'I hope this will be a good Story', 12, 1, 11, 5, 1),
+(2, 1, 1, 'Rhis should be fixed', 'I hope this will be another good Story', 13, 0, 13, 6, 2),
+(3, 1, 3, 'Test2', 'Hope this works', 13, 12, 10, 5, 1),
 (4, 2, 5, 'This is another test', 'this is amazing', 12, 1, 11, 4, 0),
 (5, 3, 5, 'New story', 'Do stuff', 1, 0, 1, 2, 0);
 
@@ -235,6 +235,7 @@ INSERT INTO `story` (`StoryID`, `EpicID`, `EmployeeID`, `Name`, `Description`, `
 CREATE TABLE IF NOT EXISTS `work` (
   `WorkID` int(11) NOT NULL AUTO_INCREMENT,
   `SprintID` int(11) NOT NULL,
+  `StroyID` int(11) NOT NULL,
   `EmployeeID` int(11) NOT NULL,
   `HoursWorks` int(11) NOT NULL,
   PRIMARY KEY (`WorkID`)
