@@ -307,8 +307,7 @@
 					echo'</tr>';
 					
 					while ($row=mysql_fetch_array($raw_results)){
-						$sprint = $row['ProjectID'].$row['Name'];
-						$story_result = mysql_query("SELECT * FROM story where story.SprintID = '$sprint'") or die(mysql_error());
+						$story_result = mysql_query("SELECT * FROM story where story.SprintID = '$row[SprintID]'") or die(mysql_error());
 						
 						$storyPoints = 0;
 						while($row3=mysql_fetch_array($story_result)){
@@ -323,7 +322,9 @@
 						echo'<td>'.$row['InitialStoryPoints'].'</td>';
 						echo'<td>'.($row['Locked'] == 1 ?'Locked':'').'</td>';
 						echo'<td>'.$storyPoints.'</td>';
+						echo"<td><a href='projectOperations.php".(!(isset($_GET['SprintID']) && ($row['SprintID'] == $_GET['SprintID'])) ? "?SprintID=".$row['SprintID']."' title='Show Stories'>Show Stories" : "' title='Hide Stories'>Hide Stories")."</a></td>";
 						echo'</tr>';
+						
 					}
 					echo'</table>';}
 				

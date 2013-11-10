@@ -122,7 +122,7 @@
 					echo (isset($_GET['SprintID'])?'Update Sprint':'Add Sprint');
 					?></h2>
 					<?php 
-					echo "<form action='addSprint.php".(isset($_GET['SprintID'])? "?SprintID='".$_GET['SprintID']: "")."' method='post'>";
+					echo "<form action='addSprint.php' method='post'>";
 					?>
 
 						<?php
@@ -140,16 +140,15 @@
 								}
 								echo "Sprint ID: <input type='text' name='SprintID' value ='".$SprintID."' readonly><br /><br />";
 								echo "Projetc Name: <select name='ProjectID'>";
-								$typequery="Select * from project where Manager = '$_SESSION[EmployeeID]'";
-								$result=mysql_query($typequery);
-								while ($typerow=mysql_fetch_array($result)){
-									if($typerow['ProjectID'] == $ProjectID )
-										echo "<option selected='selected' value='".$typerow['ProjectID']."' >".$typerow['ProjectName']."</option>";
-									else echo "<option value='".$typerow['ProjectID']."' >".$typerow['ProjectName']."</option>";
-								}
+									$typequery="Select * from project where Manager = '$_SESSION[EmployeeID]'";
+									$result=mysql_query($typequery);
+									while ($typerow=mysql_fetch_array($result)){
+										if($typerow['ProjectID'] == $ProjectID )
+											echo "<option selected='selected' value='".$typerow['ProjectID']."' >".$typerow['ProjectName']."</option>";
+										else echo "<option value='".$typerow['ProjectID']."' >".$typerow['ProjectName']."</option>";
+									}
 								echo "</select><br /><br />";
 								echo "Name: <input type='text' name='Name' value ='".$Name."'><br /><br />";
-								echo "ProjectID: <input type='text' name='ProjectID' value ='".$ProjectID."'><br /><br />";
 								echo "StartDate: <input type='date' name='StartDate' value='".$StartDate."'><br /><br />";
 								echo "EndDate: <input type='date' name='EndDate' value='".$EndDate."'><br /><br />";
 								echo "InitialStoryPoints: <input type='text' name='InitialStoryPoints' value='".$InitialStoryPoints."' readonly><br /><br />";
@@ -158,11 +157,11 @@
 
 						else{
 								echo "Projetc Name: <select name='ProjectID'>";
-								$typequery="Select * from project where Manager = '$_SESSION[EmployeeID]'";
-								$result=mysql_query($typequery);
-								while ($typerow=mysql_fetch_array($result)){
-									echo "<option value='".$typerow['ProjectID']."' >".$typerow['ProjectName']."</option>";
-								}
+									$typequery="Select * from project where Manager = '$_SESSION[EmployeeID]'";
+									$result=mysql_query($typequery);
+									while ($typerow=mysql_fetch_array($result)){
+										echo "<option value='".$typerow['ProjectID']."' >".$typerow['ProjectName']."</option>";
+									}
 								echo "</select><br /><br />";
 								echo "Sprint Name: <input type='text' name='Name'><br /><br />";	
 								echo "StartDate: <input type='date' name='StartDate' ><br /><br />";

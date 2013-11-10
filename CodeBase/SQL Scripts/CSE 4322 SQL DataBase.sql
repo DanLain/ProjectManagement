@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2013 at 03:54 AM
+-- Generation Time: Nov 10, 2013 at 04:30 AM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -15,6 +15,8 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
+
+DROP DATABASE `danlain_live`;
 
 --
 -- Database: `danlain_live`
@@ -189,8 +191,8 @@ CREATE TABLE IF NOT EXISTS `sprint` (
 --
 
 INSERT INTO `sprint` (`SprintID`, `ProjectID`, `Name`, `StartDate`, `EndDate`, `InitialStoryPoints`, `Locked`) VALUES
-(1, 13, 'Version 1.0', '2013-10-28', '2013-11-08', 0, 0),
-(2, 14, 'Version 2.0', '2013-10-29', '2013-10-31', 0, 0);
+(1, 15, 'Version 1.0', '2013-10-28', '2013-11-08', 0, 0),
+(2, 13, 'Version 2.0', '2013-10-29', '2013-10-31', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -231,13 +233,12 @@ INSERT INTO `story` (`StoryID`, `EpicID`, `EmployeeID`, `Name`, `Description`, `
 --
 
 CREATE TABLE IF NOT EXISTS `work` (
-  `StoryID` int(11) NOT NULL,
-  `EmployeeID` int(11) NOT NULL,
+  `WorkID` int(11) NOT NULL AUTO_INCREMENT,
   `SprintID` int(11) NOT NULL,
-  `Hours` int(11) NOT NULL,
-  `WorkID` int(11) NOT NULL,
+  `EmployeeID` int(11) NOT NULL,
+  `HoursWorks` int(11) NOT NULL,
   PRIMARY KEY (`WorkID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
