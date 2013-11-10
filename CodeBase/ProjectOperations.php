@@ -286,7 +286,7 @@
 						?>
 						<li><a href="createSprint.php" title="Add Sprint"><span>Add Sprint</span></a></li>
 <?php
-        $raw_results = mysql_query("SELECT * FROM sprint") or die(mysql_error());
+        $raw_results = mysql_query("SELECT * FROM sprint s, project p where s.ProjectID = p.ProjectID") or die(mysql_error());
              
        
         if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
@@ -295,6 +295,7 @@
 					
 					echo"<table border='1'> ";
 					echo'<tr>';
+					echo'<th>Project</th>';
 					echo'<th>Name</th>';
 					echo'<th>Start Date</th>';
 					echo'<th>End Date</th>';
@@ -315,6 +316,7 @@
 						}
 						
 						echo'<tr>';
+						echo'<td>'.$row['ProjectName'].'</td>';
 						echo"<td><a href=createSprint.php?SprintID=".$row['SprintID']." title='".$row['Name']."'>".$row['Name']."</a></td>";
 						echo'<td>'.$row['StartDate'].'</td>';
 						echo'<td>'.$row['EndDate'].'</td>';

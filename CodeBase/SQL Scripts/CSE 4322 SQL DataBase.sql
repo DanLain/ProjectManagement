@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2013 at 06:45 PM
+-- Generation Time: Nov 10, 2013 at 03:54 AM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `company` (
 --
 
 INSERT INTO `company` (`CompanyID`, `BusinessName`, `Address`, `City`, `State`, `Zip`, `Phone`, `Fax`, `ContactName`) VALUES
-(1, 'This is a test', '21 Jump Street', 'Lost', 'TX', '76666', '890-555-3421', '890-555-3421', 'Sally Smith');
+(1, 'Better Software', '21 Jump Street', 'Lost', 'TX', '76666', '890-555-3421', '890-555-3421', 'Sally Smith');
 
 -- --------------------------------------------------------
 
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
 INSERT INTO `employee` (`EmployeeID`, `Phone`, `Fax`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `Salary`, `CompanyID`, `ProjectID`, `Developer`, `Manager`, `Architect`) VALUES
 (1, '817-308-2582', '', 'Dan', 'Lain', '1003 Cooper Square Circle', 'Arlington', 'Te', '76013', 'danlain@live.com', '0.00', 1, 12, 0, 0, 0),
 (3, '555-555-5555', '', 'Richard', 'Sherrill', '1313', 'Arlington', 'TX', '76012', 'richardzsherrill@yahoo.com', '0.00', 1, 0, 0, 0, 0),
-(4, '682-555-1111', '', 'john', 'john', '12', 'Here', 'HI', '43433', 'john@live.com', '0.00', 1, 0, 0, 1, 0),
+(4, '682-555-1111', '', 'john', 'john', '12', 'Here', 'HI', '43433', 'john@live.com', '0.00', 1, 15, 0, 1, 0),
 (5, '1234561234', '682453124', 'Jon', 'Snow', '123', 'The', 'My', '71234', 'WhiteWalker@MiddleEarth.com', '0.00', 1, 0, 0, 0, 0),
 (21, '', '', 'Dan', 'Lain', '', '', '', '', 'daniel.lain@mavs.uta.edu', '0.00', 0, 13, 0, 1, 0);
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `epic` (
   `Name` varchar(200) NOT NULL,
   `Description` longtext NOT NULL,
   UNIQUE KEY `EpicID` (`EpicID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `epic`
@@ -109,7 +109,8 @@ CREATE TABLE IF NOT EXISTS `epic` (
 
 INSERT INTO `epic` (`EpicID`, `ProjectID`, `Name`, `Description`) VALUES
 (1, 13, 'Dan Test12', 'I hope this will be a good epic buy gollyu'),
-(2, 13, 'Dan Test', 'Test Story 1');
+(2, 13, 'Dan Test', 'Test Story 1'),
+(3, 15, 'Design Architecture', 'comp eup with plan');
 
 -- --------------------------------------------------------
 
@@ -147,30 +148,24 @@ INSERT INTO `login` (`EmployeeID`, `UserName`, `Password`, `Admin`, `Locked`) VA
 CREATE TABLE IF NOT EXISTS `project` (
   `ProjectID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `ProjectName` varchar(20) NOT NULL,
-  `TargetStartDate` datetime NOT NULL,
-  `TargetEndDate` datetime NOT NULL,
+  `TargetStartDate` date NOT NULL,
+  `TargetEndDate` date NOT NULL,
   `BudgetDays` int(11) NOT NULL,
   `BudgetCurancy` decimal(20,2) NOT NULL,
   `Manager` bigint(20) NOT NULL,
   PRIMARY KEY (`ProjectID`),
   UNIQUE KEY `ProjectID` (`ProjectID`),
   UNIQUE KEY `ProjectName` (`ProjectName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `project`
 --
 
 INSERT INTO `project` (`ProjectID`, `ProjectName`, `TargetStartDate`, `TargetEndDate`, `BudgetDays`, `BudgetCurancy`, `Manager`) VALUES
-(1, 'Test', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0.00', 0),
-(2, 'test2', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0.00', 0),
-(3, 'New Project', '1999-01-01 00:00:00', '2013-10-31 00:00:00', 12202, '120000.00', 1),
-(5, 'New Project2', '1999-01-01 00:00:00', '2013-10-31 00:00:00', 12498, '12409.00', 1),
-(6, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, '0.00', 1),
-(7, 'New Project3', '1999-01-01 00:00:00', '2013-10-31 00:00:00', 12202, '120000.00', 1),
-(11, 'New Project4', '1999-01-01 00:00:00', '2013-10-31 00:00:00', 12202, '120000.00', 1),
-(12, 'New Project5', '1999-01-01 00:00:00', '2013-10-31 00:00:00', 12202, '120000.00', 1),
-(13, 'Dan Test', '1999-01-01 00:00:00', '0000-00-00 00:00:00', 0, '0.00', 21);
+(13, 'Dan Test', '2013-10-14', '2014-03-14', 123, '12568.00', 21),
+(14, 'Test Project 2', '2013-10-29', '2014-01-13', 132, '12390.00', 21),
+(15, 'Project 3', '2013-10-29', '2013-12-17', 15, '3000.00', 21);
 
 -- --------------------------------------------------------
 
@@ -187,14 +182,15 @@ CREATE TABLE IF NOT EXISTS `sprint` (
   `InitialStoryPoints` int(11) NOT NULL,
   `Locked` int(11) NOT NULL,
   PRIMARY KEY (`SprintID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `sprint`
 --
 
 INSERT INTO `sprint` (`SprintID`, `ProjectID`, `Name`, `StartDate`, `EndDate`, `InitialStoryPoints`, `Locked`) VALUES
-(1, 13, 'Version 1.0', '2013-10-28', '2013-11-08', 0, 0);
+(1, 13, 'Version 1.0', '2013-10-28', '2013-11-08', 0, 0),
+(2, 14, 'Version 2.0', '2013-10-29', '2013-10-31', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -215,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `story` (
   `SprintID` int(11) NOT NULL,
   PRIMARY KEY (`StoryID`),
   UNIQUE KEY `StoryID` (`StoryID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `story`
@@ -225,7 +221,23 @@ INSERT INTO `story` (`StoryID`, `EpicID`, `EmployeeID`, `Name`, `Description`, `
 (1, 1, 4, 'What the Fork', 'I hope this will be a good Story', 12, 1, 11, 5, 0),
 (2, 1, 1, 'Rhis should be fixed', 'I hope this will be another good Story', 13, 0, 13, 6, 0),
 (3, 1, 3, 'Test2', 'Hope this works', 13, 12, 10, 5, 0),
-(4, 2, 5, 'This is another test', 'this is amazing', 12, 1, 11, 4, 0);
+(4, 2, 5, 'This is another test', 'this is amazing', 12, 1, 11, 4, 0),
+(5, 3, 5, 'New story', 'Do stuff', 1, 0, 1, 2, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `work`
+--
+
+CREATE TABLE IF NOT EXISTS `work` (
+  `StoryID` int(11) NOT NULL,
+  `EmployeeID` int(11) NOT NULL,
+  `SprintID` int(11) NOT NULL,
+  `Hours` int(11) NOT NULL,
+  `WorkID` int(11) NOT NULL,
+  PRIMARY KEY (`WorkID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
