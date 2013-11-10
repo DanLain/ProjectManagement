@@ -166,6 +166,7 @@
 						?>
 						<input type="submit">
 					</form>
+					<a href="projectOperations.php" title="Return to Project Operations"><span>Project Operations</span></a>
 					<div class="cl">&nbsp;</div>
 				</div>
 			</div>

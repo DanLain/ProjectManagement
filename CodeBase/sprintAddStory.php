@@ -117,68 +117,129 @@
 			<!-- Begin Content -->
 			<div id="content">
 				<div class="post">
-					<h2>
-					<?php
-					echo (isset($_GET['SprintID'])?'Update Sprint':'Add Sprint');
-					?></h2>
-					<?php 
-					echo "<form action='addSprint.php' method='post'>";
-					?>
-
+					<h2>Add/Remove Stories form Sprint</h2>
+					<ul>
+						<li><a href="createSprint.php" title="Add Sprint"><span>Add Sprint</span></a></li>
 						<?php
-						if(isset($_GET['SprintID'])){
-								$mysqlquery1="Select * from sprint where SprintID = '$_GET[SprintID]'";
-								$result1=mysql_query($mysqlquery1);
-								while ($row=mysql_fetch_array($result1)){
-										$SprintID = $row['SprintID'];
-										$ProjectID = $row['ProjectID'];
-										$Name = $row['Name'];
-										$StartDate = $row['StartDate'];
-										$EndDate = $row['EndDate'];
-										$InitialStoryPoints = $row['InitialStoryPoints'];
-										$Locked = $row['Locked'];
-								}
-								echo "Sprint ID: <input type='text' name='SprintID' value ='".$SprintID."' readonly><br /><br />";
-								echo "Projetc Name: <select name='ProjectID'>";
-									$typequery="Select * from project where Manager = '$_SESSION[EmployeeID]'";
-									$result=mysql_query($typequery);
-									while ($typerow=mysql_fetch_array($result)){
-										if($typerow['ProjectID'] == $ProjectID )
-											echo "<option selected='selected' value='".$typerow['ProjectID']."' >".$typerow['ProjectName']."</option>";
-										else echo "<option value='".$typerow['ProjectID']."' >".$typerow['ProjectName']."</option>";
+								$raw_results = mysql_query("SELECT * FROM sprint s, project p where s.SprintID = '$_REQUEST[SprintID]' and s.ProjectID = p.ProjectID order by p.ProjectName, s.Name") or die(mysql_error());
+									 
+								$_SESSION['SprintIDForAddRemove'] = $_REQUEST['SprintID'];
+								if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
+									echo"<table border='1'> ";
+									echo'<tr>';
+									echo'<th>Project</th>';
+									echo'<th>Name</th>';
+									echo'<th>Start Date</th>';
+									echo'<th>End Date</th>';
+									echo'<th>Initial Story Points</th>';
+									echo'<th>Locked</th>';
+									echo'<th>Current Story Points</th>';
+									echo'<th>Lock Story Points</th>';
+									echo'</tr>';
+									
+									while ($row=mysql_fetch_array($raw_results)){
+										$story_result = mysql_query("SELECT * FROM story where story.SprintID = '$row[SprintID]'") or die(mysql_error());
+										
+										$storyPoints = 0;
+										while($row3=mysql_fetch_array($story_result)){
+											$storyPoints += $row3['StoryPoints'];
+										}
+										
+										echo'<tr>';
+										echo'<td>'.$row['ProjectName'].'</td>';
+										echo"<td><a href=createSprint.php?SprintID=".$row['SprintID']." title='".$row['Name']."'>".$row['Name']."</a></td>";
+										echo'<td>'.$row['StartDate'].'</td>';
+										echo'<td>'.$row['EndDate'].'</td>';
+										echo'<td>'.$row['InitialStoryPoints'].'</td>';
+										echo'<td>'.($row['Locked'] == 1 ?'Locked':'').'</td>';
+										echo'<td>'.$storyPoints.'</td>';
+										echo "<td><a href='lockSprint.php?SprintID=".$row['SprintID'].($row['Locked'] ==0? "' title='Start Sprint ".$row['Name']."'>Start</a></td>" : "' title='Reset Sprint ".$row['Name']."'>Reset</a></td>");
+										echo'</tr>';
+										$detailQuery="Select * from story WHERE story.SprintID = '".$row['SprintID']."'";
+										$detailResult=mysql_query($detailQuery);					
+										
+										if(mysql_num_rows($detailResult)>0){
+											echo '</table>';
+											echo ' <h2>Stories for '.$row['Name'].'</h2>';
+											echo '<table border=1 style="margin-left:12px;">
+											<tr>
+											<th>Story ID</th>
+											<th>Name</th>
+											<th>Description</th>
+											<th>Planned Days</th>
+											<th>Worked Days</th>
+											<th>Remaining Days</th>
+											<th>Story Points</th>
+											<th>Employee ID</th>
+											<th>Remove from Sprint</th>
+											</tr>';
+											
+											while($row2=mysql_fetch_array($detailResult)){
+												echo "<tr><td><a href='createStory.php?StoryID=".$row2['StoryID']."' title='Edit ".$row2['Name']."'>".$row2['StoryID']."</a></td>";
+												echo "<td>".$row2['Name']."</td>";
+												echo "<td>".$row2['Description']."</td>";
+												echo "<td>".$row2['PlannedDays']."</td>";
+												echo "<td>".$row2['WorkedDays']."</td>";
+												echo "<td>".$row2['RemainingDays']."</td>";
+												echo "<td>".$row2['StoryPoints']."</td>";
+												echo "<td>".$row2['EmployeeID']."</td>";
+												echo "<td><a href='addRemoveFromSprint.php?StoryID=".$row2['StoryID']."' title='Remove ".$row2['Name']."'>Remove</a></td>";
+												echo '</tr>';
+												
+											}
+											echo '</table>';
+										}
 									}
-								echo "</select><br /><br />";
-								echo "Name: <input type='text' name='Name' value ='".$Name."'><br /><br />";
-								echo "StartDate: <input type='date' name='StartDate' value='".$StartDate."'><br /><br />";
-								echo "EndDate: <input type='date' name='EndDate' value='".$EndDate."'><br /><br />";
-								echo "InitialStoryPoints: <input type='text' name='InitialStoryPoints' value='".$InitialStoryPoints."' readonly><br /><br />";
-								echo "Locked: <input type='text' name='Locked' value='".($Locked==1 ? "Locked" :"")."' readonly><br /><br />";
-							}	
-
-						else{
-								echo "Projetc Name: <select name='ProjectID'>";
-									$typequery="Select * from project where Manager = '$_SESSION[EmployeeID]'";
-									$result=mysql_query($typequery);
-									while ($typerow=mysql_fetch_array($result)){
-										echo "<option value='".$typerow['ProjectID']."' >".$typerow['ProjectName']."</option>";
-									}
-								echo "</select><br /><br />";
-								echo "Sprint Name: <input type='text' name='Name'><br /><br />";	
-								echo "StartDate: <input type='date' name='StartDate' ><br /><br />";
-								echo "EndDate: <input type='date' name='EndDate'><br /><br />";
-							}
+								}																		
+								echo'</table>';
+								echo '</br></br></br></br></br>';
+								
+								$detailQuery="Select * from story WHERE story.SprintID = '".$row['SprintID']."'";
+										$detailResult=mysql_query($detailQuery);					
+										
+										if(mysql_num_rows($detailResult)>0){
+											echo '</table>';
+											echo ' <h2>Available Stories</h2>';
+											echo '<table border=1 style="margin-left:12px;">
+											<tr>
+											<th>Story ID</th>
+											<th>Name</th>
+											<th>Description</th>
+											<th>Planned Days</th>
+											<th>Worked Days</th>
+											<th>Remaining Days</th>
+											<th>Story Points</th>
+											<th>Employee ID</th>
+											<th>Add to Sprint</th>
+											</tr>';
+											
+											while($row2=mysql_fetch_array($detailResult)){
+												echo "<tr><td><a href='createStory.php?StoryID=".$row2['StoryID']."' title='Edit ".$row2['Name']."'>".$row2['StoryID']."</a></td>";
+												echo "<td>".$row2['Name']."</td>";
+												echo "<td>".$row2['Description']."</td>";
+												echo "<td>".$row2['PlannedDays']."</td>";
+												echo "<td>".$row2['WorkedDays']."</td>";
+												echo "<td>".$row2['RemainingDays']."</td>";
+												echo "<td>".$row2['StoryPoints']."</td>";
+												echo "<td>".$row2['EmployeeID']."</td>";
+												echo "<td><a href='addRemoveFromSprint.php?StoryID=".$row2['StoryID']."' title='Add ".$row2['Name']." to sprint'>Add</a></td>";
+												echo '</tr>';
+												
+											}
+											echo '</table>';
+								
+										}
+								echo '<li><a href="projectOperations.php" title="Return to Project Operations"><span>Project Operations</span></a></li>';
 						?>
-						<input type="submit">
-					</form>
-					<a href="projectOperations.php" title="Return to Project Operations"><span>Project Operations</span></a>
+					</ul>
+					
 					<div class="cl">&nbsp;</div>
 				</div>
 			</div>
 			<!-- End Content -->
 		
 			<div class="cl">&nbsp;</div>
-			
-			<!-- Begin Projects -->
+						<!-- Begin Projects -->
 			<div id="project-slider">
 				
 				<?php

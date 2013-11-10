@@ -286,13 +286,14 @@
 						?>
 						<li><a href="createSprint.php" title="Add Sprint"><span>Add Sprint</span></a></li>
 <?php
-        $raw_results = mysql_query("SELECT * FROM sprint s, project p where s.ProjectID = p.ProjectID") or die(mysql_error());
+        $raw_results = mysql_query("SELECT * FROM sprint s, project p where s.ProjectID = p.ProjectID order by p.ProjectName, s.Name") or die(mysql_error());
              
        
         if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
            									
 			if (mysql_num_rows($raw_results)>0){
-					
+					$rows = mysql_num_rows($raw_results);
+					$count = 0;
 					echo"<table border='1'> ";
 					echo'<tr>';
 					echo'<th>Project</th>';
@@ -313,7 +314,7 @@
 						while($row3=mysql_fetch_array($story_result)){
 							$storyPoints += $row3['StoryPoints'];
 						}
-						
+						$count += 1;
 						echo'<tr>';
 						echo'<td>'.$row['ProjectName'].'</td>';
 						echo"<td><a href=createSprint.php?SprintID=".$row['SprintID']." title='".$row['Name']."'>".$row['Name']."</a></td>";
@@ -323,7 +324,71 @@
 						echo'<td>'.($row['Locked'] == 1 ?'Locked':'').'</td>';
 						echo'<td>'.$storyPoints.'</td>';
 						echo"<td><a href='projectOperations.php".(!(isset($_GET['SprintID']) && ($row['SprintID'] == $_GET['SprintID'])) ? "?SprintID=".$row['SprintID']."' title='Show Stories'>Show Stories" : "' title='Hide Stories'>Hide Stories")."</a></td>";
+						echo"<td><a href='sprintAddStory.php?SprintID=".$row['SprintID']."' title='Add Story to ".$row['Name']."'>Add Story</a></td>";
 						echo'</tr>';
+						if(isset($_GET['SprintID']) && ($row['SprintID'] == $_GET['SprintID'])){
+													$detailQuery="Select * from story WHERE story.SprintID = '".$row['SprintID']."'";
+													$detailResult=mysql_query($detailQuery);					
+													
+													if(mysql_num_rows($detailResult)>0){
+														echo '</table>';
+														echo ' <h2>Stories for '.$row['Name'].'</h2>';
+														echo '<table border=1 style="margin-left:12px;">
+														<tr>
+														<th>Story ID</th>
+														<th>Name</th>
+														<th>Description</th>
+														<th>Planned Days</th>
+														<th>Worked Days</th>
+														<th>Remaining Days</th>
+														<th>Story Points</th>
+														<th>Employee ID</th>
+														</tr>';
+														
+														while($row2=mysql_fetch_array($detailResult)){
+															echo "<tr><td><a href='createStory.php?StoryID=".$row2['StoryID']."' title='Edit ".$row2['Name']."'>".$row2['StoryID']."</a></td>";
+															echo "<td>".$row2['Name']."</td>";
+															echo "<td>".$row2['Description']."</td>";
+															echo "<td>".$row2['PlannedDays']."</td>";
+															echo "<td>".$row2['WorkedDays']."</td>";
+															echo "<td>".$row2['RemainingDays']."</td>";
+															echo "<td>".$row2['StoryPoints']."</td>";
+															echo "<td>".$row2['EmployeeID']."</td>";
+															
+														}
+														echo '</table>';
+														if($rows > $count){
+															echo"<table border='1'> ";
+															echo'<tr>';
+															echo'<th>Project</th>';
+															echo'<th>Name</th>';
+															echo'<th>Start Date</th>';
+															echo'<th>End Date</th>';
+															echo'<th>Initial Story Points</th>';
+															echo'<th>Locked</th>';
+															echo'<th>Current Story Points</th>';
+															echo'<th>Show Stories</th>';
+															echo'<th>Add Stories</th>';
+															echo '</tr>';
+														}
+													}
+													else{
+														echo '<tr><td></td><td></td><td></td><td></td><td><h3>There are no Stories for '.$row['Name'].'</h3></td><td></td><td></td><td></td><td></td></tr>';
+														if($rows > $count){
+															echo'<tr>';
+															echo'<th>Project</th>';
+															echo'<th>Name</th>';
+															echo'<th>Start Date</th>';
+															echo'<th>End Date</th>';
+															echo'<th>Initial Story Points</th>';
+															echo'<th>Locked</th>';
+															echo'<th>Current Story Points</th>';
+															echo'<th>Show Stories</th>';
+															echo'<th>Add Stories</th>';
+															echo '</tr>';
+														}
+													}
+												}
 						
 					}
 					echo'</table>';}
