@@ -15,7 +15,7 @@ echo "<table border ='1' width='10000'>";
 echo "<tr>";
 while($test){
 	echo "<th>".date('m-d-y',strtotime($startDate.'+ '.$i.' day'))."</th>";
-	if (strtotime($startDate.'+ '.$i.' day') = strtotime($endDate) ) $test = false;
+	if (strtotime($startDate.'+ '.$i.' day') >= strtotime($endDate) ) $test = false;
 	$i++;
 }
 echo "</tr>";

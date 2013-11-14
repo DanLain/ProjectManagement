@@ -138,7 +138,8 @@
 											echo'<th>BudgetDays</th>';
 											echo'<th>BudgetCurancy</th>';
 											echo'<th>Manager</th>';
-											
+											echo'<th>View Gantt</th>';
+											echo'</tr>';
 											while ($row=mysql_fetch_array($raw_results)){
 												$story_results = mysql_query("SELECT * FROM project WHERE ProjectID = '$row[ProjectID]'") or die(mysql_error());
 										
@@ -153,7 +154,7 @@
 												echo"<td>".$row['BudgetDays']."</td>";
 												echo"<td>".$row['BudgetCurancy']."</td>";
 												echo"<td>".$row['Manager']."</td>";
-												
+												echo "<td><a href='gant.php?ProjectID=".$row['ProjectID']."' title='View Gantt for ".$row['ProjectName']."'>Gantt View</a></td>";
 												echo'</tr>';
 												
 												
