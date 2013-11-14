@@ -187,7 +187,8 @@
 											echo'<th>Days Worked</th>';
 											echo'<th>Days Remaining</th>';
 											echo'<th>Story Points</th>';
-											echo'<th>Add Story</th></tr>';
+											echo'<th>Add Story</th>';
+											echo'<th>Completion</th></tr>';
 											while ($row=mysql_fetch_array($raw_results)){
 												$story_results = mysql_query("SELECT * FROM story WHERE story.EpicID = '$row[EpicID]'") or die(mysql_error());
 												$storyPoints = 0;
@@ -211,9 +212,10 @@
 												echo"<td>".$remainDays."</td>";
 												echo"<td>".$storyPoints."</td>";
 												echo"<td><a href='createStory.php?EpicID=".$row['EpicID']."' title='Add Story to ".$row['Name']."'>Add Story</a></td>";
+												echo"<td><meter value=".(1-($remainDays/$planDays)).">".(1-($remainDays/$planDays))."</meter></td>";
 												echo'</tr>';
 												if(isset($_GET['EpicID']) && ($row['EpicID'] == $_GET['EpicID'])){
-													$detailQuery="Select * from story WHERE story.EpicID = '".$row['EpicID']."'";
+													$detailQuery="Select * from story s, employee e WHERE s.EpicID = '".$row['EpicID']."' and e.EmployeeID = s.EmployeeID";
 													$detailResult=mysql_query($detailQuery);					
 													
 													if(mysql_num_rows($detailResult)>0){
@@ -228,7 +230,7 @@
 														<th>Worked Days</th>
 														<th>Remaining Days</th>
 														<th>Story Points</th>
-														<th>Employee ID</th>
+														<th>Employee</th>
 														</tr>';
 														
 														while($row2=mysql_fetch_array($detailResult)){
@@ -239,7 +241,8 @@
 															echo "<td>".$row2['WorkedDays']."</td>";
 															echo "<td>".$row2['RemainingDays']."</td>";
 															echo "<td>".$row2['StoryPoints']."</td>";
-															echo "<td>".$row2['EmployeeID']."</td>";
+															echo "<td>".$row2['FirstName']." ".$row2['LastName']."</td>";
+															echo"<td><meter value=".(1-($row2['RemainingDays']/$row2['PlannedDays'])).">".(1-($row2['RemainingDays']/$row2['PlannedDays']))."</meter></td></tr>";
 															
 														}
 														echo '</table>';
@@ -305,14 +308,18 @@
 					echo'<th>Current Story Points</th>';
 					echo'<th>Show Stories</th>';
 					echo'<th>Add Stories</th>';
+					echo '<th>Completion</th>';
 					echo'</tr>';
 					
 					while ($row=mysql_fetch_array($raw_results)){
 						$story_result = mysql_query("SELECT * FROM story where story.SprintID = '$row[SprintID]'") or die(mysql_error());
-						
+						$remainingDays = 0;
+						$plannedDays = 0;
 						$storyPoints = 0;
 						while($row3=mysql_fetch_array($story_result)){
 							$storyPoints += $row3['StoryPoints'];
+							$remainingDays +=$row3['RemainingDays'];
+							$plannedDays +=$row3['PlannedDays'];
 						}
 						$count += 1;
 						echo'<tr>';
@@ -325,9 +332,10 @@
 						echo'<td>'.$storyPoints.'</td>';
 						echo"<td><a href='projectOperations.php".(!(isset($_GET['SprintID']) && ($row['SprintID'] == $_GET['SprintID'])) ? "?SprintID=".$row['SprintID']."' title='Show Stories'>Show Stories" : "' title='Hide Stories'>Hide Stories")."</a></td>";
 						echo"<td><a href='sprintAddStory.php?SprintID=".$row['SprintID']."' title='Add Story to ".$row['Name']."'>Add Story</a></td>";
+						echo"<td><meter value=".(1-($remainingDays/$plannedDays)).">".(1-($remainingDays/$plannedDays))."</meter></td>";
 						echo'</tr>';
 						if(isset($_GET['SprintID']) && ($row['SprintID'] == $_GET['SprintID'])){
-													$detailQuery="Select * from story WHERE story.SprintID = '".$row['SprintID']."'";
+													$detailQuery="Select * from story, employee WHERE story.SprintID = '".$row['SprintID']."' and story.EmployeeID = employee.EmployeeID";
 													$detailResult=mysql_query($detailQuery);					
 													
 													if(mysql_num_rows($detailResult)>0){
@@ -343,6 +351,7 @@
 														<th>Remaining Days</th>
 														<th>Story Points</th>
 														<th>Employee ID</th>
+														<th>Completion</th>
 														</tr>';
 														
 														while($row2=mysql_fetch_array($detailResult)){
@@ -353,7 +362,8 @@
 															echo "<td>".$row2['WorkedDays']."</td>";
 															echo "<td>".$row2['RemainingDays']."</td>";
 															echo "<td>".$row2['StoryPoints']."</td>";
-															echo "<td>".$row2['EmployeeID']."</td>";
+															echo "<td>".$row2['FirstName']." ".$row2['LastName']."</td>";
+															echo"<td><meter value=".(1-($row2['RemainingDays']/$row2['PlannedDays'])).">".(1-($row2['RemainingDays']/$row2['PlannedDays']))."</meter></td></tr>";
 															
 														}
 														echo '</table>';

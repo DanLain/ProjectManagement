@@ -232,8 +232,8 @@
 						
 						$workSqlQuery="Select * from work WHERE StoryID ='$_REQUEST[storyID]' AND EmployeeID='$_SESSION[EmployeeID]'";
 						$workResult=mysql_query($workSqlQuery);
-						
-						if(mysql_num_rows($workResult) != 0)
+						$test = ($workResult ? mysql_num_rows($workResult) : $workResult);
+						if($test) 
 						{
 							$work_row=mysql_fetch_array($workResult);
 							echo "<h2>Manage Hours</h2>";
