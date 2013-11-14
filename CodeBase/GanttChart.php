@@ -1,8 +1,10 @@
 <?php  
 
 Class GanttChart { 
+//Base code Adapted from http://www.ncbase.com/gc/?id=tut
   var $activities;  
   var $start;
+  var $project_name;
   var $startDate;
   var $endDate;  
   var $end;  
@@ -12,7 +14,8 @@ Class GanttChart {
   var $header_style_even;  
   var $column_style_odd;  
   var $column_style_even;  
-  var $activity_style;  
+  var $activity_style_complete;  
+  var $activity_style_open;
   function GanttChart ($start = 1, $end = 1, $unit = 'Days') {
 	if(!isset($mysqlconnect)){
 		$mysqlconnect=mysql_connect('localhost','danla_web','thisiscool');
@@ -23,6 +26,7 @@ Class GanttChart {
 	while($projectRow=mysql_fetch_array($project_result)){
 		$this->startDate = $projectRow['TargetStartDate'];
 		$this->endDate = $projectRow['TargetEndDate'];
+		$this->project_name = $projectRow['ProjectName'];
 	}
 	$i = 0;
 	$test = true;
@@ -40,20 +44,20 @@ Class GanttChart {
     $this->header_style_even = 'bgcolor="#f0f0f0"'; 
     $this->column_style_odd = 'bgcolor="#ffffff"';  
     $this->column_style_even = 'bgcolor="#f0f0f0"'; 
-    $this->activity_style = 'bgcolor="#d0d0d0"'; 
+    $this->activity_style_open = 'bgcolor="#d0d0d0"';
+    $this->activity_style_complete = 'bgcolor="green"';	
   } 
-  function AddActivity ($description, $start, $end, $style='') { 
-    if ($style == '') { 
-      $style = $this->activity_style; 
-    } 
+  function AddActivity ($description, $start, $end, $comp) { 
     $this->activities[] = array('start' => $start, 'end' => $end,  
-      'description' => $description, 'style' => $style); 
+      'description' => $description, 'comp'=>$comp); 
     $this->start = min($this->start, $start); 
     $this->end = max($this->end, $end); 
   } 
-  function Render ($unit_width = 50) { 
+  function Render ($unit_width = 500) { 
     $duration = $this->end - $this->start + 1; 
-    echo "<table border=0 cellspacing=0 cellpadding=0 width='10000'>\r\n"; 
+    echo "<table border=0 cellspacing=0 cellpadding=0 width='10000'>\r\n";
+	echo "<tr><th colspan=$duration {$this->header_style}>",
+		$this->project_name, "\r\n<tr>\r\n"; 
     echo "<tr><th colspan=$duration {$this->header_style}>",  
          $this->unit, "\r\n<tr>\r\n"; 
     for ($i = $this->start; $i <= $this->end; $i++) { 
@@ -67,9 +71,10 @@ Class GanttChart {
       $start = $activity['start']; 
       $end = $activity['end']; 
       $description = $activity['description']; 
-      $style = $activity['style']; 
       $before = $start;  
-      $duration = $end - $start + 1; 
+      //$duration = $end - $start + 1;
+	  $duration_comp = $activity['comp'];
+	  $duration_open = $end - $start + 1 - $activity['comp'];
       $after = $this->end - $end;  
       echo "<tr>\r\n"; 
       for ($i = $this->start; $i < $before; $i++) { 
@@ -79,16 +84,13 @@ Class GanttChart {
           echo "<td {$this->column_style_odd}>&nbsp;\r\n"; 
         }  
       } 
-      if (strlen($style) == 0) { 
-        echo "<td colspan=$duration>$description\r\n"; 
-      } else { 
-        echo "<td colspan=$duration $style>$description\r\n"; 
-      } 
-      for ($i = $before + $duration; $i <= $this->end; $i++) { 
+	  echo "<td colspan=$duration_comp {$this->activity_style_complete}>".($duration_comp > 4 ? $description:($duration_comp + $duration_open >3 ?($duration_comp > 0 ? $description: "" ): ""))."\r\n"; 
+	  echo "<td colspan=$duration_open {$this->activity_style_open}>".($duration_comp <= 4 ? $description:($duration_comp + $duration_open <=3 ?($duration_comp <= 0 ? $description: "" ): ""))."\r\n";
+      for ($i = $before + $duration_comp + $duration_open; $i <= $this->end; $i++) { 
         if ($i % 2 == 0) { 
-          echo "<td {$this->column_style_even}>&nbsp;\r\n"; 
-        } else { 
           echo "<td {$this->column_style_odd}>&nbsp;\r\n"; 
+        } else { 
+          echo "<td {$this->column_style_even}>&nbsp;\r\n"; 
         }  
       } 
     } 

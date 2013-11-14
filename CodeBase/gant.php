@@ -38,14 +38,16 @@ while ($row=mysql_fetch_array($raw_results)){
 
 	$secs = $datetime2 - $datetime1;
 	$days = $secs / 86400;
-	$G->AddActivity($row['Name'], $i, $i+$days);   
+	$G->AddActivity($row['Name'], $i, $i+$days, ($days-$remainingDays >=0 ? ($days-$remainingDays) : 0));   
 	
 }
 $G->Render();                              // Draw the chart 
 
 ?>
 
-<!--?php 
+<!--
+Base code for this section adapted from http://www.ncbase.com/gc/?id=tut
+?php 
 
 include 'GanttChart.php';              // Include the class file 
 $G = new GanttChart(1, 16, 'Months');  // Instantiate GanttChart 

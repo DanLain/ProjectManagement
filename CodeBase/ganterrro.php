@@ -1,4 +1,5 @@
 <?php
+
 if(!isset($mysqlconnect)){
 	$mysqlconnect=mysql_connect('localhost','danla_web','thisiscool');
 }
