@@ -6,7 +6,7 @@ if(!isset($mysqlconnect)){
 }
 
 mysql_select_db("danlain_live");
-$story_result = mysql_query("SELECT * FROM story where story.SprintID = '$row[SprintID]'") or die(mysql_error());										
+$story_result = mysql_query("SELECT * FROM story where story.SprintID = '$_SESSION[SprintID]'") or die(mysql_error());										
 $storyPoints = 0;
 while($row3=mysql_fetch_array($story_result)){
 	$storyPoints += $row3['StoryPoints'];

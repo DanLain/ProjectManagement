@@ -53,18 +53,18 @@ Class GanttChart {
     $this->start = min($this->start, $start); 
     $this->end = max($this->end, $end); 
   } 
-  function Render ($unit_width = 500) { 
+  function Render ($unit_width = 100) { 
     $duration = $this->end - $this->start + 1; 
-    echo "<table border=0 cellspacing=0 cellpadding=0 width='10000'>\r\n";
+    echo "<table border=0 cellspacing=0 cellpadding=0 width='100'>\r\n";
 	echo "<tr><th colspan=$duration {$this->header_style}>",
 		$this->project_name, "\r\n<tr>\r\n"; 
     echo "<tr><th colspan=$duration {$this->header_style}>",  
          $this->unit, "\r\n<tr>\r\n"; 
     for ($i = $this->start; $i <= $this->end; $i++) { 
       if ($i % 2 == 0) { 
-        echo "<th width=$unit_width {$this->header_style_even}>".date('m-d-y',strtotime($this->startDate.'+ '.$i.' day')); 
+        echo "<th width=$unit_width {$this->header_style_even}>".date('m-d',strtotime($this->startDate.'+ '.$i.' day')); 
       } else { 
-        echo "<th width=$unit_width {$this->header_style_odd}>".date('m-d-y',strtotime($this->startDate.'+ '.$i.' day')); 
+        echo "<th width=$unit_width {$this->header_style_odd}>".date('m-d',strtotime($this->startDate.'+ '.$i.' day')); 
       }  
     } 
     foreach ($this->activities as $activity) { 

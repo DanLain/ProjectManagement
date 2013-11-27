@@ -15,7 +15,7 @@ while($projectRow=mysql_fetch_array($project_result)){
 
 include 'GanttChart.php';     // Include the class file 
 $G = new GanttChart();        // Create an instance of GanttChart 
-$raw_results = mysql_query("SELECT * FROM sprint s, project p where s.ProjectID = p.ProjectID and s.projectID = '$_GET[ProjectID]' order by p.ProjectName, s.Name") or die(mysql_error());
+$raw_results = mysql_query("SELECT * FROM sprint s, project p where s.ProjectID = p.ProjectID and s.projectID = '$_GET[ProjectID]' order by p.ProjectName, s.StartDate") or die(mysql_error());
 while ($row=mysql_fetch_array($raw_results)){
 	$story_result = mysql_query("SELECT * FROM story where story.SprintID = '$row[SprintID]'") or die(mysql_error());
 	$remainingDays = 0;

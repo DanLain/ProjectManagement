@@ -167,127 +167,7 @@
 									echo "No results";
 								}
 						?>
-						<li><a href="createEpic.php" title="Epic"><span>Add Epic</span></a></li>
-						<?php
-								$raw_results = mysql_query("SELECT * FROM epic") or die(mysql_error());
-								$count = 0;
-								$rows = mysql_num_rows($raw_results);
-							   
-								if($rows){ // if one or more rows are returned do following
-																	
-									if (mysql_num_rows($raw_results)>0){
-											
-											echo"<table border='1'> ";
-											echo'<tr>';
-											echo'<th>EpicID</th>';
-											echo'<th>Show Stories</th>';
-											echo'<th>ProjectID</th>';
-											echo'<th>Name</th>';
-											echo'<th>Description</th>';
-											echo'<th>Days Planned</th>';
-											echo'<th>Days Worked</th>';
-											echo'<th>Days Remaining</th>';
-											echo'<th>Story Points</th>';
-											echo'<th>Add Story</th>';
-											echo'<th>Completion</th></tr>';
-											while ($row=mysql_fetch_array($raw_results)){
-												$story_results = mysql_query("SELECT * FROM story WHERE story.EpicID = '$row[EpicID]'") or die(mysql_error());
-												$storyPoints = 0;
-												$planDays = 0;
-												$workDays = 0;
-												$remainDays = 0;
-												while($row3=mysql_fetch_array($story_results)){
-													$storyPoints += $row3['StoryPoints'];
-													$planDays += $row3['PlannedDays'];
-													$workDays += $row3['WorkedDays'];
-													$remainDays += $row3['RemainingDays'];
-												}
-												$count += 1;
-												echo"<tr><td><a href='createEpic.php?EpicID=".$row['EpicID']."' title='Edit ".$row['Name']."'>".$row['EpicID']."</a></td>";
-												echo"<td><a href='projectOperations.php".(!(isset($_GET['EpicID']) && ($row['EpicID'] == $_GET['EpicID'])) ? "?EpicID=".$row['EpicID']."' title='Show Stories'>Show Stories" : "' title='Hide Stories'>Hide Stories")."</a></td>";
-												echo"<td>".$row['ProjectID']."</td>";
-												echo"<td>".$row['Name']."</td>";
-												echo"<td>".$row['Description']."</td>";
-												echo"<td>".$planDays."</td>";
-												echo"<td>".$workDays."</td>";
-												echo"<td>".$remainDays."</td>";
-												echo"<td>".$storyPoints."</td>";
-												echo"<td><a href='createStory.php?EpicID=".$row['EpicID']."' title='Add Story to ".$row['Name']."'>Add Story</a></td>";
-												echo"<td><meter value=".(1-($remainDays/$planDays)).">".(1-($remainDays/$planDays))."</meter></td>";
-												echo'</tr>';
-												if(isset($_GET['EpicID']) && ($row['EpicID'] == $_GET['EpicID'])){
-													$detailQuery="Select * from story s, employee e WHERE s.EpicID = '".$row['EpicID']."' and e.EmployeeID = s.EmployeeID";
-													$detailResult=mysql_query($detailQuery);					
-													
-													if(mysql_num_rows($detailResult)>0){
-														echo '</table>';
-														echo ' <h2>Stories for '.$row['Name'].'</h2>';
-														echo '<table border=1 style="margin-left:12px;">
-														<tr>
-														<th>Story ID</th>
-														<th>Name</th>
-														<th>Description</th>
-														<th>Planned Days</th>
-														<th>Worked Days</th>
-														<th>Remaining Days</th>
-														<th>Story Points</th>
-														<th>Employee</th>
-														</tr>';
-														
-														while($row2=mysql_fetch_array($detailResult)){
-															echo "<tr><td><a href='createStory.php?StoryID=".$row2['StoryID']."' title='Edit ".$row2['Name']."'>".$row2['StoryID']."</a></td>";
-															echo "<td>".$row2['Name']."</td>";
-															echo "<td>".$row2['Description']."</td>";
-															echo "<td>".$row2['PlannedDays']."</td>";
-															echo "<td>".$row2['WorkedDays']."</td>";
-															echo "<td>".$row2['RemainingDays']."</td>";
-															echo "<td>".$row2['StoryPoints']."</td>";
-															echo "<td>".$row2['FirstName']." ".$row2['LastName']."</td>";
-															echo"<td><meter value=".(1-($row2['RemainingDays']/$row2['PlannedDays'])).">".(1-($row2['RemainingDays']/$row2['PlannedDays']))."</meter></td></tr>";
-															
-														}
-														echo '</table>';
-														if($rows > $count){
-															echo"<table border='1'> ";
-															echo'<tr>';
-															echo'<th>EpicID</th>';
-															echo'<th>Show Stories</th>';
-															echo'<th>ProjectID</th>';
-															echo'<th>Name</th>';
-															echo'<th>Description</th>';
-															echo'<th>Days Planned</th>';
-															echo'<th>Days Worked</th>';
-															echo'<th>Days Remaining</th>';
-															echo'<th>Story Points</th>';
-															echo'<th>Add Story</th></tr>';
-														}
-													}
-													else{
-														echo '<tr><td></td><td></td><td></td><td></td><td><h3>There are no Stories for '.$row['Name'].'</h3></td><td></td></tr>';
-														if($rows > $count){
-															echo'<tr>';
-															echo'<th>EpicID</th>';
-															echo'<th>Show Stories</th>';
-															echo'<th>ProjectID</th>';
-															echo'<th>Name</th>';
-															echo'<th>Description</th>';
-															echo'<th>Days Planned</th>';
-															echo'<th>Days Worked</th>';
-															echo'<th>Days Remaining</th>';
-															echo'<th>Story Points</th>';
-															echo'<th>Add Story</th></tr>';
-														}
-													}
-												}
-											}
-												
-										}
-										echo'</table>';
-								}
-								else{ // if there is no matching rows do following
-									echo "No results";
-								}
-						?>
+						
 						<li><a href="createSprint.php" title="Add Sprint"><span>Add Sprint</span></a></li>
 <?php
         $raw_results = mysql_query("SELECT * FROM sprint s, project p where s.ProjectID = p.ProjectID order by p.ProjectName, s.Name") or die(mysql_error());
@@ -333,7 +213,7 @@
 						echo'<td>'.$storyPoints.'</td>';
 						echo"<td><a href='projectOperations.php".(!(isset($_GET['SprintID']) && ($row['SprintID'] == $_GET['SprintID'])) ? "?SprintID=".$row['SprintID']."' title='Show Stories'>Show Stories" : "' title='Hide Stories'>Hide Stories")."</a></td>";
 						echo"<td><a href='sprintAddStory.php?SprintID=".$row['SprintID']."' title='Add Story to ".$row['Name']."'>Add Story</a></td>";
-						echo"<td><meter value=".(1-($remainingDays/$plannedDays)).">".(1-($remainingDays/$plannedDays))."</meter></td>";
+						echo"<td><meter value=".($plannedDays == 0 ? 0 .">" :(1-($remainingDays/$plannedDays)).">".(1-($remainingDays/$plannedDays)))."</meter></td>";
 						echo'</tr>';
 						if(isset($_GET['SprintID']) && ($row['SprintID'] == $_GET['SprintID'])){
 													$detailQuery="Select * from story, employee WHERE story.SprintID = '".$row['SprintID']."' and story.EmployeeID = employee.EmployeeID";
@@ -420,6 +300,127 @@
         //echo "Minimum length is ".$min_length;
     }
 ?>
+<li><a href="createEpic.php" title="Epic"><span>Add Epic</span></a></li>
+						<?php
+								$raw_results = mysql_query("SELECT * FROM epic, project where epic.ProjectID = project.ProjectID") or die(mysql_error());
+								$count = 0;
+								$rows = mysql_num_rows($raw_results);
+							   
+								if($rows){ // if one or more rows are returned do following
+																	
+									if (mysql_num_rows($raw_results)>0){
+											
+											echo"<table border='1'> ";
+											echo'<tr>';
+											echo'<th>EpicID</th>';
+											echo'<th>Show Stories</th>';
+											echo'<th>Project Name</th>';
+											echo'<th>Name</th>';
+											echo'<th>Description</th>';
+											echo'<th>Days Planned</th>';
+											echo'<th>Days Worked</th>';
+											echo'<th>Days Remaining</th>';
+											echo'<th>Story Points</th>';
+											echo'<th>Add Story</th>';
+											echo'<th>Completion</th></tr>';
+											while ($row=mysql_fetch_array($raw_results)){
+												$story_results = mysql_query("SELECT * FROM story WHERE story.EpicID = '$row[EpicID]'") or die(mysql_error());
+												$storyPoints = 0;
+												$planDays = 0;
+												$workDays = 0;
+												$remainDays = 0;
+												while($row3=mysql_fetch_array($story_results)){
+													$storyPoints += $row3['StoryPoints'];
+													$planDays += $row3['PlannedDays'];
+													$workDays += $row3['WorkedDays'];
+													$remainDays += $row3['RemainingDays'];
+												}
+												$count += 1;
+												echo"<tr><td><a href='createEpic.php?EpicID=".$row['EpicID']."' title='Edit ".$row['Name']."'>".$row['EpicID']."</a></td>";
+												echo"<td><a href='projectOperations.php".(!(isset($_GET['EpicID']) && ($row['EpicID'] == $_GET['EpicID'])) ? "?EpicID=".$row['EpicID']."' title='Show Stories'>Show Stories" : "' title='Hide Stories'>Hide Stories")."</a></td>";
+												echo"<td>".$row['ProjectName']."</td>";
+												echo"<td>".$row['Name']."</td>";
+												echo"<td>".$row['Description']."</td>";
+												echo"<td>".$planDays."</td>";
+												echo"<td>".$workDays."</td>";
+												echo"<td>".$remainDays."</td>";
+												echo"<td>".$storyPoints."</td>";
+												echo"<td><a href='createStory.php?EpicID=".$row['EpicID']."' title='Add Story to ".$row['Name']."'>Add Story</a></td>";
+												echo"<td><meter value=".($planDays==0 ? (0 .">"):(1-($remainDays/($planDays))).">".(1-($remainDays/$planDays)))."</meter></td>";
+												echo'</tr>';
+												if(isset($_GET['EpicID']) && ($row['EpicID'] == $_GET['EpicID'])){
+													$detailQuery="Select * from story s, employee e WHERE s.EpicID = '".$row['EpicID']."' and e.EmployeeID = s.EmployeeID";
+													$detailResult=mysql_query($detailQuery);					
+													
+													if(mysql_num_rows($detailResult)>0){
+														echo '</table>';
+														echo ' <h2>Stories for '.$row['Name'].'</h2>';
+														echo '<table border=1 style="margin-left:12px;">
+														<tr>
+														<th>Story ID</th>
+														<th>Name</th>
+														<th>Description</th>
+														<th>Planned Days</th>
+														<th>Worked Days</th>
+														<th>Remaining Days</th>
+														<th>Story Points</th>
+														<th>Employee</th>
+														</tr>';
+														
+														while($row2=mysql_fetch_array($detailResult)){
+															echo "<tr><td><a href='createStory.php?StoryID=".$row2['StoryID']."' title='Edit ".$row2['Name']."'>".$row2['StoryID']."</a></td>";
+															echo "<td>".$row2['Name']."</td>";
+															echo "<td>".$row2['Description']."</td>";
+															echo "<td>".$row2['PlannedDays']."</td>";
+															echo "<td>".$row2['WorkedDays']."</td>";
+															echo "<td>".$row2['RemainingDays']."</td>";
+															echo "<td>".$row2['StoryPoints']."</td>";
+															echo "<td>".$row2['FirstName']." ".$row2['LastName']."</td>";
+															echo"<td><meter value=".(1-($row2['RemainingDays']/$row2['PlannedDays'])).">".(1-($row2['RemainingDays']/$row2['PlannedDays']))."</meter></td></tr>";
+															
+														}
+														echo '</table>';
+														if($rows > $count){
+															echo"<table border='1'> ";
+															echo'<tr>';
+															echo'<th>EpicID</th>';
+															echo'<th>Show Stories</th>';
+															echo'<th>ProjectID</th>';
+															echo'<th>Name</th>';
+															echo'<th>Description</th>';
+															echo'<th>Days Planned</th>';
+															echo'<th>Days Worked</th>';
+															echo'<th>Days Remaining</th>';
+															echo'<th>Story Points</th>';
+															echo'<th>Add Story</th></tr>';
+														}
+													}
+													else{
+														echo '<tr><td></td><td></td><td></td><td></td><td><h3>There are no Stories for '.$row['Name'].'</h3></td><td></td></tr>';
+														if($rows > $count){
+															echo'<tr>';
+															echo'<th>EpicID</th>';
+															echo'<th>Show Stories</th>';
+															echo'<th>ProjectID</th>';
+															echo'<th>Name</th>';
+															echo'<th>Description</th>';
+															echo'<th>Days Planned</th>';
+															echo'<th>Days Worked</th>';
+															echo'<th>Days Remaining</th>';
+															echo'<th>Story Points</th>';
+															echo'<th>Add Story</th></tr>';
+														}
+													}
+												}
+											}
+												
+										}
+										echo'</table>';
+								}
+								else{ // if there is no matching rows do following
+									echo "No results";
+								}
+						?>
 					</ul>
 					
 					<div class="cl">&nbsp;</div>

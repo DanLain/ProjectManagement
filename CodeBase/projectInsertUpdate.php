@@ -18,10 +18,11 @@ mysql_select_db("danlain_live");
 					Project.BudgetDays = '$_REQUEST[BudgetDays]',
 					Project.BudgetCurancy = '$_REQUEST[BudgetCurancy]'
 				WHERE project.ProjectID = '$_REQUEST[ProjectID]'";
+			$_SESSION['ProjectID'] = $_REQUEST['ProjectID'];
 			$retval =mysql_query($update_query);
-			if(! $retval ){
+			if(!$retval ){
 			  die('Could not update data: ' . mysql_error());
 			}
-			header("Location: http://localhost/projectOperations.php");
+			header("Location: http://localhost/chooseAddEmployee.php");
 		
 		?>

@@ -139,7 +139,7 @@
 									
 									while ($row=mysql_fetch_array($raw_results)){
 										$story_result = mysql_query("SELECT * FROM story where story.SprintID = '$row[SprintID]'") or die(mysql_error());
-										
+										$_SESSION['SprintID'] = $row['SprintID'];
 										$storyPoints = 0;
 										while($row3=mysql_fetch_array($story_result)){
 											$storyPoints += $row3['StoryPoints'];

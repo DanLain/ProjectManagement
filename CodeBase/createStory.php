@@ -128,7 +128,7 @@
 						<?php
 						if(isset($_GET['StoryID'])){
 								$_SESSION['StoryID'] = $StoryID=$_GET['StoryID'];
-								$mysqlquery1="Select * from story where StoryID = '$StoryID'";
+								$mysqlquery1="Select * from story, epic where StoryID = '$StoryID' and epic.EpicID = story.EpicID";
 								$result1=mysql_query($mysqlquery1);
 								while ($row=mysql_fetch_array($result1))
 								{
@@ -139,6 +139,7 @@
 										$WorkedDays = $row['WorkedDays'];
 										$RemainingDays = $row['RemainingDays'];
 										$StoryPoints = $row['StoryPoints'];
+										$ProjectID = $row['ProjectID'];
 								}
 								echo "Name: <input type='text' name='Name' value ='".$Name."'><br /><br />";      
 								echo "Description: <input type='text' name='Description' value='".$Description."'><br /><br />";
@@ -147,7 +148,7 @@
 								echo "RemainingDays: <input type='text' name='RemainingDays' value='".$RemainingDays."'><br /><br />";
 								echo "StoryPoints: <input type='text' name='StoryPoints' value='".$StoryPoints."'><br /><br />";
 								echo "Assigned to Name: <select name='EmployeeID'>";
-								$typequery="Select * from employee";
+								$typequery="Select * from employee where employee.ProjectID = '$ProjectID'";
 								$result=mysql_query($typequery);
 								while ($typerow=mysql_fetch_array($result))
 								{
@@ -167,7 +168,7 @@
 								echo "RemainingDays: <input type='text' name='RemainingDays'><br /><br />";
 								echo "StoryPoints: <input type='text' name='StoryPoints'><br /><br />";
 								echo "Assigned to Name: <select name='EmployeeID'>";
-								$typequery="Select * from employee";
+								$typequery="Select * from employee, epic where employee.ProjectID = epic.ProjectID and epic.EpicID = '$_GET[EpicID]'";
 								$result=mysql_query($typequery);
 								while ($typerow=mysql_fetch_array($result))
 								{

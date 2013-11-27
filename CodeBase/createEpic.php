@@ -137,11 +137,27 @@
 										$Name = $row['Name'];
 										$Description = $row['Description'];
 								}
+								echo "Projetc Name: <select name='ProjectID'>";
+									$typequery="Select * from project where Manager = '$_SESSION[EmployeeID]'";
+									$result=mysql_query($typequery);
+									while ($typerow=mysql_fetch_array($result)){
+										if($typerow['ProjectID'] == $ProjectID )
+											echo "<option selected='selected' value='".$typerow['ProjectID']."' >".$typerow['ProjectName']."</option>";
+										else echo "<option value='".$typerow['ProjectID']."' >".$typerow['ProjectName']."</option>";
+									}
+								echo "</select><br /><br />";
 								echo "Name: <input type='text' name='Name' value ='".$Name."'><br /><br />";      
 								echo "Description: <input type='text' name='Description' value='".$Description."'><br /><br />";
 							}	
 
 						else{
+								echo "Projetc Name: <select name='ProjectID'>";
+									$typequery="Select * from project where Manager = '$_SESSION[EmployeeID]'";
+									$result=mysql_query($typequery);
+									while ($typerow=mysql_fetch_array($result)){
+										echo "<option value='".$typerow['ProjectID']."' >".$typerow['ProjectName']."</option>";
+									}
+								echo "</select><br /><br />";
 								echo "Name: <input type='text' name='Name'><br /><br />";
 								echo "Description: <input type='text' name='Description'><br /><br />";
 							}
