@@ -67,7 +67,7 @@
 						</span></h2>
 						<div id="top-nav">
 							<ul>
-								<li class="active"><a href="flOhome.php" title="Home"><span>Home</span></a></li>
+								<li class="active"><a href="home.php" title="Home"><span>Home</span></a></li>
 							</ul>
 						</div>
 						<div class="cl">&nbsp;</div>
@@ -181,81 +181,7 @@
 		
 			<div class="cl">&nbsp;</div>
 			<!-- Begin Projects -->
-			<div id="project-slider">
-				
-				<?php
 			
-					if($_SESSION['Login'] == "True")
-					{
-
-						echo "<h2>Projects</h2>
-						<ul>";
-
-					//EmployeeID under session
-					$getStorySqlQuery="Select * from story";
-					$storyResult=mysql_query($getStorySqlQuery);
-																
-
-					while ($row=mysql_fetch_array($storyResult))
-					{
-						if($row['EmployeeID'] == $_SESSION['EmployeeID'])
-						{
-							$getEpicSqlQuery="Select * from epic";
-							$epicResult=mysql_query($getEpicSqlQuery);
-
-							while($row_epic=mysql_fetch_array($epicResult))
-							{
-								if($row['EpicID']==$row_epic['EpicID'])
-								{
-									$getProjectSqlQuery="Select * from project";
-									$projectResult=mysql_query($getProjectSqlQuery);
-									
-									while($row_project=mysql_fetch_array($projectResult))
-									{
-										if($row_project['ProjectID'] == $row_epic['ProjectID'])
-										{
-											//output
-											echo "<li>";
-											echo "<a href='createProject.php?ProjectID=".$row_project['ProjectID']."' title=";
-											echo "Project Link";
-											echo "><img src=";
-											echo "images/";
-											echo "baseball1.jpg";//BASEBALL IMAGE TEMPORARY
-											echo " alt=";
-											echo"Product Image/>"; 
-											echo "</a>";
-											echo "<div class=";
-											echo "info";
-											echo ">";
-											echo "<h4>";
-											echo $row_project['ProjectName'];
-											echo "</h4>";
-											echo "<span class=";
-											echo "Start Date";
-											echo ">";
-											echo $row_project['TargetStartDate'];
-											echo "</span>";
-											echo "<span class=";
-											echo "End Date";
-											echo "><span>$</span>";
-											echo $row_project['TargetEndDate'];
-											echo "</span>";
-											echo "<div class=";
-											echo "cl";
-											echo ">&nbsp;</div>";
-											echo "</div>";
-											echo "</li>";
-										}
-									}
-								}
-							}
-						}
-					}	
-				}
-				?>
-				</ul>
-				<div class="cl">&nbsp;</div>
-			</div>
 			<!-- End Project Slider -->
 		</div>
 		<!-- End Main -->

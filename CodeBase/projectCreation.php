@@ -6,18 +6,24 @@
 		}
 
 		mysql_select_db("danlain_live");
+		
+		
 		if(!isset($_SESSION['Login']))
 		{
-			$_SESSION['Login'] = "false";
+			$_SESSION['Login'] = "False";
 			$_SESSION['User'] = "Guest";
-			$_SESSION['EmployeeLogin'] = "False";
+			$_SESSION['EmployeeID'] = 0;
 			$_SESSION['LoginTry']=0;
 			$_SESSION['BadLogin']="";
 			$_SESSION['Locked']="False";
+			$_SESSION['Admin'] = 0;
+			$_SESSION['Manager'] = 0;
+			$_SESSION['Architect'] = 0;
+			$_SESSION['Developer'] = 0;
 		}
 		?>
-		
-		<html>
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+		<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 		<head>
 			<title>
 			<?php
@@ -26,7 +32,10 @@
 			while ($row=mysql_fetch_array($result)){
 				echo $row['BusinessName'];
 			}
-			?></title>
+			?>
+			</title>
+
+
 			<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 			<link rel="shortcut icon" href="css/images/favicon.ico" />
 			<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
@@ -49,45 +58,38 @@
 					<div class="shell">
 						<h2><span>
 						<?php
-									$mysqlquery="Select * from company";
-								    $result=mysql_query($mysqlquery);
-									while ($row=mysql_fetch_array($result)){
-										echo $row['BusinessName'];
-									}
+						$mysqlquery="Select * from company";
+						$result=mysql_query($mysqlquery);
+						while ($row=mysql_fetch_array($result)){
+							echo $row['BusinessName'];
+						}
 						?>
 						</span></h2>
 						<div id="top-nav">
 							<ul>
 								<li class="active"><a href="home.php" title="Home"><span>Home</span></a></li>
-								<li><!--a href="#" title="Promotions &amp; News"><span>Promotions &amp; Sales</span></a>--></li>
-								<!--<li><a href="#" title="Contact"><span>Contact</span></a></li>-->
-								
 							</ul>
 						</div>
 						<div class="cl">&nbsp;</div>
-						<p id="cart"><span class="profile">Welcome, 
-						
-					
-						<?php
-						if($_SESSION['Login'] != "True")
-						{
-							//echo "<a href='login.php' title='Profile Link'>Login</a>";
-							echo "<a href='userManagment.php' title='Profile Link'>Register</a>";
-						} 
-						else
-						{
-							
+						<p id="cart"><span class="profile">Welcome, 					
+							<?php
+							if($_SESSION['Login'] != "True")
+							{
+								//echo "<a href='login.php' title='Profile Link'>Login</a>";
+								echo "<a href='userManagment.php' title='Profile Link'>Register</a>";
+							} 
+							else
+							{
 								
-								echo "<a href='userManagment.php' title='Profile Link'>";
-								echo $_SESSION['User'];
-								echo "</a>";
-								echo "<a href='logout.php' title='Logout'> Logout</a>";
-						}
-						?>
-						  
-
-
-					</span></p>
+									
+									echo "<a href='userManagment.php' title='Profile Link'>";
+									echo $_SESSION['User'];
+									echo "</a>";
+									echo "<a href='logout.php' title='Logout'> Logout</a>";
+							}
+							?>							  
+							</span>
+						</p>
 					</div>
 					<!-- End Shell -->
 				</div>
@@ -95,69 +97,20 @@
 				<!-- Begin Navigation -->
 				<div id="navigation">
 					<!-- Begin Shell -->
-					<div class="shell">
-						
-							<?php
-
-											$mysqlquery="Select * from type";
-											$result=mysql_query($mysqlquery);
-
-											
-
-											while ($row=mysql_fetch_array($result)){
-												echo"<ul>";
-												echo "<li class=";
-												echo "active";
-												echo"><a href=";
-												echo"merchandise.php?varname=".$row['TypeName'];
-												echo " title=";
-												echo $row['TypeName'];
-												echo ">";
-												echo $row['TypeName'];
-												echo"</a>";
-													echo"<div class=";
-													echo "dd";
-													echo ">";
-														echo "<ul>";
-															$mysqlquery2="Select * from category";
-															$result2=mysql_query($mysqlquery2);
-															while ($row2=mysql_fetch_array($result2))
-																{
-																	if ($row['TypeID']== $row2['TypeID'])
-																		{
-																			echo"<li><A href=";
-																			//echo"images/soc1.jpg";
-																			echo "merchandise.php?varname=".$row2['CategoryID'];
-																			echo" title=";
-																			echo $row2['CatName'];
-																			echo">";
-																			echo $row2['CatName'];
-																			echo"</A></li>";	
-																		}
-																}
-																echo "</ul>";
-														echo "</ul>";
-											}			
-
-										?>
-							
-							
-										</li>
-										
-									</ul>
-								</div>
-							</li>
-							
-					
-							</a>.
+					<div class="shell">					
+						<ul><?php
+							if($_SESSION['Admin'] == 1|| $_SESSION['Manager'] == 1)
+							{echo '<li class = "active"><a href="projectCreation.php" title="Profile Link">New Project</a></li>';
+							}
+							?>
 						</ul>
-						<div class="cl">&nbsp;</div>
 					</div>
-					<!-- End Shell -->
+						
+					<div class="cl">&nbsp;</div>
 				</div>
+					<!-- End Shell -->
+			</div>
 				<!-- End Navigation -->
-		
-		</div>
 		<!-- End Slider -->
 		<!-- Begin Main -->
 		<div  id="main" class="shell">
