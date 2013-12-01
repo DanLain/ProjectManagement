@@ -132,6 +132,12 @@
 								$result1=mysql_query($mysqlquery1);
 								while ($row=mysql_fetch_array($result1))
 								{
+								$ProjectID = $row['ProjectID'];
+								}
+								$mysqlquery1="Select * from story where StoryID = '$StoryID'";
+								$result1=mysql_query($mysqlquery1);
+								while ($row=mysql_fetch_array($result1))
+								{
 										$EmployeeID = $row['EmployeeID'];
 										$Name = $row['Name'];
 										$Description = $row['Description'];
@@ -139,7 +145,6 @@
 										$WorkedDays = $row['WorkedDays'];
 										$RemainingDays = $row['RemainingDays'];
 										$StoryPoints = $row['StoryPoints'];
-										$ProjectID = $row['ProjectID'];
 								}
 								echo "Name: <input type='text' name='Name' value ='".$Name."'><br /><br />";      
 								echo "Description: <input type='text' name='Description' value='".$Description."'><br /><br />";
